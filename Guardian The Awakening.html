@@ -1,0 +1,2037 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<title>Guardian: The Awakening</title>
+<style>
+body{
+	margin: 0;
+	overflow: hidden;
+    background-image: url(other/bg34.png);
+    background-repeat: repeat;
+    user-select: none;
+}
+div{
+    text-align: center;
+}
+.moc{
+    width: 70px;
+    height: 70px;
+    color: white;
+    font-size: 38px;
+    cursor: pointer;
+    float: left;
+}
+#moce{
+    height: 180px;
+    float: left;
+}
+#paski{
+    height: 180px;
+    margin-right: 10px;
+    float: left;
+}
+#przyciski{
+    height: 180px;
+    float: left;
+}
+#timer{
+    height: 85px;
+    margin-top: 5px;
+	color: white;
+    font-family: fantasy;
+    font-size: 22px;
+    float: left;
+}
+.craft{
+    color: black;
+    font-size: 10px;
+    background-color: yellow;
+    width: 20px;
+    height: 70px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    cursor: pointer;
+    float: left;
+}
+.craft:hover{
+    color: white;
+}
+.info{
+    color: white;
+    font-size: 15px;
+    background-color: darkblue;
+    width: 20px;
+    height: 70px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    cursor: pointer;
+    float: left;
+}
+.info:hover{
+    color: black;
+}
+.wrap{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 3px;
+    float: left;
+}
+.ammo{
+    width: 15px;
+    color: white;
+    font-family: fantasy;
+    float: left;
+}
+.type{
+    width: 70px;
+    height: 10px;
+    color: white;
+    background-color: purple;
+    font-size: 10px;
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+    margin-left: 40px;
+    margin-right: 25px;
+    margin-top: 2px;
+    cursor: pointer;
+    float: left;
+}
+.type:hover{
+    color: black;
+}
+.type2 > div{
+    width: 70px;
+    height: 70px;
+    color: white;
+    font-size: 38px;
+    cursor: pointer;
+}
+.type2{
+    position: absolute;
+    width: 70px;
+    height: 210px;
+    background-color: brown;
+    visibility: hidden;
+}
+#surowce, #mapa, #bohaterowie, #ekwipunek{
+    width: 70px;
+    height: 70px;
+    color: white;
+    font-family: fantasy;
+    cursor: pointer;
+    background-color: orange;
+    text-shadow: 5px 5px 15px black;
+    margin: 5px;
+    float: left;
+}
+#pauza, #opcje{
+    width: 80px;
+    height: 80px;
+    color: white;
+    font-family: fantasy;
+    cursor: pointer;
+    background-color: #a26a04;
+    text-shadow: 5px 5px 15px black;
+    margin: 5px;
+    margin-left: 10px;
+    float: left;
+}
+#surowce:hover{
+    background-color: #ee9400;
+}
+#mapa:hover{
+    background-color: #ee9400;
+}
+#bohaterowie:hover{
+    background-color: #ee9400;
+}
+#surowce2{
+    position: absolute;
+    top: calc(100% - 385px);
+    left: 765px;
+    visibility: hidden;
+    width: 140px;
+    height: 300px;
+    background-color: darkorange;
+    z-index: 20;
+}
+#drewno, #poison{
+    width: 26px;
+    height: 20px;
+    color: white;
+    font-family: fantasy;
+    margin-bottom: 5px;
+    float: left;
+}
+#kamyk, #ice, #fire{
+    width: 27px;
+    height: 20px;
+    color: white;
+    font-family: fantasy;
+    margin-bottom: 5px;
+    float: left;
+}
+#mapa2{
+    position: absolute;
+    top: calc(50% - 290px);
+    left: calc(50% - 290px);
+    visibility: hidden;
+    width: 540px;
+    height: 540px;
+    background-color: darkorange;
+    z-index: 20;
+}
+.mapaDalej{
+    width: 20px;
+    height: 20px;
+    border-top: 3px solid black;
+    border-right: 3px solid black;
+}
+#wrap2{
+    position: relative;
+    width: 500px;
+    height: 500px;
+    border: 20px solid #f29a5a;
+    background-color: black;
+}
+.mapItem{
+    width: 98px;
+    height: 98px;
+    border: 1px solid #f29a5a;
+    overflow: hidden;
+    float: left;
+}
+#opcje2{
+    position: absolute;
+    top: 10vh;
+    left: 35vw;
+    width: 30vw;
+    height: 80vh;
+    background-color: white;
+    border-radius: 10px;
+    border: 3px solid black;
+    padding: 5px;
+    visibility: hidden;
+    z-index: 20;
+}
+#bohaterowie2{
+    position: absolute;
+    top: calc(50% - 300px);
+    left: calc(50% - 300px);
+    visibility: hidden;
+    width: 610px;
+    height: 600px;
+    background-image: url(other/bg145.png);
+    background-repeat: repeat;
+    border-radius: 10px;
+    z-index: 20;
+}
+#bohaterowie2 > div{
+    margin-left: 7.5px;
+    margin-right: 7.5px;
+    margin-top: 30px;
+    color: white;
+    font-family: fantasy;
+    font-size: 20px;
+    cursor: pointer;
+    float: left;
+}
+#ekwipunek2{
+    position: absolute;
+    top: calc(50% - 300px);
+    left: calc(50% - 500px);
+    visibility: hidden;
+    width: 1000px;
+    height: 600px;
+    background-image: url(other/bg135.png);
+    background-repeat: repeat;
+    border-radius: 10px;
+    z-index: 20;
+}
+.weps{
+    width: 54px;
+    height: 54px;
+    margin-left: 0.71px;
+    margin-right: 0.71px;
+    background: white;
+    background-size: cover;
+    float: left;
+}
+.slot{
+    margin: 7px;
+    width: 86px;
+    height: 86px;
+    cursor: pointer;
+    border-radius: 10px;
+    background: black;
+    background-size: cover;
+    float: left;
+}
+.slot > img, .weps > img{
+    width: 100%;
+    height: 100%;
+}
+.sekcja{
+    background-color: gray;
+    color: white;
+    border-radius: 10px;
+    border: 2px solid black;
+    cursor: pointer;
+    outline: none;
+}
+.sekcja:active{
+    background-color: #505050;
+    color: black;
+}
+@font-face {
+    font-family: quaver;
+    src: url(other/quaver.ttf);
+}
+#fala{
+    position: relative;
+    width: 110px;
+    height: 40px;
+    margin-top: 15px;
+    background-color: blue;
+    box-shadow: -6px 6px 0 darkblue;
+    margin-left: 120px;
+    border: none;
+    outline: none;
+    padding: 5px;
+    cursor: pointer;
+    color: white;
+}
+#fala:active{
+    top: 3px;
+    left: -3px;
+    background-color: #000069;
+    box-shadow: -3px 3px 0 darkblue;
+}
+#fala:hover{
+    background-color: #00007a;
+}
+#fala::before{
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 0;
+    left: -6px;
+    display: block;
+    content: '';
+    border: 6px solid transparent;
+    border-right: 6px solid darkblue;
+    border-left-width: 0;
+}
+#fala::after{
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: 0;
+    bottom: -6px;
+    display: block;
+    content: '';
+    border: 6px solid transparent;
+    border-top: 6px solid darkblue;
+    border-bottom-width: 0;
+}
+#fala:active::before{
+    left: -3px;
+    border: 3px solid transparent;
+    border-right: 3px solid darkblue;
+    border-left-width: 0;
+}
+#fala:active::after{
+    bottom: -3px;
+    border: 3px solid transparent;
+    border-top: 3px solid darkblue;
+    border-bottom-width: 0;
+}
+#load{
+    width: 250px;
+    height: 20px;
+    color: black;
+}
+#hp{
+    width: 250px;
+    height: 20px;
+    color: white;
+}
+#sprint{
+    width: 250px;
+    height: 20px;
+    color: black;
+}
+#menuPage{
+    position: absolute;
+    top: -75%;
+    left: 50%;
+    transform: translate(-50%, -25%);
+    width: 75%;
+    height: 75%;
+    background-image: url(other/menuLogo.png);
+    background-size: cover;
+    animation-iteration-count: 1;
+    animation-duration: 1.5s;
+    z-index: 201;
+}
+#loading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 22.5%;
+    padding-top: 4.5%;
+    color: white;
+    background-color: black;
+    animation-iteration-count: infinite;
+    animation-duration: 1.25s;
+    animation-name: load;
+    font-size: 4em;
+    z-index: 202;
+}
+#play{
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 20%;
+    background-color: #253e90;
+    color: white;
+    font-family: fantasy;
+    font-size: 3em;
+    cursor: pointer;
+}
+@keyframes load{
+    0%{
+        font-size: 2em;
+    }
+    50%{
+        font-size: 4em;
+    }
+    100%{
+        font-size: 2em;
+    }
+}
+@keyframes menuPage1{
+    from{top: -75%;}
+    to{top: 25%;}
+}
+@keyframes menuPage2{
+    from{top: 25%;}
+    to{top: 125%;}
+}
+footer{
+    position: absolute;
+    width: 100%;
+    height: 25px;
+    color: white;
+    font-family: fantasy;
+    bottom: 0;
+    z-index: 201;
+}
+</style>
+</head>
+<body oncontextmenu="return false;">
+<div id="menu" style="position: absolute; width: 100%; height: 100%; background-image: linear-gradient(#37e0ff, #0e810e); z-index: 200;">
+    <div id="loading">Loading...</div>
+    <div id="menuPage">
+        <button id="play" onclick="document.getElementById('menuPage').style.animationName='menuPage2'; setTimeout(function() {document.getElementById('menu').style.visibility='hidden'; start();}, 1500);">Graj</button>
+    </div>
+    <footer>A Game Made By: Programmer Maksymilian Nowak &amp; Originator Bruno Pastorczak &copy;</footer>
+</div>
+<canvas id="light" style="position: absolute; left: 0; top: 0; z-index: 6;"></canvas>
+<div id="gameHolder" style="background-image: url(maps/laka1.png); position: relative;">
+ <canvas id="resources" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+ <canvas id="hero" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+ <canvas id="enemies" style="position: absolute; left: 0; top: 0; z-index: 2;"></canvas>
+ <canvas id="text" style="position: absolute; left: 0; top: 0; z-index: 3;"></canvas>
+ <canvas id="projectiles" style="position: absolute; left: 0; top: 0; z-index: 4;"></canvas>
+ <canvas id="animations1" style="position: absolute; left: 0; top: 0; z-index: 5;"></canvas>
+</div>
+<div style="position: absolute; top: 0; left: 50%; transform: translate(-50%, 0); color: white; font-size: 30px; z-index: 100;">Score: <span id="score">0</span></div>
+<div id="moce">
+    <div class="type2" style="top: calc(100% - 388px); left: 40px;" onmouseover="lockMove=true;" onmouseout="lockMove=false;">
+        <div style="background-image: url(weps/bow.png); background-size: cover;" onmouseover="this.innerHTML=info[0]; this.style.background='white'; this.style.color='black'; this.style.fontSize='9px';" onmouseout="this.innerHTML=''; this.style.backgroundImage='url(weps/bow.png)'; this.style.backgroundSize='cover'; this.style.color='white'; this.style.fontSize='38px';" onclick="changeWep('bow', 0, 0); moc[0].style.backgroundImage='url(weps/bow.png)'; popup('.type2', 0);"></div>
+        <div style="background-image: url(weps/bowFreeze.png); background-size: cover;" onmouseover="this.innerHTML=info[1]; this.style.background='white'; this.style.color='black'; this.style.fontSize='9px';" onmouseout="this.innerHTML=''; this.style.backgroundImage='url(weps/bowFreeze.png)'; this.style.backgroundSize='cover'; this.style.color='white'; this.style.fontSize='38px';" onclick="changeWep('bowFreeze', 0, 1); moc[0].style.backgroundImage='url(weps/bowFreeze.png)'; popup('.type2', 0);"></div>
+        <div style="background-image: url(weps/bowPoison.png); background-size: cover;" onmouseover="this.innerHTML=info[2]; this.style.background='white'; this.style.color='black'; this.style.fontSize='9px';" onmouseout="this.innerHTML=''; this.style.backgroundImage='url(weps/bowPoison.png)'; this.style.backgroundSize='cover'; this.style.color='white'; this.style.fontSize='38px';" onclick="changeWep('bowPoison', 0, 2); moc[0].style.backgroundImage='url(weps/bowPoison.png)'; popup('.type2', 0);"></div>
+    </div>
+    <div class="type2" style="top: calc(100% - 388px); left: 175px;" onmouseover="lockMove=true;" onmouseout="lockMove=false;">
+        <div style="background-image: url(weps/rocks.png); background-size: cover;" onmouseover="this.innerHTML=info[3]; this.style.background='white'; this.style.color='black'; this.style.fontSize='9px';" onmouseout="this.innerHTML=''; this.style.backgroundImage='url(weps/rocks.png)'; this.style.backgroundSize='cover'; this.style.color='white'; this.style.fontSize='38px';" onclick="changeWep('rocks', 1, 3); moc[1].style.backgroundImage='url(weps/rocks.png)'; popup('.type2', 1);"></div>
+    </div>
+    <!--<div class="type" onclick="popup('.type2', 0);">Wybierz rodzaj</div>-->
+    <!--<div class="type" onclick="popup('.type2', 1);">Wybierz rodzaj</div>-->
+    <!--<div class="type">Wybierz rodzaj</div>-->
+    <!--<div class="type">Wybierz rodzaj</div>-->
+    <!--<div style="clear: both;"></div>-->
+    <div style="width: 540px; height: 12px;"></div>
+    <div class="wrap">
+        <div class="ammo">10</div>
+        <div class="craft" onclick="if(surowce[0].innerHTML*1>=1 && surowce[1].innerHTML*1>=1) {ammo[0].innerHTML=(wepAmmo.bow+=1); surowce[0].innerHTML=surowce[0].innerHTML*1-1; surowce[1].innerHTML=surowce[1].innerHTML*1-1; barAudio.play();}" onmouseover="moc[0].innerHTML=craft.bow; moc[0].style.background='white'; moc[0].style.color='black';" onmouseout="moc[0].innerHTML=''; moc[0].style.backgroundImage='url(weps/bow.png)'; moc[0].style.backgroundSize='cover'; moc[0].style.color='white';">S<br />T<br />W<br />Ó<br />R<br />Z</div>
+        <div class="moc" style="background-image: url(weps/bow.png); background-size: cover;" onclick="if(this.innerHTML=='' && !lockChangeWep && this.style.filter!='brightness(0.5)')    {if(zaznaczony=='bow') {zaznaczony=''; this.style.filter='brightness(1)';} else if(zaznaczony!=''){zaznaczony=''; for(var i=0; i<=7; i++){if(moc[i].style.filter=='brightness(1.5)') {moc[i].style.filter='brightness(1)';}} this.style.filter='brightness(1.5)'; zaznaczony='bow';} else {zaznaczony='bow'; this.style.filter='brightness(1.5)';}}"></div>
+        <div class="info" onmouseover="moc[0].innerHTML=info.bow; moc[0].style.background='white'; moc[0].style.color='black'; moc[0].style.fontSize='9px';" onmouseout="moc[0].innerHTML=''; moc[0].style.backgroundImage='url(weps/bow.png)'; moc[0].style.backgroundSize='cover'; moc[0].style.color='white'; moc[0].style.fontSize='38px';">I<br />N<br />F<br />O</div>
+        <div style="clear: both;"></div>
+    </div>
+    <div class="wrap">
+        <div class="ammo">10</div>
+        <div class="craft" onclick="if(surowce[0].innerHTML*1>=1 && surowce[2].innerHTML*1>=1) {ammo[1].innerHTML=(wepAmmo.bowFreeze+=1); surowce[0].innerHTML=surowce[0].innerHTML*1-1; surowce[2].innerHTML=surowce[2].innerHTML*1-1; barAudio.play();}" onmouseover="moc[1].innerHTML=craft.bowFreeze; moc[1].style.background='white'; moc[1].style.color='black';" onmouseout="moc[1].innerHTML=''; moc[1].style.backgroundImage='url(weps/bowFreeze.png)'; moc[1].style.backgroundSize='cover'; moc[1].style.color='white';">S<br />T<br />W<br />Ó<br />R<br />Z</div>
+        <div class="moc" style="background-image: url(weps/bowFreeze.png); background-size: cover;" onclick="if(this.innerHTML=='' && !lockChangeWep && this.style.filter!='brightness(0.5)')    {if(zaznaczony=='bowFreeze') {zaznaczony=''; this.style.filter='brightness(1)';} else if(zaznaczony!=''){zaznaczony=''; for(var i=0; i<=7; i++){if(moc[i].style.filter=='brightness(1.5)') {moc[i].style.filter='brightness(1)';}} this.style.filter='brightness(1.5)'; zaznaczony='bowFreeze';} else {zaznaczony='bowFreeze'; this.style.filter='brightness(1.5)';}}"></div>
+        <div class="info" onmouseover="moc[1].innerHTML=info.bowFreeze; moc[1].style.background='white'; moc[1].style.color='black'; moc[1].style.fontSize='9px';" onmouseout="moc[1].innerHTML=''; moc[1].style.backgroundImage='url(weps/bowFreeze.png)'; moc[1].style.backgroundSize='cover'; moc[1].style.color='white'; moc[1].style.fontSize='38px';">I<br />N<br />F<br />O</div>
+        <div style="clear: both;"></div>
+    </div>
+    <div class="wrap">
+        <div class="ammo">10</div>
+        <div class="craft" onclick="if(surowce[0].innerHTML*1>=1 && surowce[3].innerHTML*1>=1) {ammo[2].innerHTML=(wepAmmo.bowPoison+=1); surowce[0].innerHTML=surowce[0].innerHTML*1-1; surowce[3].innerHTML=surowce[3].innerHTML*1-1; barAudio.play();}" onmouseover="moc[2].innerHTML=craft.bowPoison; moc[2].style.background='white'; moc[2].style.color='black';" onmouseout="moc[2].innerHTML=''; moc[2].style.backgroundImage='url(weps/bowPoison.png)'; moc[2].style.backgroundSize='cover'; moc[2].style.color='white';">S<br />T<br />W<br />Ó<br />R<br />Z</div>
+        <div class="moc" style="background-image: url(weps/bowPoison.png); background-size: cover;" onclick="if(this.innerHTML=='' && !lockChangeWep && this.style.filter!='brightness(0.5)')    {if(zaznaczony=='bowPoison') {zaznaczony=''; this.style.filter='brightness(1)';} else if(zaznaczony!=''){zaznaczony=''; for(var i=0; i<=7; i++){if(moc[i].style.filter=='brightness(1.5)') {moc[i].style.filter='brightness(1)';}} this.style.filter='brightness(1.5)'; zaznaczony='bowPoison';} else {zaznaczony='bowPoison'; this.style.filter='brightness(1.5)';}}"></div>
+        <div class="info" onmouseover="moc[2].innerHTML=info.bowPoison; moc[2].style.background='white'; moc[2].style.color='black'; moc[2].style.fontSize='9px';" onmouseout="moc[2].innerHTML=''; moc[2].style.backgroundImage='url(weps/bowPoison.png)'; moc[2].style.backgroundSize='cover'; moc[2].style.color='white'; moc[2].style.fontSize='38px';">I<br />N<br />F<br />O</div>
+        <div style="clear: both;"></div>
+    </div>
+    <div class="wrap">
+        <div class="ammo">10</div>
+        <div class="craft" onclick="if(surowce[0].innerHTML*1>=1 && surowce[4].innerHTML*1>=1) {ammo[3].innerHTML=(wepAmmo.torch+=1); surowce[0].innerHTML=surowce[0].innerHTML*1-1; surowce[4].innerHTML=surowce[4].innerHTML*1-1; barAudio.play();}" onmouseover="moc[3].innerHTML=craft.torch; moc[3].style.background='white'; moc[3].style.color='black';" onmouseout="moc[3].innerHTML=''; moc[3].style.backgroundImage='url(weps/torch.png)'; moc[3].style.backgroundSize='cover'; moc[3].style.color='white';">S<br />T<br />W<br />Ó<br />R<br />Z</div>
+        <div class="moc" style="background-image: url(weps/torch.png); background-size: cover;" onclick="if(this.innerHTML=='' && !lockChangeWep && this.style.filter!='brightness(0.5)')    {if(zaznaczony=='torch') {zaznaczony=''; this.style.filter='brightness(1)';} else if(zaznaczony!=''){zaznaczony=''; for(var i=0; i<=7; i++){if(moc[i].style.filter=='brightness(1.5)') {moc[i].style.filter='brightness(1)';}} this.style.filter='brightness(1.5)'; zaznaczony='torch';} else {zaznaczony='torch'; this.style.filter='brightness(1.5)';}}"></div>
+        <div class="info" onmouseover="moc[3].innerHTML=info.torch; moc[3].style.background='white'; moc[3].style.color='black'; moc[3].style.fontSize='9px';" onmouseout="moc[3].innerHTML=''; moc[3].style.backgroundImage='url(weps/torch.png)'; moc[3].style.backgroundSize='cover'; moc[3].style.color='white'; moc[3].style.fontSize='38px';">I<br />N<br />F<br />O</div>
+        <div style="clear: both;"></div>
+    </div>
+    <div style="clear: both;"></div>
+    <!--<div class="type">Wybierz rodzaj</div>-->
+    <!--<div class="type">Wybierz rodzaj</div>-->
+    <!--<div class="type">Wybierz rodzaj</div>-->
+    <!--<div class="type">Wybierz rodzaj</div>-->
+    <!--<div style="clear: both;"></div>-->
+    <div style="width: 540px; height: 12px;"></div>
+    <div class="wrap" style="visibility: hidden;">
+        <div class="ammo">0</div>
+        <div class="craft">S<br />T<br />W<br />Ó<br />R<br />Z</div>
+        <div class="moc"></div>
+        <div class="info">I<br />N<br />F<br />O</div>
+        <div style="clear: both;"></div>
+    </div>
+    <div class="wrap" style="visibility: hidden;">
+        <div class="ammo">0</div>
+        <div class="craft">S<br />T<br />W<br />Ó<br />R<br />Z</div>
+        <div class="moc"></div>
+        <div class="info">I<br />N<br />F<br />O</div>
+        <div style="clear: both;"></div>
+    </div>
+    <div class="wrap" style="visibility: hidden;">
+        <div class="ammo">0</div>
+        <div class="craft">S<br />T<br />W<br />Ó<br />R<br />Z</div>
+        <div class="moc"></div>
+        <div class="info">I<br />N<br />F<br />O</div>
+        <div style="clear: both;"></div>
+    </div>
+    <div class="wrap" style="visibility: hidden;">
+        <div class="ammo">0</div>
+        <div class="craft">S<br />T<br />W<br />Ó<br />R<br />Z</div>
+        <div class="moc"></div>
+        <div class="info">I<br />N<br />F<br />O</div>
+        <div style="clear: both;"></div>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+<div id="paski">
+    <div style="color: white;">Zdrowie</div>
+    <meter value="100" max="100" id="hp"></meter>
+    <div style="color: white;">Sprint</div>
+    <progress value="100" max="100" id="sprint"></progress>
+    <div style="color: white;">Napięcie łuku/Siła rzutu</div>
+    <progress value="0" max="100" id="load"></progress>
+</div>
+<div id="przyciski" style="height: 180px;">
+    <div id="timer">
+		<img style="width: 60px; height: 60px; float: left;" src="other/zegar.png" alt="" />
+        <div id="wydarzenia" style="width: 260px; height: 60px; float: left;">Za 30s będzie duża fala potworów</div>
+		<div style="clear: both;"></div>
+		<meter value="50" max="100" id="czas" style="width: 320px; height: 20px; margin-top: 5px; display: block;"></meter>
+	</div>
+    <div id="pauza" onclick="paused ? start() : pause();"><br />Pauza</div>
+    <div style="clear: both;"></div>
+    <div id="surowce" onclick="popup('#surowce2', 0);"><br />Surowce</div>
+    <div id="surowce2">
+        <div id="drewno">0</div>
+        <div style="width: 20px; height: 20px; background-color: rgb(126, 78, 27); float: left;"></div>
+        <div id="kamyk">0</div>
+        <div style="width: 20px; height: 20px; background-color: rgb(116, 98, 99); float: left;"></div>
+        <div id="ice">0</div>
+        <div style="width: 20px; height: 20px; background-color: rgb(53, 180, 255); float: left;"></div>
+        <div style="clear: both;"></div>
+        <div id="poison">0</div>
+        <div style="width: 20px; height: 20px; background-color: rgb(130, 26, 123); float: left;"></div>
+        <div id="fire">0</div>
+        <div style="width: 20px; height: 20px; background-color: rgb(242, 107, 8); float: left;"></div>
+        <div style="clear: both;"></div>
+    </div>
+    <div id="mapa" onclick="popup('#mapa2', 0);"><br />Mapa</div>
+    <div id="mapa2">
+        <div id="wrap2">
+            <div style="position: absolute; background-color: #e18949; width: 20px; height: 20px; padding-left: 5px; padding-right: 7px; left: calc(50% - 10px); top: calc(0% - 20px);" onclick="mapaRozwin('gora'); barAudio.play();"><div class="mapaDalej" style="margin-top: 5px; transform: rotate(-45deg);"></div></div>
+            <div style="position: absolute; background-color: #e18949; width: 20px; height: 20px; padding-top: 5px; padding-bottom: 7px; right: calc(0% - 20px); top: calc(50% - 10px);" onclick="mapaRozwin('prawo'); barAudio.play();"><div class="mapaDalej" style="margin-left: -7px; transform: rotate(45deg);"></div></div>
+            <div style="position: absolute; background-color: #e18949; width: 20px; height: 20px; padding-left: 5px; padding-right: 7px; left: calc(50% - 10px); bottom: calc(0% - 20px);" onclick="mapaRozwin('dol'); barAudio.play();"><div class="mapaDalej" style="margin-top: -7px; transform: rotate(135deg);"></div></div>
+            <div style="position: absolute; background-color: #e18949; width: 20px; height: 20px; padding-top: 5px; padding-bottom: 7px; left: calc(0% - 20px); top: calc(50% - 10px);" onclick="mapaRozwin('lewo'); barAudio.play();"><div class="mapaDalej" style="margin-left: 5px; transform: rotate(-135deg);"></div></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div style="clear: both;"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div style="clear: both;"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div style="clear: both;"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div style="clear: both;"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div class="mapItem"></div>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+    <div id="bohaterowie" onclick="popup('#bohaterowie2', 0);"><br />Herosi</div>
+    <div id="bohaterowie2">
+        <div onclick="changeHero(0);"><img src="heroes/elfLogo.png" alt="Elf" /><br />Elf<hr style="background: white;" />Poziom <span>1</span><br /><meter value="50" max="100" style="width: 120px; height: 30px;"></meter></div>
+        <div onclick="changeHero(1);"><img src="heroes/fireMageLogo.png" alt="FireMage"><br />Mag ognia<hr style="background: white;" />Poziom <span>1</span><br /><meter value="50" max="100" style="width: 120px; height: 30px;"></meter></div>
+        <div><img src="heroes/knightLogo.png" alt="Knight" /><br />Rycerz<hr style="background: white;" />Poziom <span>1</span><br /><meter value="50" max="100" style="width: 120px; height: 30px;"></meter></div>
+        <div><img src="heroes/hunterLogo.png" alt="Hunter"><br />Łowca<hr style="background: white;" />Poziom <span>1</span><br /><meter value="50" max="100" style="width: 120px; height: 30px;"></meter></div>
+        <div style="clear: both; float: none;"></div>
+        <div><img src="heroes/thiefLogo.png" alt="Thief" /><br />Złodziej<hr style="background: white;" />Poziom <span>1</span><br /><meter value="50" max="100" style="width: 120px; height: 30px;"></meter></div>
+        <div><img src="heroes/windMageLogo.png" alt="WindMage"><br />Mag powietrza<hr style="background: white;" />Poziom <span>1</span><br /><meter value="50" max="100" style="width: 120px; height: 30px;"></meter></div>
+        <div><img src="heroes/warlockLogo.png" alt="Warlock" /><br />Czarnoksiężnik<hr style="background: white;" />Poziom <span>1</span><br /><meter value="50" max="100" style="width: 120px; height: 30px;"></meter></div>
+        <div><img src="heroes/iceMageLogo.png" alt="IceMage"><br />Mag lodu<hr style="background: white;" />Poziom <span>1</span><br /><meter value="50" max="100" style="width: 120px; height: 30px;"></meter></div>
+        <div style="clear: both; float: none;"></div>
+    </div>
+    <div id="ekwipunek" onclick="popup('#ekwipunek2', 0);"><br />Ekwipunek</div>
+    <div id="ekwipunek2">
+        <div style="width: 1000px; height: 12px; font-size: 12px; font-family: fantasy;">E K W I P U N E K</div>
+        <div style="width: 499px; height: 270px; float: left; border-right: 1px solid black;">
+            <div class="weps weps1" style="background: url(heroes/elfLogo.png); background-size: cover;"></div>
+            <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"><img src="weps/bow.png" alt="weps1" id="bow1" draggable="true" ondragstart="drag(event)" /></div>
+            <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"><img src="weps/bowFreeze.png" alt="weps1" id="bowFreeze1" draggable="true" ondragstart="drag(event)" /></div>
+            <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"><img src="weps/bowPoison.png" alt="weps1" id="bowPoison1" draggable="true" ondragstart="drag(event)" /></div>
+            <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"><img src="weps/torch.png" alt="w" id="torch" draggable="true" ondragstart="drag(event)" /></div>
+            <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div style="clear: both;"></div>
+            <hr style="border-color: black; background: black; width: 96%; margin-left: 2%;" />
+            <div class="weps weps2" style="background: url(heroes/fireMageLogo.png); background-size: cover;"></div>
+            <div class="weps weps2" ondrop="drop(event)" ondragover="allowDrop(event)"><img src="weps/fireball.png" alt="weps2" id="fireball1" draggable="true" ondragstart="drag(event)" /></div>
+            <div class="weps weps2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div style="clear: both;"></div>
+            <hr style="border-color: black; background: black; width: 96%; margin-left: 2%;" />
+            <div class="weps weps3" style="background: url(heroes/knightLogo.png); background-size: cover;"></div>
+            <div class="weps weps3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div style="clear: both;"></div>
+            <hr style="border-color: black; background: black; width: 96%; margin-left: 2%;" />
+            <div class="weps weps4" style="background: url(heroes/hunterLogo.png); background-size: cover;"></div>
+            <div class="weps weps4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div style="clear: both;"></div>
+        </div>
+        <div style="width: 499px; height: 270px; float: left; border-left: 1px solid black;">
+            <div class="weps weps5" style="background: url(heroes/thiefLogo.png); background-size: cover;"></div>
+            <div class="weps weps5" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps5" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps5" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps5" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps5" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps5" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps5" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps5" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div style="clear: both;"></div>
+            <hr style="border-color: black; background: black; width: 96%; margin-left: 2%;" />
+            <div class="weps weps6" style="background: url(heroes/windMageLogo.png); background-size: cover;"></div>
+            <div class="weps weps6" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps6" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps6" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps6" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps6" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps6" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps6" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps6" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div style="clear: both;"></div>
+            <hr style="border-color: black; background: black; width: 96%; margin-left: 2%;" />
+            <div class="weps weps7" style="background: url(heroes/warlockLogo.png); background-size: cover;"></div>
+            <div class="weps weps7" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps7" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps7" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps7" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps7" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps7" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps7" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps7" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div style="clear: both;"></div>
+            <hr style="border-color: black; background: black; width: 96%; margin-left: 2%;" />
+            <div class="weps weps8" style="background: url(heroes/iceMageLogo.png); background-size: cover;"></div>
+            <div class="weps weps8" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps8" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps8" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps8" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps8" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps8" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps8" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps8" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div style="clear: both;"></div>
+        </div>
+        <div style="clear: both;"></div>
+        <hr style="background: white; width: 96%; margin-left: 2%;" />
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div style="clear: both;"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div style="clear: both;"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div class="slot" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div style="clear: both;"></div>
+    </div>
+    <div id="opcje" onclick="popup('#opcje2', 0); if(document.getElementById('opcje2').style.visibility=='hidden'){for(var i=0; i<3; i++) {document.getElementsByClassName('optionPage')[i].style.visibility='hidden';}} else{document.getElementsByClassName('optionPage')[0].style.visibility='visible'}"><br />Opcje</div>
+    <div id="opcje2">
+        <button class="sekcja" onclick="changeSekcja(0);">Gameplay</button>
+        <button class="sekcja" onclick="changeSekcja(1);">Controls</button>
+        <button class="sekcja" onclick="changeSekcja(2);">Display</button>
+        <div id="opcContent" style="margin-top: 5px; font-family: fantasy; position: relative;">
+            <div class="optionPage" style="position: absolute; top: 0; left: 0;">
+            <div>Reset broni: <img src="other/yes.png" alt="" id="checkReset" style="width: auto; height: 35px; margin-bottom: -12px; background-size: cover;"  onmouseover="this.setAttribute('src', 'other/yesHover.png');" onmouseout="this.setAttribute('src', 'other/yes.png');" onmousedown="this.setAttribute('src', 'other/yesPress.png');" onclick="changeOption('#checkReset', 0); options.checkReset=!options.checkReset;" /></div></div>
+        <div class="optionPage" style="position: absolute; top: 0; left: 0; visibility: hidden;">
+        </div>
+        <div class="optionPage" style="position: absolute; top: 0; left: 0; visibility: hidden;">
+        <!--<div>Skala UI: <input type="range" min="0.1" step="0.1" max="1" value="0.8" id="UIScale" style="width: auto; height: 35px;" onchange="options.UIScale=this.value;" /></div>-->
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+<div style="clear: both;"></div>
+<!--<button id="fala" onclick="fala();">Rozpocznij falę</button>-->
+<script>
+const proj=document.getElementById("projectiles");
+const projCtx=proj.getContext("2d");
+const enemies=document.getElementById("enemies");
+const enemiesCtx=enemies.getContext("2d");
+const heroCanv=document.getElementById("hero");
+const heroCtx=heroCanv.getContext("2d");
+const resources=document.getElementById("resources");
+const resourcesCtx=resources.getContext("2d");
+const anim1=document.getElementById("animations1");
+const anim1Ctx=anim1.getContext("2d");
+const text=document.getElementById("text");
+const textCtx=text.getContext("2d");
+const light=document.getElementById("light");
+const lightCtx=light.getContext("2d");
+if(window.innerWidth>1800) {
+    proj.width=1800;
+    enemies.width=1800;
+    heroCanv.width=1800;
+    resources.width=1800;
+    anim1.width=1800;
+    text.width=1800;
+    document.getElementById("gameHolder").style.marginLeft=((window.innerWidth-1800)/2)+"px";
+    document.getElementById("light").style.marginLeft=((window.innerWidth-1800)/2)+"px";
+} else {
+    proj.width=window.innerWidth;
+    enemies.width=window.innerWidth;
+    heroCanv.width=window.innerWidth;
+    resources.width=window.innerWidth;
+    anim1.width=window.innerWidth;
+    text.width=window.innerWidth;
+    document.getElementById("gameHolder").style.backgroundSize="cover";
+} if(window.innerHeight>1193) {
+    proj.height=1013;
+    enemies.height=1013;
+    heroCanv.height=1013;
+    anim1.height=1013;
+    text.height=1013;
+}
+else {
+    proj.height=(window.innerHeight-180);
+    enemies.height=(window.innerHeight-180);
+    heroCanv.height=(window.innerHeight-180);
+    resources.height=(window.innerHeight-180);
+    anim1.height=(window.innerHeight-180);
+    text.height=(window.innerHeight-180);
+    document.getElementById("gameHolder").style.backgroundSize="cover";
+}
+document.getElementById("gameHolder").style.width=proj.width+"px";
+document.getElementById("gameHolder").style.height=proj.height+"px";
+light.width=proj.width;
+light.height=proj.height;
+var img=new Image;
+var imgs={goblin: new Image, goblinProca: new Image, goblinFreeze: new Image, goblinProcaFreeze: new Image};
+var weps=new Audio("sounds/iceball.wav");
+var barAudio=new Audio("sounds/select2.wav");
+window.onload=function()
+{
+    imgs.goblin.setAttribute("src", "enemies/goblin.png");
+    imgs.goblinProca.setAttribute("src", "enemies/goblinProca.png");
+    imgs.goblinFreeze.setAttribute("src", "enemies/goblinFreeze.png");
+    imgs.goblinProcaFreeze.setAttribute("src", "enemies/goblinProcaFreeze.png");
+    document.getElementById("loading").innerHTML="<button>PLAY</button>";
+    document.getElementById("loading").firstChild.setAttribute("onclick", "document.getElementById('menuPage').style.animationName='menuPage1'; document.getElementById('loading').style.visibility='hidden'; openFullscreen(); setTimeout(function() {document.getElementById('menuPage').style.top='25%';}, 1500);");
+    document.getElementById("loading").firstChild.style.width="50%";
+    document.getElementById("loading").firstChild.style.height="66.6%";
+    document.getElementById("loading").style.animationName="None";
+    document.getElementById("loading").style.cursor="pointer";
+}
+var gracz=[proj.width/2, proj.height/2];
+var zaznaczony="";
+var numer=0;
+var polGracza=[600, 300];
+var bowDmg=15;
+var sila=1;
+var dsily;
+var recharge=0;
+var energia=100;
+var wsprint;
+var move;
+var lockMove=false;
+var lockChangeWep=false;
+var paused=true;
+var space=false;
+var surowceTyp=[];
+var surowceX=[];
+var surowceY=[];
+var biome=["laka", 2];
+var mapa=["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
+mapa.forEach((item, index)=>{
+    item="";
+    mapa[index]=new Array(25);
+});
+var mapaMy=[12, 12];
+var mapaPatrz=[10, 10];
+var selHero="1";
+var Przeciwnicy=[];
+var spells=[];
+var sprint;
+var surowceInt;
+var shootInt;
+var enemyMoveInt;
+var enemyInt;
+var animInt;
+var torches=[];
+const moc=document.getElementsByClassName("moc");
+var hero="elf";
+var changeType=[];
+var keys={w: false, a: false, s: false, d: false};
+var sound={lakaBG: new Audio("sounds/crickets.wav")};
+var attack={
+    rock: {color: "rgb(116, 98, 99)", size: 14, type: "rect", dmg: 40},
+    arrow: {color: "#4b1414", size: 7, type: "line", dmg: 50},
+    fireball: {color1: "rgb(255, 127, 39)", color2: "rgb(255, 242, 0)", bsize: 16, size: 30, type: "ball", dmg: 70}
+};
+var options={
+    checkReset: true,
+    UIScale: 0.8
+};
+var animations=[];
+const popup=(element, index)=>{
+    if(document.querySelectorAll(element)[index].style.visibility=='' || document.querySelectorAll(element)[index].style.visibility=='hidden') document.querySelectorAll(element)[index].style.visibility='visible';
+    else document.querySelectorAll(element)[index].style.visibility='hidden';
+    barAudio.play();
+};
+const changeOption=(element, index)=>{
+    if(document.querySelectorAll(element)[index].getAttribute("src")=="other/yesPress.png") {
+        document.querySelectorAll(element)[index].setAttribute("src", "other/noHover.png");
+        document.querySelectorAll(element)[index].setAttribute("onmouseover", "this.setAttribute('src', 'other/noHover.png')");
+        document.querySelectorAll(element)[index].setAttribute("onmouseout", "this.setAttribute('src', 'other/no.png')");
+        document.querySelectorAll(element)[index].setAttribute("onmousedown", "this.setAttribute('src', 'other/noPress.png')");
+    } else {
+        document.querySelectorAll(element)[index].setAttribute("src", "other/yesHover.png");
+        document.querySelectorAll(element)[index].setAttribute("onmouseover", "this.setAttribute('src', 'other/yesHover.png')");
+        document.querySelectorAll(element)[index].setAttribute("onmouseout", "this.setAttribute('src', 'other/yes.png')");
+        document.querySelectorAll(element)[index].setAttribute("onmousedown", "this.setAttribute('src', 'other/yesPress.png')");
+    }
+    barAudio.play();
+}
+const changeSekcja=(index)=>{
+    for(var i=0; i<3; i++) {document.getElementsByClassName('optionPage')[i].style.visibility='hidden';}
+    document.getElementsByClassName('optionPage')[index].style.visibility='visible';
+    barAudio.play();
+}
+const surowce=[
+    document.getElementById("drewno"),
+    document.getElementById("kamyk"),
+    document.getElementById("ice"),
+    document.getElementById("poison"),
+    document.getElementById("fire")
+];
+const ammo=[
+    document.getElementsByClassName("ammo")[0],
+    document.getElementsByClassName("ammo")[1],
+    document.getElementsByClassName("ammo")[2],
+    document.getElementsByClassName("ammo")[3],
+    document.getElementsByClassName("ammo")[4],
+    document.getElementsByClassName("ammo")[5],
+    document.getElementsByClassName("ammo")[6],
+    document.getElementsByClassName("ammo")[7]
+];
+var craft={
+    bow: "1<div style='display: inline-block; padding: 6px;  background-color: rgb(126, 78, 27);'></div>1<div style='display: inline-block; padding: 6px; background-color: rgb(116, 98, 99);'></div>",
+    bowFreeze: "1<div style='display: inline-block; padding: 6px;  background-color: rgb(126, 78, 27);'></div>1<div style='display: inline-block; padding: 6px; background-color: rgb(53, 180, 255);'></div>",
+    bowPoison: "1<div style='display: inline-block; padding: 6px;  background-color: rgb(126, 78, 27);'></div>1<div style='display: inline-block; padding: 6px; background-color: rgb(130, 26, 123);'></div>",
+    fireball: "2<div style='display: inline-block; padding: 6px;  background-color: rgb(242, 107, 8);'></div>",
+    torch: "1<div style='display: inline-block; padding: 6px;  background-color: rgb(126, 78, 27);'></div>1<div style='display: inline-block; padding: 6px; background-color: rgb(242, 107, 8);'></div>"
+};
+var info={
+    bow: "STRZALA<br /><br /><br />Zwyczajna strzala<br />Dla: Elf",
+    bowFreeze: "LODOWA STRZALA<br /><br /><br />Zamrazajaca strzala<br />Dla: Elf",
+    bowPoison: "ZATRUTA STRZALA<br /><br /><br />Zatruta strzala<br />Dla: Elf",
+    fireball: "KULA OGNIA<br /><br /><br />Wybucha<br />Dla: Mag Ognia",
+    torch: "POCHODNIA<br /><br /><br />Pozwala widziec wrogow w nocy<br />Dla: Wszyscy"
+};
+var heroes=["elf", "fireMage"];
+var recipe={
+    bow: [0, 1, 1, 1],
+    bowFreeze: [0, 1, 2, 1],
+    bowPoison: [0, 1, 3, 1],
+    fireball: [4, 2],
+    torch: [0, 1, 4, 1]
+};
+var wepAmmo={
+    bow: 10,
+    bowFreeze: 10,
+    bowPoison: 10,
+    fireball: 10,
+    torch: 10
+};
+var items={
+    bow: {info: ""+info.bow, craft: ""+craft.bow, name: "bow"},
+    bowFreeze: {info: info.bowFreeze, craft: craft.bowFreeze, name: "bowFreeze"},
+    bowPoison: {info: info.bowPoison, craft: craft.bowPoison, name: "bowPoison"},
+    fireball: {info: info.fireball, craft: craft.fireball, name: "fireball"},
+    torch: {info: info.torch, craft: craft.torch, name: "torch"}
+};
+img.setAttribute("src", "heroes/elf.png");
+heroCtx.drawImage(img, gracz[0], gracz[1]);
+mapa[mapaMy[0]][mapaMy[1]]=biome[0]+1;
+document.getElementsByClassName("mapItem")[12].style.backgroundImage="url(maps/laka1.png)";
+document.getElementsByClassName("mapItem")[12].style.backgroundSize="cover";
+document.getElementsByClassName("mapItem")[12].innerHTML="<br />JESTES TUTAJ";
+document.getElementById("light").addEventListener("click", function(r) {
+    let ind;
+    let fix=false;
+    if(zaznaczony!="" && wepAmmo[zaznaczony]>0){
+        for(var i=0; i<8; i++) {if(moc[i].style.backgroundImage.includes("/"+zaznaczony+".") && document.getElementsByClassName("wrap")[i].style.visibility!="hidden"){ind=i; break;}}
+        moc[ind].style.filter="brightness(0.5)";
+        clearInterval(dsily);
+        document.getElementById("load").value="0";
+        lockChangeWep=false;
+        ammo[ind].innerHTML=ammo[ind].innerHTML*1-1;
+        wepAmmo[zaznaczony]-=1;
+        fix=true;
+        if(zaznaczony.slice(0, 3)=="bow") {weps.setAttribute("src", "sounds/bowStrRel"+(Math.floor(Math.random()*4)+1)+".wav"); weps.play();}
+    } if(fix){
+        if(zaznaczony=="bow"){
+            spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e){weps.setAttribute("src", "sounds/arrow.wav"); weps.play();}, onMove: function(x, y){projCtx.fillStyle="#646464"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: Math.trunc(15*(sila/30))});
+            odliczanie(1, ind, zaznaczony);
+        } else if(zaznaczony=="bowFreeze"){
+            spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e,x,y){e.frozen=true; e.frozenTime=0; weps.setAttribute("src", "sounds/iceball.wav"); weps.play(); Przeciwnicy.forEach((item2, index2) => {if(Math.abs(x-item2.polozenieX+18)<=65 && Math.abs(y-item2.polozenieY+18)<=65) {item2.frozen=true; item2.frozenTime=0;}});animations.push([0, "ice", x, y, 6, new Image("effects/ice/0.png")]);}, onMove: function(x, y){projCtx.fillStyle="#35b4ff"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: Math.trunc(15*(sila/30))});
+            odliczanie(1, ind, zaznaczony);
+        } else if(zaznaczony=="bowPoison"){
+            spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e,x,y){e.poisoned=true; e.poisonedTime=0; weps.setAttribute("src", "sounds/poison.ogg"); weps.play();}, onMove: function(x, y){projCtx.fillStyle="#821a7b"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: Math.trunc(15*(sila/30))});
+            odliczanie(1, ind, zaznaczony);
+        } else if(zaznaczony=="fireball"){
+            spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+7, posY: gracz[1]+7, target: true, effects: {onHit: function(e,x,y,dmg){weps.setAttribute("src", "sounds/fireball.wav"); weps.play(); Przeciwnicy.forEach((item2, index2) => {if(Math.abs(x-item2.polozenieX+18)<=45 && Math.abs(y-item2.polozenieY+18)<=45 && e!=item2) {item2.hp-=dmg}});animations.push([0, "explosion", x+32, y+32, 9, new Image("effects/explosion/0.png")]);}, onMove: function(x, y){}}, spell: attack.fireball, dmg: Math.trunc(21*(sila/30))});
+            odliczanie(4, ind, zaznaczony);
+        } else if(zaznaczony=="torch"){
+            torches.push({x: gracz[0], y: gracz[1], stage: [mapaMy[0], mapaMy[1]]});
+            lightCtx.fillStyle="rgb(114, 72, 27)";
+            lightCtx.fillRect(gracz[0]+10, gracz[1]+10, 10, 20);
+            lightCtx.fillStyle="rgb(204, 23, 23)";
+            lightCtx.fillRect(gracz[0]+10, gracz[1], 10, 10);
+            lightCtx.fillStyle="rgb(229, 252, 56)";
+            lightCtx.fillRect(gracz[0]+12, gracz[1]+4, 6, 6);
+            odliczanie(2, ind, zaznaczony);
+        } if(zaznaczony!=""){
+            sila=1;
+            zaznaczony="";
+        }
+    }
+    /*if(zaznaczony=="bow" && ammo[0].innerHTML*1>0 && sila!=1){
+        document.getElementsByClassName("moc")[0].style.filter="brightness(0.5)";
+        clearInterval(dsily);
+        bowDmg=Math.trunc(15*(sila/30));
+        sila=1;
+        document.getElementById("load").value="0";
+        lockChangeWep=false;
+        spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e){weps.setAttribute("src", "sounds/ballista.ogg"); weps.play();}, onMove: function(x, y){projCtx.fillStyle="#646464"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: bowDmg});
+        ammo[0].innerHTML=ammo[0].innerHTML*1-1;
+        wepAmmo[zaznaczony]-=1;
+        if(options.checkReset) zaznaczony="";
+        odliczanie(1, 0, zaznaczony);
+    } else if(zaznaczony=="bowFreeze" && ammo[1].innerHTML*1>0 && sila!=1){
+        document.getElementsByClassName("moc")[1].style.filter="brightness(0.5)";
+        clearInterval(dsily);
+        bowDmg=Math.trunc(15*(sila/30));
+        sila=1;
+        document.getElementById("load").value="0";
+        lockChangeWep=false;
+        spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e,x,y){e.frozen=true; e.frozenTime=0; weps.setAttribute("src", "sounds/iceball.wav"); weps.play(); Przeciwnicy.forEach((item2, index2) => {if(Math.abs(x-item2.polozenieX+18)<=65 && Math.abs(y-item2.polozenieY+18)<=65) {item2.frozen=true; item2.frozenTime=0;}});animations.push([0, "ice", x, y, 6, new Image]);animations[animations.length-1][5].setAttribute("src", "effects/ice/0.png");}, onMove: function(x, y){projCtx.fillStyle="#35b4ff"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: bowDmg});
+        ammo[1].innerHTML=ammo[1].innerHTML*1-1;
+        if(options.checkReset) zaznaczony="";
+        odliczanie(1, 1, zaznaczony);
+    } else if(zaznaczony=="bowPoison" && ammo[2].innerHTML*1>0 && sila!=1){
+        document.getElementsByClassName("moc")[2].style.filter="brightness(0.5)";
+        clearInterval(dsily);
+        bowDmg=Math.trunc(15*(sila/30));
+        sila=1;
+        document.getElementById("load").value="0";
+        lockChangeWep=false;
+        spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e,x,y){e.poisoned=true; e.poisonedTime=0; weps.setAttribute("src", "sounds/poison.ogg"); weps.play();}, onMove: function(x, y){projCtx.fillStyle="#821a7b"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: bowDmg});
+        ammo[2].innerHTML=ammo[2].innerHTML*1-1;
+        if(options.checkReset) zaznaczony="";
+        odliczanie(1, 2, zaznaczony);
+    }
+    else if(zaznaczony=="rocks" && ammo[3].innerHTML*1>0 && sila!=1){
+        document.getElementsByClassName("moc")[1].style.filter="brightness(0.5)";
+        Moc.rocks(r.clientX-(document.getElementById("gameHolder").style.marginLeft).replace("px", "")*1, r.clientY);
+        if(zaznaczony=="rocks") ammo[3].innerHTML=ammo[3].innerHTML*1-1;
+        if(options.checkReset) zaznaczony="";
+        odliczanie(3, 1, zaznaczony);
+    }*/
+});
+/*document.addEventListener("mousemove", function(t) {
+    if((document.getElementById("gameHolder").style.marginLeft).replace("px", "")*1<=t.clientX && (document.getElementById("gameHolder").style.marginLeft).replace("px", "")*1+canvas.width>=t.clientX && 0<=t.clientY && canvas.height>=t.clientY && !lockMove)
+    {
+        numer++;
+        if(numer>=3)
+        {
+            numer=0;
+            polGracza[0]=t.clientX-(document.getElementById("gameHolder").style.marginLeft).replace("px", "")*1;
+            polGracza[1]=t.clientY;
+        }
+    }
+    else{
+        polGracza[0]=gracz[0]+15;
+        polGracza[1]=gracz[1]+15;
+    }
+});*/
+document.getElementById("light").addEventListener("mousedown", function(e) {
+    //if((zaznaczony=="bow" && ammo[0].innerHTML*1>0 && moc[0].textContent=="") || (zaznaczony=="bowFreeze" && ammo[1].innerHTML*1>0 && moc[0].textContent=="") || (zaznaczony=="bowPoison" && ammo[2].innerHTML*1>0 && moc[0].textContent=="") || (zaznaczony=="rocks" && ammo[3].innerHTML*1>0 && moc[1].textContent=="")){
+    if(zaznaczony!="" && wepAmmo[zaznaczony]>0 && zaznaczony!="torch"){
+        if(e.button==0)
+        {
+            if(zaznaczony.slice(0, 3)=="bow") {weps.setAttribute("src", "sounds/bowStrBack"+(Math.floor(Math.random()*4)+1)+".wav"); weps.play();}
+            lockChangeWep=true;
+            clearInterval(dsily);
+            dsily=setInterval(function() {
+                if(sila!=100)
+                {
+                    sila++;
+                    document.getElementById("load").textContent=sila;
+                    document.getElementById("load").value=sila;
+                }
+            }, 20);
+        }
+    }
+});
+window.addEventListener("resize", function() {
+    if(window.innerWidth>1800) {
+        proj.width=1800;
+        enemies.width=1800;
+        heroCanv.width=1800;
+        resources.width=1800;
+        anim1.width=1800;
+        text.width=1800;
+        document.getElementById("gameHolder").style.marginLeft=((window.innerWidth-1800)/2)+"px";
+    } else {
+        proj.width=window.innerWidth;
+        enemies.width=window.innerWidth;
+        heroCanv.width=window.innerWidth;
+        resources.width=window.innerWidth;
+        anim1.width=window.innerWidth;
+        text.width=window.innerWidth;
+        document.getElementById("gameHolder").style.backgroundSize="cover";
+    } if(window.innerHeight>1193) {
+        proj.height=1013;
+        enemies.height=1013;
+        heroCanv.height=1013;
+        anim1.height=1013;
+        text.height=1013;
+    }
+    else {
+        proj.height=(window.innerHeight-180);
+        enemies.height=(window.innerHeight-180);
+        heroCanv.height=(window.innerHeight-180);
+        resources.height=(window.innerHeight-180);
+        anim1.height=(window.innerHeight-180);
+        text.height=(window.innerHeight-180);
+        document.getElementById("gameHolder").style.backgroundSize="cover";
+    }
+    document.getElementById("gameHolder").style.width=proj.width+"px";
+    document.getElementById("gameHolder").style.height=proj.height+"px";
+    light.width=proj.width;
+    light.height=proj.height;
+    for(var i=0; i<surowceTyp.length; i++){
+        if(surowceTyp[i]=="drewno") resourcesCtx.fillStyle="rgb(126, 78, 27)";
+        else if(surowceTyp[i]=="kamyk") resourcesCtx.fillStyle="rgb(116, 98, 99)";
+        resourcesCtx.fillRect(surowceX[i], surowceY[i], 10, 10);
+    }
+    torches.forEach((item, index)=>{
+        if(item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]){
+            lightCtx.fillStyle="rgb(114, 72, 27)";
+            lightCtx.fillRect(item.x+10, item.y+10, 10, 20);
+            lightCtx.fillStyle="rgb(204, 23, 23)";
+            lightCtx.fillRect(item.x+10, item.y, 10, 10);
+            lightCtx.fillStyle="rgb(229, 252, 56)";
+            lightCtx.fillRect(item.x+12, item.y+4, 6, 6);
+        }
+    });
+    img.setAttribute("src", "heroes/"+hero+".png");
+    heroCtx.drawImage(img, gracz[0], gracz[1]);
+    if(paused) Przeciwnicy.forEach((item, index)=>{
+        enemiesCtx.drawImage(imgs[item.type], item.polozenieX, item.polozenieY);
+        enemiesCtx.fillStyle="red";
+        enemiesCtx.fillRect(item.polozenieX, item.polozenieY-11, 30, 10);
+        if(!item.poisoned) enemiesCtx.fillStyle="#008400";
+        else enemiesCtx.fillStyle="#821a7b";
+        enemiesCtx.fillRect(item.polozenieX, item.polozenieY-11, Math.trunc(item.hp/3), 10);
+    });
+});
+function changeHero(index){
+    for(var ind=0; ind<8; ind++){
+        if(document.getElementsByClassName("weps"+(index+1))[ind+1].childElementCount==1){
+            let wep="";
+            for(var x=0; x<document.getElementsByClassName("weps"+(index+1))[ind+1].firstChild.id.length; x++) {if(document.getElementsByClassName("weps"+(index+1))[ind+1].firstChild.id[x]*1>-1){break;} else {wep+=document.getElementsByClassName("weps"+(index+1))[ind+1].firstChild.id[x]}}
+            if(zaznaczony==wep) zaznaczony="";
+            if(moc[ind].style.filter=="brightness(1.5)") moc[ind].style.filter="brightness(1)";
+            moc[ind].style.backgroundImage="url(weps/"+wep+".png)";
+            moc[ind].style.backgroundSize="cover";
+            ammo[ind].innerHTML=wepAmmo[wep];
+            moc[ind].setAttribute("onclick", "if(moc["+ind+"].innerHTML=='' && !lockChangeWep){if(zaznaczony=='"+wep+"'){zaznaczony='';moc["+ind+"].style.filter='brightness(1)';}else if(zaznaczony!=''){zaznaczony='';for(var i=0; i<=7; i++){if(moc[i].style.filter=='brightness(1.5)'){moc[i].style.filter='brightness(1)';}}moc["+ind+"].style.filter='brightness(1.5)';zaznaczony='"+wep+"';}else{zaznaczony='"+wep+"';moc["+ind+"].style.filter='brightness(1.5)';}}");
+            document.getElementsByClassName("craft")[ind].setAttribute("onclick", 'let pozwolenie=true; for(var i=0; ['+recipe[wep]+'].length/2>i; i++){if(surowce[['+recipe[wep]+'][i*2]].innerHTML*1<['+recipe[wep]+'][i*2+1]) pozwolenie=false;}if(pozwolenie) {ammo['+ind+'].innerHTML=(wepAmmo["'+wep+'"]+=1);barAudio.play();for(var i=0; ['+recipe[wep]+'].length/2>i; i++){surowce[['+recipe[wep]+'][i*2]].innerHTML=surowce[['+recipe[wep]+'][i*2]].innerHTML*1-['+recipe[wep]+'][i*2+1];}}');
+            document.getElementsByClassName("craft")[ind].setAttribute("onmouseover", 'moc['+ind+'].innerHTML="'+craft[wep]+'";moc['+ind+'].style.background="white";moc['+ind+'].style.color="black";');
+            document.getElementsByClassName("craft")[ind].setAttribute("onmouseout", 'moc['+ind+'].innerHTML="";moc['+ind+'].style.backgroundImage="url(weps/'+wep+'.png)";moc['+ind+'].style.backgroundSize="cover";moc['+ind+'].style.color="white";');
+            document.getElementsByClassName("info")[ind].setAttribute("onmouseover", 'moc['+ind+'].innerHTML="'+info[wep]+'";moc['+ind+'].style.background="white";moc['+ind+'].style.color="black";moc['+ind+'].style.fontSize="9px";');
+            document.getElementsByClassName("info")[ind].setAttribute("onmouseout", 'moc['+ind+'].innerHTML="";moc['+ind+'].style.backgroundImage="url(weps/'+wep+'.png)";moc['+ind+'].style.backgroundSize="cover";moc['+ind+'].style.color="white";moc['+ind+'].style.fontSize="38px";');
+            document.getElementsByClassName("wrap")[ind].style.visibility="visible";
+        } else {document.getElementsByClassName("wrap")[ind].style.visibility="hidden";}
+    }
+    popup("#bohaterowie2", 0);
+    hero=heroes[index];
+    selHero=(index+1)+"";
+}
+function openFullscreen() {
+  if(document.getElementsByTagName("html")[0].requestFullscreen) document.getElementsByTagName("html")[0].requestFullscreen();
+  else if(document.getElementsByTagName("html")[0].webkitRequestFullscreen) document.getElementsByTagName("html")[0].webkitRequestFullscreen();
+  else if(document.getElementsByTagName("html")[0].msRequestFullscreen) document.getElementsByTagName("html")[0].msRequestFullscreen();
+}
+function pause(){
+    paused=true;
+    window.removeEventListener("keypress", keypress);
+    window.removeEventListener("keydown", keyDown);
+    clearInterval(sprint);
+    clearInterval(move);
+    clearInterval(surowceInt);
+    clearInterval(enemyInt);
+    clearInterval(enemyMoveInt);
+    clearInterval(shootInt);
+    clearInterval(animInt);
+}
+function keypress(e){
+    if(e.key==" ") space=true;
+    if(e.key=="Q" && e.shiftKey) document.getElementsByClassName("craft")[0].click();
+    //else if((e.key=="q" || e.key=="Q") && !e.shiftKey) moc[0].click();
+    else if(e.key=="W" && e.shiftKey) document.getElementsByClassName("craft")[1].click();
+    //else if((e.key=="w" || e.key=="W") && !e.shiftKey) moc[1].click();
+    else if(e.key=="n") popup('#surowce2', 0);
+    else if(e.key=="m") popup('#mapa2', 0);
+    else if((e.key).match(/[1-8]/g)){if(ammo[e.key*1-1].innerHTML*1>0 && moc[e.key*1-1].innerHTML=="" && document.getElementsByClassName("wrap")[e.key*1-1].style.visibility!="hidden") moc[e.key*1-1].click();}
+    //else if(e.key=="1" && ammo[0]*1>0 && moc[0].innerHTML=="" && moc[0].style.visibility=="visible") moc[0].click();
+}
+function keyUp(e){
+    if(e.key==" ") space=false;
+    if(e.key=="w" || e.key=="W") keys.w=false;
+    if(e.key=="a" || e.key=="A") keys.a=false;
+    if(e.key=="s" || e.key=="S") keys.s=false;
+    if(e.key=="d" || e.key=="D") keys.d=false;
+}
+function keyDown(e){
+    if(e.key=="w" || e.key=="W") keys.w=true;
+    if(e.key=="a" || e.key=="A") keys.a=true;
+    if(e.key=="s" || e.key=="S") keys.s=true;
+    if(e.key=="d" || e.key=="D") keys.d=true;
+}
+window.addEventListener("keyup", keyUp);
+//start();
+function start()
+{
+    paused=false;
+/*setInterval(function() {
+    for(var i=0; i<=surowceX.length-1; i++)
+    {
+        if(surowceX[i]==undefined) continue;
+        else if(surowceTyp[i]=="drewno")
+        {
+            resourcesCtx.fillStyle="rgb(126, 78, 27)";
+            resourcesCtx.fillRect(surowceX[i], surowceY[i], 10, 10);
+        }
+        else if(surowceTyp[i]=="kamyk")
+        {
+            resourcesCtx.fillStyle="rgb(116, 98, 99)";
+            resourcesCtx.fillRect(surowceX[i], surowceY[i], 10, 10);
+        }
+    }
+}, 1000);*/
+window.addEventListener("keypress", keypress);
+window.addEventListener("keydown", keyDown);
+move=setInterval(function() {
+    if(keys.w && polGracza[1]-15>=0) polGracza[1]-=10;
+    if(keys.a && polGracza[0]-15>=0) polGracza[0]-=10;
+    if(keys.s && polGracza[1]+15<=proj.height) polGracza[1]+=10;
+    if(keys.d && polGracza[0]+15<=proj.width) polGracza[0]+=10;
+    ruch(polGracza[0], polGracza[1]);
+    sprSurowce();
+}, 90);
+surowceInt=setInterval(function() {
+    if(biome[0]=="laka")
+    {
+        var liczbaL=Math.floor(Math.random()*2)+1;
+        var x=Math.floor(Math.random()*(proj.width-10));
+        var y=Math.floor(Math.random()*(proj.height-10));
+        surowceX.push(x);
+        surowceY.push(y);
+        if(liczbaL==1)
+        {
+            surowceTyp.push("drewno");
+            resourcesCtx.fillStyle="rgb(126, 78, 27)";
+        }
+        if(liczbaL==2)
+        {
+            surowceTyp.push("kamyk");
+            resourcesCtx.fillStyle="rgb(116, 98, 99)";
+        }
+        resourcesCtx.fillRect(x, y, 10, 10);
+    }
+}, 3000);
+sprint=setInterval(function() {
+    if((energia!=100) && (recharge==100))
+    {
+        energia++;
+        document.getElementById("sprint").value=energia;
+    }
+    else if(recharge!=100) recharge++;
+    if(space && energia!=0)
+    {
+        energia--;
+        document.getElementById("sprint").value=energia;
+        recharge=0;
+        if(!wsprint)
+        {
+            clearInterval(move);
+            move=setInterval(function() {
+                if(keys.w && polGracza[1]-15>=0) polGracza[1]-=10;
+                if(keys.a && polGracza[0]-15>=0) polGracza[0]-=10;
+                if(keys.s && polGracza[1]+15<=proj.height) polGracza[1]+=10;
+                if(keys.d && polGracza[0]+15<=proj.width) polGracza[0]+=10;
+                ruch(polGracza[0], polGracza[1]);
+                sprSurowce();
+            }, 50);
+        }
+        wsprint=true;
+    }
+    else if(wsprint)
+    {
+        clearInterval(move);
+        move=setInterval(function() {
+            if(keys.w && polGracza[1]-15>=0) polGracza[1]-=10;
+            if(keys.a && polGracza[0]-15>=0) polGracza[0]-=10;
+            if(keys.s && polGracza[1]+15<=proj.height) polGracza[1]+=10;
+            if(keys.d && polGracza[0]+15<=proj.width) polGracza[0]+=10;
+            ruch(polGracza[0], polGracza[1]);
+            sprSurowce();
+        }, 90);
+        wsprint=false;
+    }
+}, 50);
+enemyInt=setInterval(function() {
+    if(biome[0]=="laka")
+    {
+        let losowa=Math.floor(Math.random()*2)+1;
+        if(losowa==1) new Enemy({type: "goblin", hp: 90, shoot: false, shootType: null});
+        else new Enemy({type: "goblinProca", hp: 90, shoot: true, shootType: "proca"});
+    }
+}, 13000);
+enemyMoveInt=setInterval(function() {
+    Przeciwnicy.forEach((item, index)=>{
+        if(Przeciwnicy[index]!=undefined && item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1])
+        {
+            item.dl=Math.abs((gracz[0]-item.polozenieX+15)+15);
+            item.wy=Math.abs((gracz[1]-item.polozenieY+15)+15);
+            enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-12, 32, 12);
+            if(item.poisoned) {
+                item.poisonedTime++;
+                if(item.poisonedTime%2==0) item.hp-=2;
+                if(item.poisonedTime>=20) {
+                    item.poisoned=false;
+                    item.poisonedTime=0;
+                }
+            }
+            if(item.frozen) {
+                item.frozenTime++;
+                enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-1, 32, 32);
+                //if(item.type=="goblin") img.setAttribute("src", "enemies/goblinFreeze.png");
+                //else if(item.type=="goblinProca") img.setAttribute("src", "enemies/goblinProcaFreeze.png");
+                if(item.type=="goblin") enemiesCtx.drawImage(imgs.goblinFreeze, item.polozenieX, item.polozenieY);
+                else if(item.type=="goblinProca") enemiesCtx.drawImage(imgs.goblinProcaFreeze, item.polozenieX, item.polozenieY);
+                //ctx.drawImage(img, item.polozenieX, item.polozenieY);
+                if(item.frozenTime>=40) {
+                    item.frozen=false;
+                    item.frozenTime=0;
+                }
+            }
+            else if(item.shoot && item.dl<=600 && item.wy<=300 && item.polozenieX>=20 && item.polozenieY>=20 && item.polozenieX<=proj.width-50 && item.polozenieY<=proj.height-50)
+            {
+                if(item.odlicz==18)
+                {
+                    item.odlicz=0;
+                    /*
+                    let procaPolx=item.polozenieX+8;
+                    let procaPoly=item.polozenieY+8;
+                    let procaX=(gracz[0]-42)+Math.floor(Math.random()*100)+1;
+                    let procaY=(gracz[1]-42)+Math.floor(Math.random()*100)+1;
+                    let procaDl=Math.abs(procaPolx-procaX);
+                    let procaWy=Math.abs(procaPoly-procaY);
+                    let angle=Math.atan2(procaY-procaPoly, procaX-procaPolx);
+                    let vY=Math.sin(angle)*10;
+                    let vX=Math.cos(angle)*10;
+                    spells.push({procaPolx: procaPolx, procaPoly: procaPoly, procaX: procaX, procaY: procaY, procaDl: procaDl, procaWy: procaWy, angle: angle, vY: vY, vX: vX});*/
+                    spells.push({x: (gracz[0]-42)+Math.floor(Math.random()*100)+1, y: (gracz[1]-42)+Math.floor(Math.random()*100)+1, posX: item.polozenieX+8, posY: item.polozenieY+8, target: false, effects: {onHit: function(e){}, onMove: function(){}}, spell: attack.rock});
+                }
+                else
+                {
+                    item.odlicz++;
+                    enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-1, 32, 32);
+                    //if(item.type=="goblinProca") img.setAttribute("src", "enemies/goblinProca.png");
+                    //ctx.drawImage(img, item.polozenieX, item.polozenieY);
+                    if(item.type=="goblinProca") enemiesCtx.drawImage(imgs.goblinProca, item.polozenieX, item.polozenieY);
+                }
+            }
+            else {
+                enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-1, 32, 32);
+                item.angle2=Math.atan2(gracz[1]-item.polozenieY, gracz[0]-item.polozenieX);
+                item.polozenieY+=Math.sin(item.angle2)*10;
+                item.polozenieX+=Math.cos(item.angle2)*10;
+                //if(item.type=="goblin") img.setAttribute("src", "enemies/goblin.png");
+                //else if(item.type=="goblinProca") img.setAttribute("src", "enemies/goblinProca.png");
+                if(item.type=="goblin") enemiesCtx.drawImage(imgs.goblin, item.polozenieX, item.polozenieY);
+                else if(item.type=="goblinProca") enemiesCtx.drawImage(imgs.goblinProca, item.polozenieX, item.polozenieY);
+                //ctx.drawImage(img, item.polozenieX, item.polozenieY);
+            }
+            enemiesCtx.fillStyle="red";
+            enemiesCtx.fillRect(item.polozenieX, item.polozenieY-11, 30, 10);
+            if(!item.poisoned) enemiesCtx.fillStyle="#008400";
+            else enemiesCtx.fillStyle="#821a7b";
+            if(item.hp>0) enemiesCtx.fillRect(item.polozenieX, item.polozenieY-11, Math.trunc(item.hp/3), 10);
+            else {
+                enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-1, 32, 32);
+                enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-12, 32, 12);
+                document.getElementById("score").innerHTML=(document.getElementById("score").innerHTML*1)+50;
+                Przeciwnicy.splice(index, 1);
+            }
+        }
+    });
+}, 125);
+shootInt=setInterval(function() {
+    spells.forEach((item, index)=>{
+        /*projCtx.fillStyle="#ffffff";
+        projCtx.fillRect(item.procaPolx, item.procaPoly, 14, 14);
+        setTimeout("projCtx.clearRect("+(item.procaPolx-1)+", "+(item.procaPoly-1)+", 16, 16)", 50);
+        item.procaPoly+=item.vY;
+        item.procaPolx+=item.vX;
+        projCtx.fillStyle="rgb(116, 98, 99)";
+        projCtx.fillRect(item.procaPolx, item.procaPoly, 14, 14);
+        if((((item.procaPolx>=proj.width) || (item.procaPoly<=0)) || ((item.procaPolx<=0) || (item.procaPoly>=proj.height))) || (((gracz[0]-14<=item.procaPolx) && (gracz[0]+30>=item.procaPolx)) && ((gracz[1]-14<=item.procaPoly) && (gracz[1]+30>=item.procaPoly))))
+        {
+            setTimeout("projCtx.clearRect("+(item.procaPolx-1)+", "+(item.procaPoly-1)+", 16, 16)", 50);
+            projCtx.fillStyle="#ffffff";
+            projCtx.fillRect(item.procaPolx, item.procaPoly, 14, 14);
+            spells.splice(index, 1);
+        }*/
+        let angle=Math.atan2(item.y-item.posY, item.x-item.posX);
+        if(item.spell.type=="rect"){
+            projCtx.fillStyle="#ffffff";
+            projCtx.fillRect(item.posX-1, item.posY-1, item.spell.size+2, item.spell.size+2);
+            setTimeout("projCtx.clearRect("+(item.posX-2)+", "+(item.posY-2)+", "+(item.spell.size+4)+", "+(item.spell.size+4)+")", 50);
+        } else if(item.spell.type=="line"){
+            /*projCtx.fillStyle="#ffffff";
+            projCtx.beginPath();
+            projCtx.lineWidth=item.spell.size;
+            projCtx.moveTo(item.posX+item.spell.size/2+Math.cos(angle)*27, item.posY+item.spell.size/2+Math.sin(angle)*27);
+            projCtx.lineTo(item.posX+item.spell.size/2+Math.cos(angle)*37, item.posY+item.spell.size/2+Math.sin(angle)*37);
+            projCtx.stroke();
+            projCtx.lineWidth=1;
+            projCtx.endPath();
+            setTimeout("ctx.clearRect("+(item.posX-2)+", "+(item.posY-2)+", "+(item.spell.size+4)+", "+(item.spell.size+4)+")", 50);*/
+            for(var i=0; i<=30; i++)
+            {
+                projCtx.fillStyle="#ffffff";
+                projCtx.fillRect(item.posX-Math.cos(angle)*i, item.posY-Math.sin(angle)*i, 7, 7);
+            }
+            for(var i=0; i<=30; i++)
+            {
+                projCtx.clearRect(item.posX+(-5*Math.cos(angle)*10)-Math.cos(angle)*i-1, item.posY+(-5*Math.sin(angle)*10)-Math.sin(angle)*i-1, 9, 9);
+            }
+        } else if(item.spell.type=="ball") projCtx.clearRect(item.posX-((30-item.spell.bsize)/2)-1, item.posY-((30-item.spell.bsize)/2)-1, 32, 32);
+        item.posY+=Math.sin(angle)*10;
+        item.posX+=Math.cos(angle)*10;
+        item.y+=Math.sin(angle)*10;
+        item.x+=Math.cos(angle)*10;
+        if(item.spell.type=="rect"){
+            projCtx.fillStyle=item.spell.color;
+            projCtx.fillRect(item.posX, item.posY, item.spell.size, item.spell.size);
+        }
+        else if(item.spell.type=="line"){
+            /*projCtx.fillStyle=item.spell.color;
+            projCtx.beginPath();
+            projCtx.lineWidth=item.spell.size;
+            projCtx.moveTo(item.posX+item.spell.size/2, item.posY+item.spell.size/2);
+            projCtx.lineTo(item.posX+item.spell.size/2+Math.cos(angle)*37, item.posY+item.spell.size/2+Math.sin(angle)*37);
+            projCtx.stroke();
+            projCtx.lineWidth=1;
+            projCtx.endPath();*/
+            for(var i=0; i<=30; i++)
+            {
+                projCtx.fillStyle=item.spell.color;
+                projCtx.fillRect(item.posX-Math.cos(angle)*i, item.posY-Math.sin(angle)*i, 7, 7);
+            }
+        }
+        else if(item.spell.type=="ball"){
+            projCtx.beginPath();
+            projCtx.fillStyle=item.spell.color1;
+            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2, 0, 2*Math.PI);
+            projCtx.fill();
+            projCtx.fillStyle=item.spell.color2;
+            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-2, 0, 2*Math.PI);
+            projCtx.fill();
+            projCtx.fillStyle="white";
+            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-3, 0, 2*Math.PI);
+            projCtx.fill();
+            projCtx.fillStyle=item.spell.color1;
+            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-4, 0, 2*Math.PI);
+            projCtx.fill();
+            projCtx.fillStyle="white";
+            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-5, 0, 2*Math.PI);
+            projCtx.fill();
+            projCtx.fillStyle=item.spell.color2;
+            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-6, 0, 2*Math.PI);
+            projCtx.fill();
+            projCtx.closePath();
+            projCtx.fillStyle=item.spell.color1;
+            /*for(var i=0; i<=8; i++){
+                for(var j=0; j<=8; j++){
+                    if(Math.floor(Math.random()*5)+1<5) projCtx.fillRect(item.posX+item.spell.size/2-Math.cos(angle)*i, item.posY+item.spell.size/2-Math.sin(angle)*j, 1, 1);
+                }
+            }*/
+            for(var i=0; i<=10; i++){
+                for(var j=0; j<=10; j++){
+                    if(Math.floor(Math.random()*5)+1<5) projCtx.fillRect(item.posX+item.spell.bsize/2-Math.cos(angle)*10-5+i, item.posY+item.spell.bsize/2-Math.sin(angle)*10-5+j, 1, 1);
+                }
+            }
+        }
+        item.effects.onMove(item.posX, item.posY);
+        if(((((item.posX>=proj.width) || (item.posY<=0)) || ((item.posX<=0) || (item.posY>=proj.height))) || (((gracz[0]-item.spell.size<=item.posX) && (gracz[0]+30>=item.posX)) && ((gracz[1]-item.spell.size<=item.posY) && (gracz[1]+30>=item.posY)))) && !item.target)
+        {
+            if(item.spell.type=="rect"){
+                setTimeout("projCtx.clearRect("+(item.posX-1)+", "+(item.posY-1)+", "+(item.spell.size+2)+", "+(item.spell.size+2)+")", 50);
+                projCtx.fillStyle="#ffffff";
+                projCtx.fillRect(item.posX, item.posY, item.spell.size, item.spell.size);
+            } else if(item.spell.type=="line"){
+                for(var i=0; i<=60; i++) projCtx.clearRect(item.posX-Math.cos(angle)*i-1, item.posY-Math.sin(angle)*i-1, 9, 9);
+            } else if(item.spell.type=="ball") projCtx.clearRect(item.posX-(30-item.spell.size)/2-1, item.posY-(30-item.spell.size)/2-1, 32, 32);
+            spells.splice(index, 1);
+        }
+        if(item.target){
+        if((item.posX<=0) || (item.posY<=0) || (item.posY-7>=proj.height) || (item.posX-7>=proj.width) || czyDostal(item.posX, item.posY, item.dmg, item.spell.size, item.effects.onHit)){
+            if(item.spell.type=="rect"){
+                setTimeout("projCtx.clearRect("+(item.posX-1)+", "+(item.posY-1)+", "+(item.spell.size+2)+", "+(item.spell.size+2)+")", 50);
+                projCtx.fillStyle="#ffffff";
+                projCtx.fillRect(item.posX, item.posY, item.spell.size, item.spell.size);
+            } else if(item.spell.type=="line"){
+                for(var i=0; i<=60; i++) projCtx.clearRect(item.posX-Math.cos(angle)*i-1, item.posY-Math.sin(angle)*i-1, 9, 9);
+            } else if(item.spell.type=="ball") projCtx.clearRect(item.posX-(30-item.spell.bsize)/2-1, item.posY-(30-item.spell.bsize)/2-1, 32, 32);
+            spells.splice(index, 1);
+        }}
+    });
+}, 15);
+animInt=setInterval(function() {
+    animations.forEach((item, index)=>{
+        anim1Ctx.clearRect(item[2]-70, item[3]-70, 140, 140);
+        item[5].setAttribute("src", "effects/"+item[1]+"/"+item[0]+".png");
+        anim1Ctx.drawImage(item[5], item[2]-64, item[3]-64);
+        item[0]=item[0]+1;
+        if(item[4]!=item[0]) animations[animations.length-1][5].setAttribute("src", "effects/"+item[1]+"/"+item[0]+".png");
+        if(item[4]==item[0]) {setTimeout(function() {anim1Ctx.clearRect(item[2]-70, item[3]-70, 140, 140)}, 2000/60); animations.splice(index, 1);}
+    });
+}, 2000/60);
+}
+const mapaRozwin=kierunek=>{
+    this.pozwolenie=true;
+    if(kierunek=="gora" && mapaPatrz[1]!=0) mapaPatrz[1]-=5;
+    else if(kierunek=="gora" && mapaPatrz[1]==0) this.pozwolenie=false;
+    if(kierunek=="dol" && mapaPatrz[1]!=20)  mapaPatrz[1]+=5;
+    else if(kierunek=="dol" && mapaPatrz[1]==20) this.pozwolenie=false;
+    if(kierunek=="lewo" && mapaPatrz[0]!=0) mapaPatrz[0]-=5;
+    else if(kierunek=="lewo" && mapaPatrz[0]==0) this.pozwolenie=false;
+    if(kierunek=="prawo" && mapaPatrz[0]!=20) mapaPatrz[0]+=5;
+    else if(kierunek=="prawo" && mapaPatrz[0]==20) this.pozwolenie=false;
+    if(pozwolenie)
+    {
+        for(var j=0; j<=4; j++)
+        {
+            for(var i=0; i<=4; i++)
+            {
+                if(mapa[mapaPatrz[0]+i][mapaPatrz[1]+j]==undefined) document.getElementsByClassName("mapItem")[i+j*5].style.background="black";
+                else document.getElementsByClassName("mapItem")[i+j*5].style.backgroundImage="url(maps/"+mapa[mapaPatrz[0]+i][mapaPatrz[1]+j]+".png)";
+                document.getElementsByClassName("mapItem")[i+j*5].style.backgroundSize="cover";
+            }
+        }
+        if(mapaPatrz[0]==mapaMy[0]-mapaMy[0]%5 && mapaPatrz[1]==mapaMy[1]-mapaMy[1]%5)document.getElementsByClassName("mapItem")[mapaMy[0]%5+mapaMy[1]%5*5].innerHTML="<br />JESTES TUTAJ";
+    }
+};
+const changeWep=(wep, index, index2)=>{
+    let index3;
+    zaznaczony="";
+    if(moc[index].style.filter=="brightness(1.5)") moc[index].style.filter="brightness(1)";
+    if(hero=="elf") {index3=index2;}else{index3=(heroes.indexOf(hero)*12)-1+index2;}
+    moc[index].setAttribute("onclick", "if(moc["+index+"].innerHTML=='' && !lockChangeWep){if(zaznaczony=='"+wep+"'){zaznaczony='';moc["+index+"].style.filter='brightness(1)';}else if(zaznaczony!=''){zaznaczony='';for(var i=0; i<=7; i++){if(moc[i].style.filter=='brightness(1.5)'){moc[i].style.filter='brightness(1)';}}moc["+index+"].style.filter='brightness(1.5)';zaznaczony='"+wep+"';}else{zaznaczony='"+wep+"';moc["+index+"].style.filter='brightness(1.5)';}}");
+    document.getElementsByClassName("craft")[index].setAttribute("onclick", 'let pozwolenie=true; for(var i=0; recipe['+index3+'].length/2>i; i++){if(surowce[recipe['+index3+'][i*2]].innerHTML*1<recipe['+index3+'][i*2+1]) pozwolenie=false;}if(pozwolenie) {ammo['+index2+'].innerHTML=(ammo['+index2+'].innerHTML*1)+1;barAudio.play();for(var i=0; recipe['+index3+'].length/2>i; i++){surowce[recipe['+index3+'][i*2]].innerHTML=surowce[recipe['+index3+'][i*2]].innerHTML*1-recipe['+index3+'][i*2+1];}}');
+    document.getElementsByClassName("craft")[index].setAttribute("onmouseover", 'moc['+index+'].innerHTML=craft['+index3+'];moc['+index+'].style.background="white";moc['+index+'].style.color="black";');
+    document.getElementsByClassName("craft")[index].setAttribute("onmouseout", 'moc['+index+'].innerHTML="";moc['+index+'].style.backgroundImage="url(weps/'+wep+'.png)";moc['+index+'].style.backgroundSize="cover";moc['+index+'].style.color="white";');
+    document.getElementsByClassName("info")[index].setAttribute("onmouseover", 'moc['+index+'].innerHTML=info['+index3+'];moc['+index+'].style.background="white";moc['+index+'].style.color="black";moc['+index+'].style.fontSize="9px";');
+    document.getElementsByClassName("info")[index].setAttribute("onmouseout", 'moc['+index+'].innerHTML="";moc['+index+'].style.backgroundImage="url(weps/'+wep+'.png)";moc['+index+'].style.backgroundSize="cover";moc['+index+'].style.color="white";moc['+index+'].style.fontSize="38px";');
+    ammo[index2-(index2%3)].style.backgroundColor="brown";
+    ammo[(index2+1)-(index2%3)].style.backgroundColor="brown";
+    ammo[(index2+2)-(index2%3)].style.backgroundColor="brown";
+    ammo[index2].style.backgroundColor="black";
+};
+function odliczanie(s, numer, wep)
+{
+    if(typeof(moc[numer]*1)=="number" || moc[numer].innerHTML=="") moc[numer].innerHTML=s;
+    s--;
+    if(s==0) setTimeout(function() {moc[numer].innerHTML=""; moc[numer].style.filter="grayscale(0)"; if(!options.checkReset && zaznaczony=="") {moc[numer].style.filter="brightness(1.5)"; zaznaczony=wep;}}, 1000);
+    else setTimeout(function() {odliczanie(s, numer, wep);}, 1000);
+}
+const allowDrop=e=>e.preventDefault();
+const drag=e=>e.dataTransfer.setData("text", e.target.id);
+function drop(e) {
+    if(e.target.className.includes(document.getElementById(e.dataTransfer.getData("text")).alt) || e.target.className=="slot" || (e.target.tagName=="IMG" && (e.target.parentElement.className.includes(document.getElementById(e.dataTransfer.getData("text")).alt) || e.target.parentElement.className=="slot"))){
+        let a=e.target;
+        let b=false;
+        /*if((e.target.className.includes(document.getElementById(e.dataTransfer.getData("text")).alt) && selHero==document.getElementById(e.dataTransfer.getData("text")).alt[4]) || document.getElementById(e.dataTransfer.getData("text")).parentElement.className.includes(selHero)){
+            
+        }*/
+        if(e.target.tagName=="IMG" && e.target.parentElement.className.includes(selHero) && document.getElementById(e.dataTransfer.getData("text")).parentElement.className.includes(selHero)) b=[e.target.parentElement, document.getElementById(e.dataTransfer.getData("text")).parentElement];
+        else if(e.target.className.includes(selHero) && document.getElementById(e.dataTransfer.getData("text")).parentElement.className.includes(selHero)) b=[e.target, document.getElementById(e.dataTransfer.getData("text")).parentElement];
+        else if(document.getElementById(e.dataTransfer.getData("text")).parentElement.className.includes(selHero)) b=[document.getElementById(e.dataTransfer.getData("text")).parentElement];
+        else if(e.target.tagName=="IMG" && e.target.parentElement.className.includes(selHero)) b=[e.target.parentElement];
+        else if(e.target.className.includes(selHero)) b=[e.target];
+        if(e.target.tagName=="IMG") {
+            a=e.target.parentElement;
+            document.getElementById(e.dataTransfer.getData("text")).parentElement.appendChild(e.target.parentElement.removeChild(e.target));
+        }
+        e.preventDefault();
+        a.appendChild(document.getElementById(e.dataTransfer.getData("text")));
+        if(b) {
+            for(var i=0; i<b.length; i++) {
+                let ind=b[i];
+                for(var j=1; j<9; j++) {if(ind.nextElementSibling.style.clear=="both"){ind=8-j; break;} else {ind=ind.nextElementSibling;}}
+                if(document.getElementsByClassName("weps"+selHero)[ind+1].childElementCount==1){
+                    let wep="";
+                    /*if(b[i]==a.parentElement && b[i].childElementCount==1){for(var x=0; x<b[i].firstChild.id.length; x++) {if(b[i].firstChild.id[x]*1>-1){break;} else {wep+=b[i].firstChild.id[x]}}}
+                    else{for(var x=0; x<e.dataTransfer.getData("text").length; x++) {if(e.dataTransfer.getData("text")[x]*1>-1){break;} else {wep+=e.dataTransfer.getData("text")[x]}}}*/
+                    for(var x=0; x<b[i].firstChild.id.length; x++) {if(b[i].firstChild.id[x]*1>-1){break;} else {wep+=b[i].firstChild.id[x]}}
+                    if(zaznaczony==wep) zaznaczony="";
+                    if(moc[ind].style.filter=="brightness(1.5)") moc[ind].style.filter="brightness(1)";
+                    //Object.values(test)[Object.keys(test).indexOf("b")];
+                    moc[ind].style.backgroundImage="url(weps/"+wep+".png)";
+                    moc[ind].style.backgroundSize="cover";
+                    ammo[ind].innerHTML=wepAmmo[wep];
+                    moc[ind].setAttribute("onclick", "if(moc["+ind+"].innerHTML=='' && !lockChangeWep){if(zaznaczony=='"+wep+"'){zaznaczony='';moc["+ind+"].style.filter='brightness(1)';}else if(zaznaczony!=''){zaznaczony='';for(var i=0; i<=7; i++){if(moc[i].style.filter=='brightness(1.5)'){moc[i].style.filter='brightness(1)';}}moc["+ind+"].style.filter='brightness(1.5)';zaznaczony='"+wep+"';}else{zaznaczony='"+wep+"';moc["+ind+"].style.filter='brightness(1.5)';}}");
+                    document.getElementsByClassName("craft")[ind].setAttribute("onclick", 'let pozwolenie=true; for(var i=0; ['+recipe[wep]+'].length/2>i; i++){if(surowce[['+recipe[wep]+'][i*2]].innerHTML*1<['+recipe[wep]+'][i*2+1]) pozwolenie=false;}if(pozwolenie) {ammo['+ind+'].innerHTML=(wepAmmo["'+wep+'"]+=1);barAudio.play();for(var i=0; ['+recipe[wep]+'].length/2>i; i++){surowce[['+recipe[wep]+'][i*2]].innerHTML=surowce[['+recipe[wep]+'][i*2]].innerHTML*1-['+recipe[wep]+'][i*2+1];}}');
+                    document.getElementsByClassName("craft")[ind].setAttribute("onmouseover", 'moc['+ind+'].innerHTML="'+craft[wep]+'";moc['+ind+'].style.background="white";moc['+ind+'].style.color="black";');
+                    document.getElementsByClassName("craft")[ind].setAttribute("onmouseout", 'moc['+ind+'].innerHTML="";moc['+ind+'].style.backgroundImage="url(weps/'+wep+'.png)";moc['+ind+'].style.backgroundSize="cover";moc['+ind+'].style.color="white";');
+                    document.getElementsByClassName("info")[ind].setAttribute("onmouseover", 'moc['+ind+'].innerHTML="'+info[wep]+'";moc['+ind+'].style.background="white";moc['+ind+'].style.color="black";moc['+ind+'].style.fontSize="9px";');
+                    document.getElementsByClassName("info")[ind].setAttribute("onmouseout", 'moc['+ind+'].innerHTML="";moc['+ind+'].style.backgroundImage="url(weps/'+wep+'.png)";moc['+ind+'].style.backgroundSize="cover";moc['+ind+'].style.color="white";moc['+ind+'].style.fontSize="38px";');
+                    document.getElementsByClassName("wrap")[ind].style.visibility="visible";
+                } else {document.getElementsByClassName("wrap")[ind].style.visibility="hidden";}
+            }
+        }
+    }
+}
+function ruch(x, y)
+{
+    let dl=Math.abs((gracz[0]-x)+15);
+    let wy=Math.abs((gracz[1]-y)+15);
+    if(dl>=10 || wy>=10)
+    {
+        heroCtx.clearRect(gracz[0]-1, gracz[1]-1, 32, 32);
+        let angle=Math.atan2(y-15-gracz[1], x-15-gracz[0]);
+        gracz[1]+=Math.sin(angle)*10;
+        gracz[0]+=Math.cos(angle)*10;
+        polGracza[0]=gracz[0]+15;
+        polGracza[1]=gracz[1]+15;
+    }
+    img.setAttribute("src", "heroes/"+hero+".png");
+    heroCtx.drawImage(img, gracz[0], gracz[1]);
+    sprPoziom();
+}
+function czyDostal(x, y, dmg, size, effects)
+{
+    var returned=false;
+    Przeciwnicy.forEach((item, index) => {
+        if(item.polozenieX-size<=x && item.polozenieX+30>=x && item.polozenieY-size<=y && item.polozenieY+30>=y && !returned  && item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1])
+        {
+            item.hp-=dmg;
+            effects(item, x, y, dmg);
+            /*if(wep=="bow") {weps.setAttribute("src", "sounds/ballista.ogg"); weps.play();}
+            if(wep=="bowFreeze") {item.frozen=true; item.frozenTime=0; weps.setAttribute("src", "sounds/iceball.wav"); weps.play();  Przeciwnicy.forEach((item2, index2) => {
+                if(Math.abs(x-item2.polozenieX+18)<=65 && Math.abs(y-item2.polozenieY+18)<=65) {item2.frozen=true; item2.frozenTime=0;}});
+            animations.push([0, "ice", x, y, 6, new Image]);
+            animations[animations.length-1][5].setAttribute("src", "effects/ice/0.png");}
+            if(wep=="bowPoison") {item.poisoned=true; item.poisonedTime=0; weps.setAttribute("src", "sounds/poison.ogg"); weps.play();}*/
+            textCtx.fillStyle="white";
+            textCtx.font="30px Arial";
+            textCtx.fillText(dmg, x, y-30);
+            setTimeout("textCtx.clearRect("+(x-1)+", "+(y-61)+", 62, 32)", 1000);
+            returned=true;
+        }
+    });
+    return returned;
+}
+function sprSurowce()
+{
+    for(var i=0; i<=surowceX.length-1; i++)
+    {
+        if(surowceX[i]==undefined) {}
+        else if(((gracz[0]-10<=surowceX[i]) && (gracz[0]+30>=surowceX[i])) && ((gracz[1]-10<=surowceY[i]) && (gracz[1]+30>=surowceY[i])))
+        {
+            document.getElementById(surowceTyp[i]).textContent=(document.getElementById(surowceTyp[i]).textContent*1)+1;
+            resourcesCtx.clearRect(surowceX[i], surowceY[i], 10, 10);
+            delete surowceX[i];
+            delete surowceY[i];
+            delete surowceTyp[i];
+        }
+    }
+}
+function sprPoziom()
+{
+    let lewa=false;
+    let prawa=false;
+    let gora=false;
+    let dol=false;
+    if(gracz[0]+15<=20 && mapaMy[0]!=0) lewa=true;
+    else if(gracz[0]+15>=proj.width-20 && mapaMy[0]!=24) prawa=true;
+    else if(gracz[1]+15<=20 && mapaMy[1]!=0) gora=true;
+    else if(gracz[1]+15>=proj.height-20 && mapaMy[1]!=24) dol=true;
+    if(lewa || prawa || gora || dol)
+    {
+        surowceTyp=[];
+        surowceX=[];
+        surowceY=[];
+        document.getElementsByClassName("mapItem")[mapaMy[0]%5+mapaMy[1]%5*5].innerHTML="";
+        if((mapa[mapaMy[0]-1][mapaMy[1]]==undefined && lewa) || (mapa[mapaMy[0]+1][mapaMy[1]]==undefined && prawa) || (mapa[mapaMy[0]][mapaMy[1]-1]==undefined && gora) || (mapa[mapaMy[0]][mapaMy[1]+1]==undefined && dol))
+        {
+            if(biome[1]<=5)
+            {
+                if(biome[0]=="laka")
+                {
+                    animations=[];
+                    spells=[];
+                    document.getElementById("gameHolder").style.backgroundImage="url(maps/"+biome[0]+biome[1]+".png)";
+                    heroCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+                    enemiesCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+                    projCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+                    anim1Ctx.clearRect(-10, -10, proj.width+20, proj.height+20);
+                    textCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+                    resourcesCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+                    lightCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+                    if(lewa) {gracz[0]=proj.width-40; mapaMy[0]-=1;}
+                    else if(prawa) {gracz[0]=10; mapaMy[0]+=1;}
+                    else if(gora) {gracz[1]=proj.height-40; mapaMy[1]-=1;}
+                    else if(dol) {gracz[1]=10; mapaMy[1]+=1;}
+                    mapa[mapaMy[0]][mapaMy[1]]=biome[0]+biome[1];
+                    torches.forEach((item, index)=>{
+                        if(item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]){
+                            lightCtx.fillStyle="rgb(114, 72, 27)";
+                            lightCtx.fillRect(item.x+10, item.y+10, 10, 20);
+                            lightCtx.fillStyle="rgb(204, 23, 23)";
+                            lightCtx.fillRect(item.x+10, item.y, 10, 10);
+                            lightCtx.fillStyle="rgb(229, 252, 56)";
+                            lightCtx.fillRect(item.x+12, item.y+4, 6, 6);
+                        }
+                    });
+                }
+                biome[1]++;
+            }
+            else
+            {
+                let liczba=Math.floor(Math.random()*100)+1;
+                if((liczba>=1 && liczba<=100) || (biome[0]=="laka" && liczba>=11 && liczba<=30))
+                {
+                    biome[1]=1;
+                    animations=[];
+                    spells=[];
+                    document.getElementById("gameHolder").style.backgroundImage="url(maps/"+biome[0]+biome[1]+".png)";
+                    heroCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+                    enemiesCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+                    projCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+                    anim1Ctx.clearRect(-10, -10, proj.width+20, proj.height+20);
+                    textCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+                    resourcesCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+                    lightCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+                    if(lewa) {gracz[0]=proj.width-40; mapaMy[0]-=1;}
+                    else if(prawa) {gracz[0]=10; mapaMy[0]+=1;}
+                    else if(gora) {gracz[1]=proj.height-40; mapaMy[1]-=1;}
+                    else if(dol) {gracz[1]=10; mapaMy[1]+=1;}
+                    mapa[mapaMy[0]][mapaMy[1]]=biome[0]+biome[1];
+                    torches.forEach((item, index)=>{
+                        if(item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]){
+                            lightCtx.fillStyle="rgb(114, 72, 27)";
+                            lightCtx.fillRect(item.x+10, item.y+10, 10, 20);
+                            lightCtx.fillStyle="rgb(204, 23, 23)";
+                            lightCtx.fillRect(item.x+10, item.y, 10, 10);
+                            lightCtx.fillStyle="rgb(229, 252, 56)";
+                            lightCtx.fillRect(item.x+12, item.y+4, 6, 6);
+                        }
+                    });
+                }
+                biome[1]++;
+            }
+        }
+        else
+        {
+            if(lewa) {gracz[0]=proj.width-40; mapaMy[0]-=1;}
+            else if(prawa) {gracz[0]=10; mapaMy[0]+=1;}
+            else if(gora) {gracz[1]=proj.height-40; mapaMy[1]-=1;}
+            else if(dol) {gracz[1]=10; mapaMy[1]+=1;}
+            animations=[];
+            spells=[];
+            document.getElementById("gameHolder").style.backgroundImage="url(maps/"+mapa[mapaMy[0]][mapaMy[1]]+".png)";
+            heroCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+            enemiesCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+            projCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+            anim1Ctx.clearRect(-10, -10, proj.width+20, proj.height+20);
+            textCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+            resourcesCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+            lightCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+            torches.forEach((item, index)=>{
+                if(item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]){
+                    lightCtx.fillStyle="rgb(114, 72, 27)";
+                    lightCtx.fillRect(item.x+10, item.y+10, 10, 20);
+                    lightCtx.fillStyle="rgb(204, 23, 23)";
+                    lightCtx.fillRect(item.x+10, item.y, 10, 10);
+                    lightCtx.fillStyle="rgb(229, 252, 56)";
+                    lightCtx.fillRect(item.x+12, item.y+4, 6, 6);
+                }
+            });
+        }
+        for(var j=0; j<=4; j++)
+        {
+            for(var i=0; i<=4; i++)
+            {
+                if(mapa[mapaMy[0]-mapaMy[0]%5+i][mapaMy[1]-mapaMy[1]%5+j]==undefined) document.getElementsByClassName("mapItem")[i+j*5].style.background="black";
+                else document.getElementsByClassName("mapItem")[i+j*5].style.backgroundImage="url(maps/"+mapa[mapaMy[0]-mapaMy[0]%5+i][mapaMy[1]-mapaMy[1]%5+j]+".png)";
+                document.getElementsByClassName("mapItem")[i+j*5].style.backgroundSize="cover";
+            }
+        }
+        document.getElementsByClassName("mapItem")[mapaMy[0]%5+mapaMy[1]%5*5].innerHTML="<br />JESTES TUTAJ";
+        mapaPatrz[0]=mapaMy[0]-mapaMy[0]%5;
+        mapaPatrz[1]=mapaMy[1]-mapaMy[1]%5;
+    }
+}
+/*function fala()
+{
+    ctx.fillStyle="#000000";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle="green";
+    ctx.fillRect(gracz[0], gracz[1], 30, 30);
+    Przeciwnik.lprzeciwnicy+=4;
+    Przeciwnik.przeciwnicy=Przeciwnik.lprzeciwnicy;
+    tworzenieWrogow();
+    document.getElementById("falanr").innerHTML=(document.getElementById("falanr").innerHTML*1+1);
+}*/
+class Enemy
+{
+    constructor(enemy)
+    {
+        let liczba=losuj("l", 0);
+        let polozenieX=losuj("x", liczba);
+        let polozenieY=losuj("y", liczba);
+        let index=Przeciwnicy.length;
+        Przeciwnicy[index]={
+            type: enemy.type,
+            hp: enemy.hp,
+            shoot: enemy.shoot,
+            shootType: enemy.shootType,
+            frozen: false,
+            frozenTime: 0,
+            poisoned: false,
+            poisonedTime: 0,
+            index: index,
+            polozenieX: polozenieX,
+            polozenieY: polozenieY,
+            dl: Math.abs((gracz[0]-polozenieX+15)+15),
+            wy: Math.abs((gracz[1]-polozenieY+15)+15),
+            odlicz: 18,
+            angle2: null,
+            stage: [mapaMy[0], mapaMy[1]]
+        };
+    }
+}
+/*var temporary=10;
+function tworzenieWrogow()
+{
+    Przeciwnicy.push(new Goblin(false));
+    temporary--;
+    if(temporary!=0) setTimeout("tworzenieWrogow();", 700);
+}*/
+class Moc
+{
+    static bow(x, y, type)
+    {
+        let dlugosc=Math.abs((gracz[0]-x)+12);
+        let wysokosc=Math.abs((gracz[1]-y)+12);
+        let polozenieX=gracz[0]+12;
+        let polozenieY=gracz[1]+12;
+        let angle=Math.atan2(y-polozenieY-3, x-polozenieX-3);
+        let vY=Math.sin(angle)*10;
+        let vX=Math.cos(angle)*10;
+        clearInterval(dsily);
+        bowDmg=Math.trunc(15*(sila/30));
+        sila=1;
+        document.getElementById("load").value="0";
+        lockChangeWep=false;
+        let petla=setInterval(function() {
+            for(var i=0; i<=30; i++)
+            {
+                ctx.fillStyle="#ffffff";
+                ctx.fillRect(polozenieX-(vX/10)*i, polozenieY-(vY/10)*i, 7, 7);
+            }
+            for(var i=0; i<=30; i++)
+            {
+                ctx.clearRect(polozenieX+(-5*vX)-(vX/10)*i-1, polozenieY+(-5*vY)-(vY/10)*i-1, 9, 9);
+            }
+            polozenieX+=vX;
+            polozenieY+=vY;
+            for(var i=0; i<=30; i++)
+            {
+                ctx.fillStyle="#4b1414";
+                ctx.fillRect(polozenieX-(vX/10)*i, polozenieY-(vY/10)*i, 7, 7);
+            }
+            if(type=="bowFreeze") ctx.fillStyle="#35b4ff";
+            else if(type=="bowPoison") ctx.fillStyle="#821a7b";
+            else if(type=="bow") ctx.fillStyle="#646464";
+            ctx.fillRect(polozenieX, polozenieY, 7, 7);
+            if((polozenieX<=0) || (polozenieY<=0) || (polozenieY-7>=canvas.height) || (polozenieX-7>=canvas.width) || czyDostal(polozenieX, polozenieY, type, bowDmg))
+            {
+                clearInterval(petla);
+                for(var i=0; i<=60; i++)
+                {
+                    ctx.clearRect(polozenieX-(vX/10)*i-1, polozenieY-(vY/10)*i-1, 9, 9);
+                }
+                polozenieY=undefined;
+                polozenieX=undefined;
+            }
+        }, 14);
+    }
+    static rocks(x, y)
+    {
+        let rocksPolX2=x;
+        let rocksPolY2=y;
+        let rocksDl2=Math.abs((gracz[0]+15)-rocksPolX2);
+        let rocksWy2=Math.abs((gracz[1]+15)-rocksPolY2);
+        let rocksX1=gracz[0]+8;
+        let rocksX2=gracz[0]+8;
+        let rocksX3=gracz[0]+8;
+        let rocksY1=gracz[1]+8;
+        let rocksY2=gracz[1]+8;
+        let rocksY3=gracz[1]+8;
+        let rocksPolX1;
+        let rocksPolX3;
+        let rocksPolY1;
+        let rocksPolY3;
+        let rocksDl1;
+        let rocksWy1;
+        let rocksDl3;
+        let rocksWy3;
+        let rocksDmg=12;
+        clearInterval(dsily);
+        rocksDmg=Math.trunc(12*(sila/30));
+        sila=1;
+        document.getElementById("load").value="0";
+        lockChangeWep=false;
+        if(x<=gracz[0]+15 && y<=gracz[1]+15) {
+            rocksPolX1=x-Math.trunc(rocksWy2/5);
+            rocksPolX3=x+Math.trunc(rocksWy2/5);
+            rocksPolY1=y+Math.trunc(rocksDl2/5);
+            rocksPolY3=y-Math.trunc(rocksDl2/5);
+        } else if(x>=gracz[0]+15 && y<=gracz[1]+15) {
+            rocksPolX1=x-Math.trunc(rocksWy2/5);
+            rocksPolX3=x+Math.trunc(rocksWy2/5);
+            rocksPolY1=y-Math.trunc(rocksDl2/5);
+            rocksPolY3=y+Math.trunc(rocksDl2/5);
+        } else if(x>=gracz[0]+15 && y>=gracz[1]+15) {
+            rocksPolX1=x+Math.trunc(rocksWy2/5);
+            rocksPolX3=x-Math.trunc(rocksWy2/5);
+            rocksPolY1=y-Math.trunc(rocksDl2/5);
+            rocksPolY3=y+Math.trunc(rocksDl2/5);
+        } else if(x<=gracz[0]+15 && y>=gracz[1]+15) {
+            rocksPolX1=x-Math.trunc(rocksWy2/5);
+            rocksPolX3=x+Math.trunc(rocksWy2/5);
+            rocksPolY1=y-Math.trunc(rocksDl2/5);
+            rocksPolY3=y+Math.trunc(rocksDl2/5);
+        }
+        rocksDl1=Math.abs((gracz[0]-rocksPolX1)+8);
+        rocksWy1=Math.abs((gracz[1]-rocksPolY1)+8);
+        rocksDl3=Math.abs((gracz[0]-rocksPolX3)+8);
+        rocksWy3=Math.abs((gracz[1]-rocksPolY3)+8);
+        let angle1=Math.atan2(rocksPolY1-rocksY1-8, rocksPolX1-rocksX1-8);
+        let vY1=Math.sin(angle1)*10;
+        let vX1=Math.cos(angle1)*10;
+        let angle2=Math.atan2(rocksPolY2-rocksY2-8, rocksPolX2-rocksX2-8);
+        let vY2=Math.sin(angle2)*10;
+        let vX2=Math.cos(angle2)*10;
+        let angle3=Math.atan2(rocksPolY3-rocksY3-8, rocksPolX3-rocksX3-8);
+        let vY3=Math.sin(angle3)*10;
+        let vX3=Math.cos(angle3)*10;
+        let rocksPetla1=setInterval(function() {
+            ctx.fillStyle="#ffffff";
+            ctx.fillRect(rocksX1, rocksY1, 14, 14);
+            setTimeout("ctx.clearRect("+(rocksX1-1)+", "+(rocksY1-1)+", 16, 16)", 50);
+            rocksY1+=vY1;
+            rocksX1+=vX1;
+            ctx.fillStyle="rgb(116, 98, 99)";
+            ctx.fillRect(rocksX1, rocksY1, 14, 14);
+            if(((rocksX1>=canvas.width) || (rocksY1<=0)) || ((rocksX1<=0) || (rocksY1>=canvas.height)) || czyDostal(rocksX1, rocksY1, "rock", rocksDmg)){
+                clearInterval(rocksPetla1);
+                ctx.fillStyle="#ffffff";
+                ctx.fillRect(rocksX1, rocksY1, 14, 14);
+                setTimeout("ctx.clearRect("+(rocksX1-1)+", "+(rocksY1-1)+", 16, 16)", 50);
+                rocksX1=undefined;
+                rocksY1=undefined;
+            }
+            }, 21);
+            let rocksPetla2=setInterval(function() {
+                ctx.fillStyle="#ffffff";
+                ctx.fillRect(rocksX2, rocksY2, 14, 14);
+                setTimeout("ctx.clearRect("+(rocksX2-1)+", "+(rocksY2-1)+", 16, 16)", 50);
+                rocksY2+=vY2;
+                rocksX2+=vX2;
+                ctx.fillStyle="rgb(116, 98, 99)";
+                ctx.fillRect(rocksX2, rocksY2, 14, 14);
+                if(((rocksX2>=canvas.width) || (rocksY2<=0)) || ((rocksX2<=0) || (rocksY2>=canvas.height)) || czyDostal(rocksX2, rocksY2, "rock", rocksDmg)){
+                    clearInterval(rocksPetla2);
+                    ctx.fillStyle="#ffffff";
+                    ctx.fillRect(rocksX2, rocksY2, 14, 14);
+                    setTimeout("ctx.clearRect("+(rocksX2-1)+", "+(rocksY2-1)+", 16, 16)", 50);
+                    rocksX2=undefined;
+                    rocksY2=undefined;
+                }
+            }, 21);
+            let rocksPetla3=setInterval(function() {
+                ctx.fillStyle="#ffffff";
+                ctx.fillRect(rocksX3, rocksY3, 14, 14);
+                setTimeout("ctx.clearRect("+(rocksX3-1)+", "+(rocksY3-1)+", 16, 16)", 50);
+                rocksY3+=vY3;
+                rocksX3+=vX3;
+                ctx.fillStyle="rgb(116, 98, 99)";
+                ctx.fillRect(rocksX3, rocksY3, 14, 14);
+                if(((rocksX3>=canvas.width) || (rocksY3<=0)) || ((rocksX3<=0) || (rocksY3>=canvas.height)) || czyDostal(rocksX3, rocksY3, "rock", rocksDmg)){
+                    clearInterval(rocksPetla3);
+                    ctx.fillStyle="#ffffff";
+                    ctx.fillRect(rocksX3, rocksY3, 14, 14);
+                    setTimeout("ctx.clearRect("+(rocksX3-1)+", "+(rocksY3-1)+", 16, 16)", 50);
+                    rocksX3=undefined;
+                    rocksY3=undefined;
+                }
+            }, 21);
+    }
+}
+function losuj(xy, liczba)
+{
+    var losowa=Math.floor(Math.random()*4)+1;
+    if(xy=="l") {return losowa;}
+    if(liczba==1)
+    {
+        if(xy=="y") {return -30;}
+        else {return (Math.floor(Math.random()*(proj.width-30)));}
+    }
+    else if(liczba==2)
+    {
+        if(xy=="y") {return (Math.floor(Math.random()*(proj.height-30)));}
+        else {return proj.width;}
+    }
+    else if(liczba==3)
+    {
+        if(xy=="y") {return proj.height;}
+        else {return (Math.floor(Math.random()*(proj.width-30)));}
+    }
+    else if(liczba==4)
+    {
+        if(xy=="y") {return (Math.floor(Math.random()*(proj.height-30)));}
+        else {return -30;}
+    }
+}
+</script>
+</body>
+</html>
