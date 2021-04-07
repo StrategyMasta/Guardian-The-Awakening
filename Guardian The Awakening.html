@@ -453,19 +453,6 @@ footer{
 </div>
 <div style="position: absolute; top: 0; left: 50%; transform: translate(-50%, 0); color: white; font-size: 30px; z-index: 100;">Score: <span id="score">0</span></div>
 <div id="moce">
-    <div class="type2" style="top: calc(100% - 388px); left: 40px;" onmouseover="lockMove=true;" onmouseout="lockMove=false;">
-        <div style="background-image: url(weps/bow.png); background-size: cover;" onmouseover="this.innerHTML=info[0]; this.style.background='white'; this.style.color='black'; this.style.fontSize='9px';" onmouseout="this.innerHTML=''; this.style.backgroundImage='url(weps/bow.png)'; this.style.backgroundSize='cover'; this.style.color='white'; this.style.fontSize='38px';" onclick="changeWep('bow', 0, 0); moc[0].style.backgroundImage='url(weps/bow.png)'; popup('.type2', 0);"></div>
-        <div style="background-image: url(weps/bowFreeze.png); background-size: cover;" onmouseover="this.innerHTML=info[1]; this.style.background='white'; this.style.color='black'; this.style.fontSize='9px';" onmouseout="this.innerHTML=''; this.style.backgroundImage='url(weps/bowFreeze.png)'; this.style.backgroundSize='cover'; this.style.color='white'; this.style.fontSize='38px';" onclick="changeWep('bowFreeze', 0, 1); moc[0].style.backgroundImage='url(weps/bowFreeze.png)'; popup('.type2', 0);"></div>
-        <div style="background-image: url(weps/bowPoison.png); background-size: cover;" onmouseover="this.innerHTML=info[2]; this.style.background='white'; this.style.color='black'; this.style.fontSize='9px';" onmouseout="this.innerHTML=''; this.style.backgroundImage='url(weps/bowPoison.png)'; this.style.backgroundSize='cover'; this.style.color='white'; this.style.fontSize='38px';" onclick="changeWep('bowPoison', 0, 2); moc[0].style.backgroundImage='url(weps/bowPoison.png)'; popup('.type2', 0);"></div>
-    </div>
-    <div class="type2" style="top: calc(100% - 388px); left: 175px;" onmouseover="lockMove=true;" onmouseout="lockMove=false;">
-        <div style="background-image: url(weps/rocks.png); background-size: cover;" onmouseover="this.innerHTML=info[3]; this.style.background='white'; this.style.color='black'; this.style.fontSize='9px';" onmouseout="this.innerHTML=''; this.style.backgroundImage='url(weps/rocks.png)'; this.style.backgroundSize='cover'; this.style.color='white'; this.style.fontSize='38px';" onclick="changeWep('rocks', 1, 3); moc[1].style.backgroundImage='url(weps/rocks.png)'; popup('.type2', 1);"></div>
-    </div>
-    <!--<div class="type" onclick="popup('.type2', 0);">Wybierz rodzaj</div>-->
-    <!--<div class="type" onclick="popup('.type2', 1);">Wybierz rodzaj</div>-->
-    <!--<div class="type">Wybierz rodzaj</div>-->
-    <!--<div class="type">Wybierz rodzaj</div>-->
-    <!--<div style="clear: both;"></div>-->
     <div style="width: 540px; height: 12px;"></div>
     <div class="wrap">
         <div class="ammo">10</div>
@@ -496,11 +483,6 @@ footer{
         <div style="clear: both;"></div>
     </div>
     <div style="clear: both;"></div>
-    <!--<div class="type">Wybierz rodzaj</div>-->
-    <!--<div class="type">Wybierz rodzaj</div>-->
-    <!--<div class="type">Wybierz rodzaj</div>-->
-    <!--<div class="type">Wybierz rodzaj</div>-->
-    <!--<div style="clear: both;"></div>-->
     <div style="width: 540px; height: 12px;"></div>
     <div class="wrap" style="visibility: hidden;">
         <div class="ammo">0</div>
@@ -872,7 +854,7 @@ const moc=document.getElementsByClassName("moc");
 var hero="elf";
 var changeType=[];
 var keys={w: false, a: false, s: false, d: false};
-var sound={lakaBG: new Audio("sounds/crickets.wav")};
+var sound={lakaBG: new Audio()};
 var attack={
     rock: {color: "rgb(116, 98, 99)", size: 14, type: "rect", dmg: 40},
     arrow: {color: "#4b1414", size: 7, type: "line", dmg: 50},
@@ -1006,65 +988,7 @@ document.getElementById("light").addEventListener("click", function(r) {
             zaznaczony="";
         }
     }
-    /*if(zaznaczony=="bow" && ammo[0].innerHTML*1>0 && sila!=1){
-        document.getElementsByClassName("moc")[0].style.filter="brightness(0.5)";
-        clearInterval(dsily);
-        bowDmg=Math.trunc(15*(sila/30));
-        sila=1;
-        document.getElementById("load").value="0";
-        lockChangeWep=false;
-        spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e){weps.setAttribute("src", "sounds/ballista.ogg"); weps.play();}, onMove: function(x, y){projCtx.fillStyle="#646464"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: bowDmg});
-        ammo[0].innerHTML=ammo[0].innerHTML*1-1;
-        wepAmmo[zaznaczony]-=1;
-        if(options.checkReset) zaznaczony="";
-        odliczanie(1, 0, zaznaczony);
-    } else if(zaznaczony=="bowFreeze" && ammo[1].innerHTML*1>0 && sila!=1){
-        document.getElementsByClassName("moc")[1].style.filter="brightness(0.5)";
-        clearInterval(dsily);
-        bowDmg=Math.trunc(15*(sila/30));
-        sila=1;
-        document.getElementById("load").value="0";
-        lockChangeWep=false;
-        spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e,x,y){e.frozen=true; e.frozenTime=0; weps.setAttribute("src", "sounds/iceball.wav"); weps.play(); Przeciwnicy.forEach((item2, index2) => {if(Math.abs(x-item2.polozenieX+18)<=65 && Math.abs(y-item2.polozenieY+18)<=65) {item2.frozen=true; item2.frozenTime=0;}});animations.push([0, "ice", x, y, 6, new Image]);animations[animations.length-1][5].setAttribute("src", "effects/ice/0.png");}, onMove: function(x, y){projCtx.fillStyle="#35b4ff"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: bowDmg});
-        ammo[1].innerHTML=ammo[1].innerHTML*1-1;
-        if(options.checkReset) zaznaczony="";
-        odliczanie(1, 1, zaznaczony);
-    } else if(zaznaczony=="bowPoison" && ammo[2].innerHTML*1>0 && sila!=1){
-        document.getElementsByClassName("moc")[2].style.filter="brightness(0.5)";
-        clearInterval(dsily);
-        bowDmg=Math.trunc(15*(sila/30));
-        sila=1;
-        document.getElementById("load").value="0";
-        lockChangeWep=false;
-        spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e,x,y){e.poisoned=true; e.poisonedTime=0; weps.setAttribute("src", "sounds/poison.ogg"); weps.play();}, onMove: function(x, y){projCtx.fillStyle="#821a7b"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: bowDmg});
-        ammo[2].innerHTML=ammo[2].innerHTML*1-1;
-        if(options.checkReset) zaznaczony="";
-        odliczanie(1, 2, zaznaczony);
-    }
-    else if(zaznaczony=="rocks" && ammo[3].innerHTML*1>0 && sila!=1){
-        document.getElementsByClassName("moc")[1].style.filter="brightness(0.5)";
-        Moc.rocks(r.clientX-(document.getElementById("gameHolder").style.marginLeft).replace("px", "")*1, r.clientY);
-        if(zaznaczony=="rocks") ammo[3].innerHTML=ammo[3].innerHTML*1-1;
-        if(options.checkReset) zaznaczony="";
-        odliczanie(3, 1, zaznaczony);
-    }*/
 });
-/*document.addEventListener("mousemove", function(t) {
-    if((document.getElementById("gameHolder").style.marginLeft).replace("px", "")*1<=t.clientX && (document.getElementById("gameHolder").style.marginLeft).replace("px", "")*1+canvas.width>=t.clientX && 0<=t.clientY && canvas.height>=t.clientY && !lockMove)
-    {
-        numer++;
-        if(numer>=3)
-        {
-            numer=0;
-            polGracza[0]=t.clientX-(document.getElementById("gameHolder").style.marginLeft).replace("px", "")*1;
-            polGracza[1]=t.clientY;
-        }
-    }
-    else{
-        polGracza[0]=gracz[0]+15;
-        polGracza[1]=gracz[1]+15;
-    }
-});*/
 document.getElementById("light").addEventListener("mousedown", function(e) {
     //if((zaznaczony=="bow" && ammo[0].innerHTML*1>0 && moc[0].textContent=="") || (zaznaczony=="bowFreeze" && ammo[1].innerHTML*1>0 && moc[0].textContent=="") || (zaznaczony=="bowPoison" && ammo[2].innerHTML*1>0 && moc[0].textContent=="") || (zaznaczony=="rocks" && ammo[3].innerHTML*1>0 && moc[1].textContent=="")){
     if(zaznaczony!="" && wepAmmo[zaznaczony]>0 && zaznaczony!="torch"){
@@ -1836,175 +1760,6 @@ class Enemy
             angle2: null,
             stage: [mapaMy[0], mapaMy[1]]
         };
-    }
-}
-/*var temporary=10;
-function tworzenieWrogow()
-{
-    Przeciwnicy.push(new Goblin(false));
-    temporary--;
-    if(temporary!=0) setTimeout("tworzenieWrogow();", 700);
-}*/
-class Moc
-{
-    static bow(x, y, type)
-    {
-        let dlugosc=Math.abs((gracz[0]-x)+12);
-        let wysokosc=Math.abs((gracz[1]-y)+12);
-        let polozenieX=gracz[0]+12;
-        let polozenieY=gracz[1]+12;
-        let angle=Math.atan2(y-polozenieY-3, x-polozenieX-3);
-        let vY=Math.sin(angle)*10;
-        let vX=Math.cos(angle)*10;
-        clearInterval(dsily);
-        bowDmg=Math.trunc(15*(sila/30));
-        sila=1;
-        document.getElementById("load").value="0";
-        lockChangeWep=false;
-        let petla=setInterval(function() {
-            for(var i=0; i<=30; i++)
-            {
-                ctx.fillStyle="#ffffff";
-                ctx.fillRect(polozenieX-(vX/10)*i, polozenieY-(vY/10)*i, 7, 7);
-            }
-            for(var i=0; i<=30; i++)
-            {
-                ctx.clearRect(polozenieX+(-5*vX)-(vX/10)*i-1, polozenieY+(-5*vY)-(vY/10)*i-1, 9, 9);
-            }
-            polozenieX+=vX;
-            polozenieY+=vY;
-            for(var i=0; i<=30; i++)
-            {
-                ctx.fillStyle="#4b1414";
-                ctx.fillRect(polozenieX-(vX/10)*i, polozenieY-(vY/10)*i, 7, 7);
-            }
-            if(type=="bowFreeze") ctx.fillStyle="#35b4ff";
-            else if(type=="bowPoison") ctx.fillStyle="#821a7b";
-            else if(type=="bow") ctx.fillStyle="#646464";
-            ctx.fillRect(polozenieX, polozenieY, 7, 7);
-            if((polozenieX<=0) || (polozenieY<=0) || (polozenieY-7>=canvas.height) || (polozenieX-7>=canvas.width) || czyDostal(polozenieX, polozenieY, type, bowDmg))
-            {
-                clearInterval(petla);
-                for(var i=0; i<=60; i++)
-                {
-                    ctx.clearRect(polozenieX-(vX/10)*i-1, polozenieY-(vY/10)*i-1, 9, 9);
-                }
-                polozenieY=undefined;
-                polozenieX=undefined;
-            }
-        }, 14);
-    }
-    static rocks(x, y)
-    {
-        let rocksPolX2=x;
-        let rocksPolY2=y;
-        let rocksDl2=Math.abs((gracz[0]+15)-rocksPolX2);
-        let rocksWy2=Math.abs((gracz[1]+15)-rocksPolY2);
-        let rocksX1=gracz[0]+8;
-        let rocksX2=gracz[0]+8;
-        let rocksX3=gracz[0]+8;
-        let rocksY1=gracz[1]+8;
-        let rocksY2=gracz[1]+8;
-        let rocksY3=gracz[1]+8;
-        let rocksPolX1;
-        let rocksPolX3;
-        let rocksPolY1;
-        let rocksPolY3;
-        let rocksDl1;
-        let rocksWy1;
-        let rocksDl3;
-        let rocksWy3;
-        let rocksDmg=12;
-        clearInterval(dsily);
-        rocksDmg=Math.trunc(12*(sila/30));
-        sila=1;
-        document.getElementById("load").value="0";
-        lockChangeWep=false;
-        if(x<=gracz[0]+15 && y<=gracz[1]+15) {
-            rocksPolX1=x-Math.trunc(rocksWy2/5);
-            rocksPolX3=x+Math.trunc(rocksWy2/5);
-            rocksPolY1=y+Math.trunc(rocksDl2/5);
-            rocksPolY3=y-Math.trunc(rocksDl2/5);
-        } else if(x>=gracz[0]+15 && y<=gracz[1]+15) {
-            rocksPolX1=x-Math.trunc(rocksWy2/5);
-            rocksPolX3=x+Math.trunc(rocksWy2/5);
-            rocksPolY1=y-Math.trunc(rocksDl2/5);
-            rocksPolY3=y+Math.trunc(rocksDl2/5);
-        } else if(x>=gracz[0]+15 && y>=gracz[1]+15) {
-            rocksPolX1=x+Math.trunc(rocksWy2/5);
-            rocksPolX3=x-Math.trunc(rocksWy2/5);
-            rocksPolY1=y-Math.trunc(rocksDl2/5);
-            rocksPolY3=y+Math.trunc(rocksDl2/5);
-        } else if(x<=gracz[0]+15 && y>=gracz[1]+15) {
-            rocksPolX1=x-Math.trunc(rocksWy2/5);
-            rocksPolX3=x+Math.trunc(rocksWy2/5);
-            rocksPolY1=y-Math.trunc(rocksDl2/5);
-            rocksPolY3=y+Math.trunc(rocksDl2/5);
-        }
-        rocksDl1=Math.abs((gracz[0]-rocksPolX1)+8);
-        rocksWy1=Math.abs((gracz[1]-rocksPolY1)+8);
-        rocksDl3=Math.abs((gracz[0]-rocksPolX3)+8);
-        rocksWy3=Math.abs((gracz[1]-rocksPolY3)+8);
-        let angle1=Math.atan2(rocksPolY1-rocksY1-8, rocksPolX1-rocksX1-8);
-        let vY1=Math.sin(angle1)*10;
-        let vX1=Math.cos(angle1)*10;
-        let angle2=Math.atan2(rocksPolY2-rocksY2-8, rocksPolX2-rocksX2-8);
-        let vY2=Math.sin(angle2)*10;
-        let vX2=Math.cos(angle2)*10;
-        let angle3=Math.atan2(rocksPolY3-rocksY3-8, rocksPolX3-rocksX3-8);
-        let vY3=Math.sin(angle3)*10;
-        let vX3=Math.cos(angle3)*10;
-        let rocksPetla1=setInterval(function() {
-            ctx.fillStyle="#ffffff";
-            ctx.fillRect(rocksX1, rocksY1, 14, 14);
-            setTimeout("ctx.clearRect("+(rocksX1-1)+", "+(rocksY1-1)+", 16, 16)", 50);
-            rocksY1+=vY1;
-            rocksX1+=vX1;
-            ctx.fillStyle="rgb(116, 98, 99)";
-            ctx.fillRect(rocksX1, rocksY1, 14, 14);
-            if(((rocksX1>=canvas.width) || (rocksY1<=0)) || ((rocksX1<=0) || (rocksY1>=canvas.height)) || czyDostal(rocksX1, rocksY1, "rock", rocksDmg)){
-                clearInterval(rocksPetla1);
-                ctx.fillStyle="#ffffff";
-                ctx.fillRect(rocksX1, rocksY1, 14, 14);
-                setTimeout("ctx.clearRect("+(rocksX1-1)+", "+(rocksY1-1)+", 16, 16)", 50);
-                rocksX1=undefined;
-                rocksY1=undefined;
-            }
-            }, 21);
-            let rocksPetla2=setInterval(function() {
-                ctx.fillStyle="#ffffff";
-                ctx.fillRect(rocksX2, rocksY2, 14, 14);
-                setTimeout("ctx.clearRect("+(rocksX2-1)+", "+(rocksY2-1)+", 16, 16)", 50);
-                rocksY2+=vY2;
-                rocksX2+=vX2;
-                ctx.fillStyle="rgb(116, 98, 99)";
-                ctx.fillRect(rocksX2, rocksY2, 14, 14);
-                if(((rocksX2>=canvas.width) || (rocksY2<=0)) || ((rocksX2<=0) || (rocksY2>=canvas.height)) || czyDostal(rocksX2, rocksY2, "rock", rocksDmg)){
-                    clearInterval(rocksPetla2);
-                    ctx.fillStyle="#ffffff";
-                    ctx.fillRect(rocksX2, rocksY2, 14, 14);
-                    setTimeout("ctx.clearRect("+(rocksX2-1)+", "+(rocksY2-1)+", 16, 16)", 50);
-                    rocksX2=undefined;
-                    rocksY2=undefined;
-                }
-            }, 21);
-            let rocksPetla3=setInterval(function() {
-                ctx.fillStyle="#ffffff";
-                ctx.fillRect(rocksX3, rocksY3, 14, 14);
-                setTimeout("ctx.clearRect("+(rocksX3-1)+", "+(rocksY3-1)+", 16, 16)", 50);
-                rocksY3+=vY3;
-                rocksX3+=vX3;
-                ctx.fillStyle="rgb(116, 98, 99)";
-                ctx.fillRect(rocksX3, rocksY3, 14, 14);
-                if(((rocksX3>=canvas.width) || (rocksY3<=0)) || ((rocksX3<=0) || (rocksY3>=canvas.height)) || czyDostal(rocksX3, rocksY3, "rock", rocksDmg)){
-                    clearInterval(rocksPetla3);
-                    ctx.fillStyle="#ffffff";
-                    ctx.fillRect(rocksX3, rocksY3, 14, 14);
-                    setTimeout("ctx.clearRect("+(rocksX3-1)+", "+(rocksY3-1)+", 16, 16)", 50);
-                    rocksX3=undefined;
-                    rocksY3=undefined;
-                }
-            }, 21);
     }
 }
 function losuj(xy, liczba)
