@@ -404,6 +404,21 @@ div{
     font-size: 3em;
     cursor: pointer;
 }
+#sprint, #load{
+    background-color: gray;
+}
+#sprint::-webkit-progress-value{
+    background-color: darkblue;
+}
+#sprint::-moz-progress-bar{
+    background-color: darkblue;
+}
+#load::-webkit-progress-value{
+    background-color: darkblue;
+}
+#load::-moz-progress-bar{
+    background-color: darkblue;
+}
 @keyframes load{
     0%{
         font-size: 2em;
@@ -525,9 +540,9 @@ footer{
 <div id="przyciski" style="height: 180px;">
     <div id="timer">
 		<img style="width: 60px; height: 60px; float: left;" src="other/zegar.png" alt="" />
-        <div id="wydarzenia" style="width: 260px; height: 60px; float: left;">Za 30s będzie duża fala potworów</div>
+        <div id="wydarzenia" style="width: 260px; height: 60px; float: left;">Za 35s będzie noc</div>
 		<div style="clear: both;"></div>
-		<meter value="50" max="100" id="czas" style="width: 320px; height: 20px; margin-top: 5px; display: block;"></meter>
+		<meter value="0" max="100" id="czas" style="width: 320px; height: 20px; margin-top: 5px; display: block;"></meter>
 	</div>
     <div id="pauza" onclick="paused ? start() : pause();"><br />Pauza</div>
     <div style="clear: both;"></div>
@@ -799,20 +814,19 @@ light.width=proj.width;
 light.height=proj.height;
 var img=new Image;
 var imgs={goblin: new Image, goblinProca: new Image, goblinFreeze: new Image, goblinProcaFreeze: new Image};
-var weps=new Audio("sounds/iceball.wav");
-var barAudio=new Audio("sounds/select2.wav");
-window.onload=function()
-{
+var weps=new Audio();
+var barAudio=new Audio();
+window.onload=function(){
     imgs.goblin.setAttribute("src", "enemies/goblin.png");
     imgs.goblinProca.setAttribute("src", "enemies/goblinProca.png");
     imgs.goblinFreeze.setAttribute("src", "enemies/goblinFreeze.png");
     imgs.goblinProcaFreeze.setAttribute("src", "enemies/goblinProcaFreeze.png");
     document.getElementById("loading").innerHTML="<button>PLAY</button>";
-    document.getElementById("loading").firstChild.setAttribute("onclick", "document.getElementById('menuPage').style.animationName='menuPage1'; document.getElementById('loading').style.visibility='hidden'; openFullscreen(); setTimeout(function() {document.getElementById('menuPage').style.top='25%';}, 1500);");
+    document.getElementById("loading").firstChild.setAttribute("onclick", `document.getElementById('menuPage').style.animationName='menuPage1'; document.getElementById('loading').style.visibility='hidden'; barAudio.addEventListener("canplaythrough", _=>barAudio.play()); weps.addEventListener("canplaythrough", _=>weps.play()); barAudio.setAttribute("src", "sounds/select2.wav"); openFullscreen(); setTimeout(function() {document.getElementById('menuPage').style.top='25%';}, 1500);`);
     document.getElementById("loading").firstChild.style.width="50%";
     document.getElementById("loading").firstChild.style.height="66.6%";
     document.getElementById("loading").style.animationName="None";
-    document.getElementById("loading").style.cursor="pointer";
+    document.getElementById("loading").firstChild.style.cursor="pointer";
 }
 var gracz=[proj.width/2, proj.height/2];
 var zaznaczony="";
@@ -850,6 +864,7 @@ var enemyMoveInt;
 var enemyInt;
 var animInt;
 var torches=[];
+var night=false;
 const moc=document.getElementsByClassName("moc");
 var hero="elf";
 var changeType=[];
@@ -966,22 +981,33 @@ document.getElementById("light").addEventListener("click", function(r) {
             spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e){weps.setAttribute("src", "sounds/arrow.wav"); weps.play();}, onMove: function(x, y){projCtx.fillStyle="#646464"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: Math.trunc(15*(sila/30))});
             odliczanie(1, ind, zaznaczony);
         } else if(zaznaczony=="bowFreeze"){
-            spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e,x,y){e.frozen=true; e.frozenTime=0; weps.setAttribute("src", "sounds/iceball.wav"); weps.play(); Przeciwnicy.forEach((item2, index2) => {if(Math.abs(x-item2.polozenieX+18)<=65 && Math.abs(y-item2.polozenieY+18)<=65) {item2.frozen=true; item2.frozenTime=0;}});animations.push([0, "ice", x, y, 6, new Image("effects/ice/0.png")]);}, onMove: function(x, y){projCtx.fillStyle="#35b4ff"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: Math.trunc(15*(sila/30))});
+            spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e,x,y){e.frozen=true; e.frozenTime=0; weps.setAttribute("src", "sounds/iceball.wav"); weps.play(); Przeciwnicy.forEach((item2, index2) => {if(Math.sqrt(Math.abs(x-item2.polozenieX+18)**2+Math.abs(y-item2.polozenieY+18)**2)<65) {item2.frozen=true; item2.frozenTime=0;}});animations.push([0, "ice", x, y, 6, new Image("effects/ice/0.png")]);}, onMove: function(x, y){projCtx.fillStyle="#35b4ff"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: Math.trunc(15*(sila/30))});
             odliczanie(1, ind, zaznaczony);
         } else if(zaznaczony=="bowPoison"){
             spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e,x,y){e.poisoned=true; e.poisonedTime=0; weps.setAttribute("src", "sounds/poison.ogg"); weps.play();}, onMove: function(x, y){projCtx.fillStyle="#821a7b"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: Math.trunc(15*(sila/30))});
             odliczanie(1, ind, zaznaczony);
         } else if(zaznaczony=="fireball"){
-            spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+7, posY: gracz[1]+7, target: true, effects: {onHit: function(e,x,y,dmg){weps.setAttribute("src", "sounds/fireball.wav"); weps.play(); Przeciwnicy.forEach((item2, index2) => {if(Math.abs(x-item2.polozenieX+18)<=45 && Math.abs(y-item2.polozenieY+18)<=45 && e!=item2) {item2.hp-=dmg}});animations.push([0, "explosion", x+32, y+32, 9, new Image("effects/explosion/0.png")]);}, onMove: function(x, y){}}, spell: attack.fireball, dmg: Math.trunc(21*(sila/30))});
+            spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+7, posY: gracz[1]+7, target: true, effects: {onHit: function(e,x,y,dmg){weps.setAttribute("src", "sounds/fireball.wav"); weps.play(); Przeciwnicy.forEach((item2, index2) => {if(Math.sqrt(Math.abs(x-item2.polozenieX+23)**2+Math.abs(y-item2.polozenieY+23)**2)<45 && e!=item2) {item2.hp-=dmg}});animations.push([0, "explosion", x+32, y+32, 9, new Image("effects/explosion/0.png")]);}, onMove: function(x, y){}}, spell: attack.fireball, dmg: Math.trunc(21*(sila/30))});
             odliczanie(4, ind, zaznaczony);
         } else if(zaznaczony=="torch"){
             torches.push({x: gracz[0], y: gracz[1], stage: [mapaMy[0], mapaMy[1]]});
+            lightCtx.fillStyle=`rgba(255, 255, 255, ${Math.floor(Math.random()*0.4)+0.3})`;
+            for(var i=0; i<200; i++){
+                let angle=Math.floor(Math.random()*(2*Math.PI))+1;
+                lightCtx.fillRect(gracz[0]+15-(Math.floor(Math.random()*200)+1)*Math.cos(angle), gracz[1]+15-(Math.floor(Math.random()*200)+1)*Math.sin(angle), 7, 7);
+            }
             lightCtx.fillStyle="rgb(114, 72, 27)";
             lightCtx.fillRect(gracz[0]+10, gracz[1]+10, 10, 20);
             lightCtx.fillStyle="rgb(204, 23, 23)";
             lightCtx.fillRect(gracz[0]+10, gracz[1], 10, 10);
             lightCtx.fillStyle="rgb(229, 252, 56)";
             lightCtx.fillRect(gracz[0]+12, gracz[1]+4, 6, 6);
+            lightCtx.fillStyle="rgb(204, 23, 23)";
+            for(var i=-5; i<15; i++){
+                for(var j=-5; j<15; j++){
+                    if(Math.floor(Math.random()*5)+1==5) lightCtx.fillRect(gracz[0]+10+i, gracz[1]+j, 1, 1);
+                }
+            }
             odliczanie(2, ind, zaznaczony);
         } if(zaznaczony!=""){
             sila=1;
@@ -1052,12 +1078,23 @@ window.addEventListener("resize", function() {
     }
     torches.forEach((item, index)=>{
         if(item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]){
+            lightCtx.fillStyle=`rgba(255, 255, 255, ${Math.floor(Math.random()*0.4)+0.3})`;
+            for(var i=0; i<200; i++){
+                let angle=Math.floor(Math.random()*(2*Math.PI))+1;
+                lightCtx.fillRect(item.x+15-(Math.floor(Math.random()*200)+1)*Math.cos(angle), item.y+15-(Math.floor(Math.random()*200)+1)*Math.sin(angle), 7, 7);
+            }
             lightCtx.fillStyle="rgb(114, 72, 27)";
             lightCtx.fillRect(item.x+10, item.y+10, 10, 20);
             lightCtx.fillStyle="rgb(204, 23, 23)";
             lightCtx.fillRect(item.x+10, item.y, 10, 10);
             lightCtx.fillStyle="rgb(229, 252, 56)";
             lightCtx.fillRect(item.x+12, item.y+4, 6, 6);
+            lightCtx.fillStyle="rgb(204, 23, 23)";
+            for(var i=-5; i<15; i++){
+                for(var j=-5; j<15; j++){
+                    if(Math.floor(Math.random()*5)+1==5) lightCtx.fillRect(item.x+10+i, item.y+j, 1, 1);
+                }
+            }
         }
     });
     img.setAttribute("src", "heroes/"+hero+".png");
@@ -1071,6 +1108,26 @@ window.addEventListener("resize", function() {
         enemiesCtx.fillRect(item.polozenieX, item.polozenieY-11, Math.trunc(item.hp/3), 10);
     });
 });
+function events(n, action, nextAction){
+    if(!paused){
+        if(action=="night"){
+            if(n<6) document.getElementById("gameHolder").style.filter="brightness("+(0.3+0.14*n)+")";
+            document.getElementById("wydarzenia").innerHTML=`Za ${n}s będzie noc`;
+            night=false;
+            nextAction="day";
+        } else if(action=="day"){
+            if(n<6) document.getElementById("gameHolder").style.filter="brightness("+(1-0.14*n)+")";
+            document.getElementById("wydarzenia").innerHTML=`Za ${n}s będzie dzień`;
+            night=true;
+            nextAction="night";
+        }
+        document.getElementById("czas").value+=100/36;
+        n--;
+        if(n==-1) {action=nextAction; n=35; document.getElementById("czas").value=0;}
+    }
+    setTimeout(`events(${n}, "${action}", "${nextAction}")`, 1000);
+}
+events(35, 'night', 'day');
 function changeHero(index){
     for(var ind=0; ind<8; ind++){
         if(document.getElementsByClassName("weps"+(index+1))[ind+1].childElementCount==1){
@@ -1239,8 +1296,10 @@ enemyMoveInt=setInterval(function() {
     Przeciwnicy.forEach((item, index)=>{
         if(Przeciwnicy[index]!=undefined && item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1])
         {
+            item.torch=torches.some((tItem, tIndex)=>((tItem.stage[0]==mapaMy[0] && tItem.stage[1]==mapaMy[1]) && Math.sqrt(Math.abs((item.polozenieX+15)-(tItem.x+15))**2+Math.abs((item.polozenieY+15)-(tItem.y+15))**2)<201));
             item.dl=Math.abs((gracz[0]-item.polozenieX+15)+15);
             item.wy=Math.abs((gracz[1]-item.polozenieY+15)+15);
+            if(!item.torch) item.torch=66>Math.sqrt(item.dl**2+item.wy**2);
             enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-12, 32, 12);
             if(item.poisoned) {
                 item.poisonedTime++;
@@ -1255,8 +1314,7 @@ enemyMoveInt=setInterval(function() {
                 enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-1, 32, 32);
                 //if(item.type=="goblin") img.setAttribute("src", "enemies/goblinFreeze.png");
                 //else if(item.type=="goblinProca") img.setAttribute("src", "enemies/goblinProcaFreeze.png");
-                if(item.type=="goblin") enemiesCtx.drawImage(imgs.goblinFreeze, item.polozenieX, item.polozenieY);
-                else if(item.type=="goblinProca") enemiesCtx.drawImage(imgs.goblinProcaFreeze, item.polozenieX, item.polozenieY);
+                if(!night || item.torch) enemiesCtx.drawImage(imgs[item.type+"Freeze"], item.polozenieX, item.polozenieY);
                 //ctx.drawImage(img, item.polozenieX, item.polozenieY);
                 if(item.frozenTime>=40) {
                     item.frozen=false;
@@ -1287,7 +1345,7 @@ enemyMoveInt=setInterval(function() {
                     enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-1, 32, 32);
                     //if(item.type=="goblinProca") img.setAttribute("src", "enemies/goblinProca.png");
                     //ctx.drawImage(img, item.polozenieX, item.polozenieY);
-                    if(item.type=="goblinProca") enemiesCtx.drawImage(imgs.goblinProca, item.polozenieX, item.polozenieY);
+                    if(item.type=="goblinProca" && (!night || item.torch)) enemiesCtx.drawImage(imgs.goblinProca, item.polozenieX, item.polozenieY);
                 }
             }
             else {
@@ -1297,15 +1355,14 @@ enemyMoveInt=setInterval(function() {
                 item.polozenieX+=Math.cos(item.angle2)*10;
                 //if(item.type=="goblin") img.setAttribute("src", "enemies/goblin.png");
                 //else if(item.type=="goblinProca") img.setAttribute("src", "enemies/goblinProca.png");
-                if(item.type=="goblin") enemiesCtx.drawImage(imgs.goblin, item.polozenieX, item.polozenieY);
-                else if(item.type=="goblinProca") enemiesCtx.drawImage(imgs.goblinProca, item.polozenieX, item.polozenieY);
+                if(!night || item.torch) enemiesCtx.drawImage(imgs[item.type], item.polozenieX, item.polozenieY);
                 //ctx.drawImage(img, item.polozenieX, item.polozenieY);
             }
             enemiesCtx.fillStyle="red";
-            enemiesCtx.fillRect(item.polozenieX, item.polozenieY-11, 30, 10);
+            if(!night || item.torch) enemiesCtx.fillRect(item.polozenieX, item.polozenieY-11, 30, 10);
             if(!item.poisoned) enemiesCtx.fillStyle="#008400";
             else enemiesCtx.fillStyle="#821a7b";
-            if(item.hp>0) enemiesCtx.fillRect(item.polozenieX, item.polozenieY-11, Math.trunc(item.hp/3), 10);
+            if(item.hp>0){if(!night || item.torch) enemiesCtx.fillRect(item.polozenieX, item.polozenieY-11, Math.trunc(item.hp/3), 10);}
             else {
                 enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-1, 32, 32);
                 enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-12, 32, 12);
@@ -1636,12 +1693,23 @@ function sprPoziom()
                     mapa[mapaMy[0]][mapaMy[1]]=biome[0]+biome[1];
                     torches.forEach((item, index)=>{
                         if(item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]){
+                            lightCtx.fillStyle=`rgba(255, 255, 255, ${Math.floor(Math.random()*0.4)+0.3})`;
+                            for(var i=0; i<200; i++){
+                                let angle=Math.floor(Math.random()*(2*Math.PI))+1;
+                                lightCtx.fillRect(item.x+15-(Math.floor(Math.random()*200)+1)*Math.cos(angle), item.y+15-(Math.floor(Math.random()*200)+1)*Math.sin(angle), 7, 7);
+                            }
                             lightCtx.fillStyle="rgb(114, 72, 27)";
                             lightCtx.fillRect(item.x+10, item.y+10, 10, 20);
                             lightCtx.fillStyle="rgb(204, 23, 23)";
                             lightCtx.fillRect(item.x+10, item.y, 10, 10);
                             lightCtx.fillStyle="rgb(229, 252, 56)";
                             lightCtx.fillRect(item.x+12, item.y+4, 6, 6);
+                            lightCtx.fillStyle="rgb(204, 23, 23)";
+                            for(var i=-5; i<15; i++){
+                                for(var j=-5; j<15; j++){
+                                    if(Math.floor(Math.random()*5)+1==5) lightCtx.fillRect(item.x+10+i, item.y+j, 1, 1);
+                                }
+                            }
                         }
                     });
                 }
@@ -1670,12 +1738,23 @@ function sprPoziom()
                     mapa[mapaMy[0]][mapaMy[1]]=biome[0]+biome[1];
                     torches.forEach((item, index)=>{
                         if(item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]){
+                            lightCtx.fillStyle=`rgba(255, 255, 255, ${Math.floor(Math.random()*0.4)+0.3})`;
+                            for(var i=0; i<200; i++){
+                                let angle=Math.floor(Math.random()*(2*Math.PI))+1;
+                                lightCtx.fillRect(item.x+15-(Math.floor(Math.random()*200)+1)*Math.cos(angle), item.y+15-(Math.floor(Math.random()*200)+1)*Math.sin(angle), 7, 7);
+                            }
                             lightCtx.fillStyle="rgb(114, 72, 27)";
                             lightCtx.fillRect(item.x+10, item.y+10, 10, 20);
                             lightCtx.fillStyle="rgb(204, 23, 23)";
                             lightCtx.fillRect(item.x+10, item.y, 10, 10);
                             lightCtx.fillStyle="rgb(229, 252, 56)";
                             lightCtx.fillRect(item.x+12, item.y+4, 6, 6);
+                            lightCtx.fillStyle="rgb(204, 23, 23)";
+                            for(var i=-5; i<15; i++){
+                                for(var j=-5; j<15; j++){
+                                    if(Math.floor(Math.random()*5)+1==5) lightCtx.fillRect(item.x+10+i, item.y+j, 1, 1);
+                                }
+                            }
                         }
                     });
                 }
@@ -1700,12 +1779,23 @@ function sprPoziom()
             lightCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
             torches.forEach((item, index)=>{
                 if(item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]){
+                    lightCtx.fillStyle=`rgba(255, 255, 255, ${Math.floor(Math.random()*0.4)+0.3})`;
+                    for(var i=0; i<200; i++){
+                        let angle=Math.floor(Math.random()*(2*Math.PI))+1;
+                        lightCtx.fillRect(item.x+15-(Math.floor(Math.random()*200)+1)*Math.cos(angle), item.y+15-(Math.floor(Math.random()*200)+1)*Math.sin(angle), 7, 7);
+                    }
                     lightCtx.fillStyle="rgb(114, 72, 27)";
                     lightCtx.fillRect(item.x+10, item.y+10, 10, 20);
                     lightCtx.fillStyle="rgb(204, 23, 23)";
                     lightCtx.fillRect(item.x+10, item.y, 10, 10);
                     lightCtx.fillStyle="rgb(229, 252, 56)";
                     lightCtx.fillRect(item.x+12, item.y+4, 6, 6);
+                    lightCtx.fillStyle="rgb(204, 23, 23)";
+                    for(var i=-5; i<15; i++){
+                        for(var j=-5; j<15; j++){
+                            if(Math.floor(Math.random()*5)+1==5) lightCtx.fillRect(item.x+10+i, item.y+j, 1, 1);
+                        }
+                    }
                 }
             });
         }
@@ -1758,7 +1848,8 @@ class Enemy
             wy: Math.abs((gracz[1]-polozenieY+15)+15),
             odlicz: 18,
             angle2: null,
-            stage: [mapaMy[0], mapaMy[1]]
+            stage: [mapaMy[0], mapaMy[1]],
+            torch: false
         };
     }
 }
