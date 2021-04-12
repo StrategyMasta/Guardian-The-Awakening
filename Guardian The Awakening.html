@@ -404,6 +404,19 @@ div{
     font-size: 3em;
     cursor: pointer;
 }
+#pickUps{
+    position: absolute;
+    top: 25%;
+    right: 0;
+    width: 80px;
+    height: 50%;
+    pointer-events: none;
+    font-size: 30px;
+    font-family: quaver;
+    color: white;
+    text-align: left;
+    z-index: 400;
+}
 #sprint, #load{
     background-color: gray;
 }
@@ -457,6 +470,7 @@ footer{
     </div>
     <footer>A Game Made By: Programmer Maksymilian Nowak &amp; Originator Bruno Pastorczak &copy;</footer>
 </div>
+<div id="pickUps"></div>
 <canvas id="light" style="position: absolute; left: 0; top: 0; z-index: 6;"></canvas>
 <div id="gameHolder" style="background-image: url(maps/laka1.png); position: relative;">
  <canvas id="resources" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
@@ -549,9 +563,9 @@ footer{
     <div id="surowce" onclick="popup('#surowce2', 0);"><br />Surowce</div>
     <div id="surowce2">
         <div id="drewno">0</div>
-        <div style="width: 20px; height: 20px; background-color: rgb(126, 78, 27); float: left;"></div>
+        <div style="width: 20px; height: 20px; background-image: url(resources/drewno.png); float: left;"></div>
         <div id="kamyk">0</div>
-        <div style="width: 20px; height: 20px; background-color: rgb(116, 98, 99); float: left;"></div>
+        <div style="width: 20px; height: 20px; background-image: url(resources/kamyk.png); float: left;"></div>
         <div id="ice">0</div>
         <div style="width: 20px; height: 20px; background-color: rgb(53, 180, 255); float: left;"></div>
         <div style="clear: both;"></div>
@@ -863,8 +877,10 @@ var shootInt;
 var enemyMoveInt;
 var enemyInt;
 var animInt;
+var pickUpInt;
 var torches=[];
 var night=false;
+var pickUp=[];
 const moc=document.getElementsByClassName("moc");
 var hero="elf";
 var changeType=[];
@@ -922,11 +938,16 @@ const ammo=[
     document.getElementsByClassName("ammo")[7]
 ];
 var craft={
-    bow: "1<div style='display: inline-block; padding: 6px;  background-color: rgb(126, 78, 27);'></div>1<div style='display: inline-block; padding: 6px; background-color: rgb(116, 98, 99);'></div>",
-    bowFreeze: "1<div style='display: inline-block; padding: 6px;  background-color: rgb(126, 78, 27);'></div>1<div style='display: inline-block; padding: 6px; background-color: rgb(53, 180, 255);'></div>",
-    bowPoison: "1<div style='display: inline-block; padding: 6px;  background-color: rgb(126, 78, 27);'></div>1<div style='display: inline-block; padding: 6px; background-color: rgb(130, 26, 123);'></div>",
+    //bow: "1<div style='display: inline-block; padding: 6px;  background-color: rgb(126, 78, 27);'></div>1<div style='display: inline-block; padding: 6px; background-color: rgb(116, 98, 99);'></div>",
+    //bowFreeze: "1<div style='display: inline-block; padding: 6px;  background-color: rgb(126, 78, 27);'></div>1<div style='display: inline-block; padding: 6px; background-color: rgb(53, 180, 255);'></div>",
+    //bowPoison: "1<div style='display: inline-block; padding: 6px;  background-color: rgb(126, 78, 27);'></div>1<div style='display: inline-block; padding: 6px; background-color: rgb(130, 26, 123);'></div>",
+    //fireball: "2<div style='display: inline-block; padding: 6px;  background-color: rgb(242, 107, 8);'></div>",
+    //torch: "1<div style='display: inline-block; padding: 6px;  background-color: rgb(126, 78, 27);'></div>1<div style='display: inline-block; padding: 6px; background-color: rgb(242, 107, 8);'></div>"
+    bow: "1<img src='resources/drewno.png' alt='' width='12' height='12' title='drewno' />1<img src='resources/kamyk.png' alt='' width='12' height='12' title='kamyki' />",
+    bowFreeze: "1<img src='resources/drewno.png' alt='' width='12' height='12' title='drewno' />1<div style='display: inline-block; padding: 6px; background-color: rgb(53, 180, 255);'></div>",
+    bowPoison: "1<img src='resources/drewno.png' alt='' width='12' height='12' title='drewno' />1<div style='display: inline-block; padding: 6px; background-color: rgb(130, 26, 123);'></div>",
     fireball: "2<div style='display: inline-block; padding: 6px;  background-color: rgb(242, 107, 8);'></div>",
-    torch: "1<div style='display: inline-block; padding: 6px;  background-color: rgb(126, 78, 27);'></div>1<div style='display: inline-block; padding: 6px; background-color: rgb(242, 107, 8);'></div>"
+    torch: "1<img src='resources/drewno.png' alt='' width='12' height='12' title='drewno' />1<div style='display: inline-block; padding: 6px; background-color: rgb(242, 107, 8);'></div>"
 };
 var info={
     bow: "STRZALA<br /><br /><br />Zwyczajna strzala<br />Dla: Elf",
@@ -991,23 +1012,12 @@ document.getElementById("light").addEventListener("click", function(r) {
             odliczanie(4, ind, zaznaczony);
         } else if(zaznaczony=="torch"){
             torches.push({x: gracz[0], y: gracz[1], stage: [mapaMy[0], mapaMy[1]]});
-            lightCtx.fillStyle=`rgba(255, 255, 255, ${Math.floor(Math.random()*0.4)+0.3})`;
+            /*lightCtx.fillStyle=`rgba(255, 255, 255, ${Math.floor(Math.random()*0.4)+0.3})`;
             for(var i=0; i<200; i++){
                 let angle=Math.floor(Math.random()*(2*Math.PI))+1;
                 lightCtx.fillRect(gracz[0]+15-(Math.floor(Math.random()*200)+1)*Math.cos(angle), gracz[1]+15-(Math.floor(Math.random()*200)+1)*Math.sin(angle), 7, 7);
-            }
-            lightCtx.fillStyle="rgb(114, 72, 27)";
-            lightCtx.fillRect(gracz[0]+10, gracz[1]+10, 10, 20);
-            lightCtx.fillStyle="rgb(204, 23, 23)";
-            lightCtx.fillRect(gracz[0]+10, gracz[1], 10, 10);
-            lightCtx.fillStyle="rgb(229, 252, 56)";
-            lightCtx.fillRect(gracz[0]+12, gracz[1]+4, 6, 6);
-            lightCtx.fillStyle="rgb(204, 23, 23)";
-            for(var i=-5; i<15; i++){
-                for(var j=-5; j<15; j++){
-                    if(Math.floor(Math.random()*5)+1==5) lightCtx.fillRect(gracz[0]+10+i, gracz[1]+j, 1, 1);
-                }
-            }
+            }*/
+            torch(gracz[0], gracz[1]);
             odliczanie(2, ind, zaznaczony);
         } if(zaznaczony!=""){
             sila=1;
@@ -1072,29 +1082,15 @@ window.addEventListener("resize", function() {
     light.width=proj.width;
     light.height=proj.height;
     for(var i=0; i<surowceTyp.length; i++){
-        if(surowceTyp[i]=="drewno") resourcesCtx.fillStyle="rgb(126, 78, 27)";
-        else if(surowceTyp[i]=="kamyk") resourcesCtx.fillStyle="rgb(116, 98, 99)";
-        resourcesCtx.fillRect(surowceX[i], surowceY[i], 10, 10);
+        //if(surowceTyp[i]=="drewno") resourcesCtx.fillStyle="rgb(126, 78, 27)";
+        //else if(surowceTyp[i]=="kamyk") resourcesCtx.fillStyle="rgb(116, 98, 99)";
+        //resourcesCtx.fillRect(surowceX[i], surowceY[i], 10, 10);
+        img.setAttribute("src", "resources/"+surowceTyp[i]+".png");
+        resourcesCtx.drawImage(img, surowceX[i], surowceY[i]);
     }
     torches.forEach((item, index)=>{
         if(item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]){
-            lightCtx.fillStyle=`rgba(255, 255, 255, ${Math.floor(Math.random()*0.4)+0.3})`;
-            for(var i=0; i<200; i++){
-                let angle=Math.floor(Math.random()*(2*Math.PI))+1;
-                lightCtx.fillRect(item.x+15-(Math.floor(Math.random()*200)+1)*Math.cos(angle), item.y+15-(Math.floor(Math.random()*200)+1)*Math.sin(angle), 7, 7);
-            }
-            lightCtx.fillStyle="rgb(114, 72, 27)";
-            lightCtx.fillRect(item.x+10, item.y+10, 10, 20);
-            lightCtx.fillStyle="rgb(204, 23, 23)";
-            lightCtx.fillRect(item.x+10, item.y, 10, 10);
-            lightCtx.fillStyle="rgb(229, 252, 56)";
-            lightCtx.fillRect(item.x+12, item.y+4, 6, 6);
-            lightCtx.fillStyle="rgb(204, 23, 23)";
-            for(var i=-5; i<15; i++){
-                for(var j=-5; j<15; j++){
-                    if(Math.floor(Math.random()*5)+1==5) lightCtx.fillRect(item.x+10+i, item.y+j, 1, 1);
-                }
-            }
+            torch(item.x, item.y);
         }
     });
     img.setAttribute("src", "heroes/"+hero+".png");
@@ -1108,6 +1104,29 @@ window.addEventListener("resize", function() {
         enemiesCtx.fillRect(item.polozenieX, item.polozenieY-11, Math.trunc(item.hp/3), 10);
     });
 });
+function torch(x, y){
+    lightCtx.globalAlpha=0.5;
+    for(var i=0; i<200; i++){
+        lightCtx.strokeStyle=`rgba(255, 255, 255, ${1-i/200})`;
+        lightCtx.beginPath();
+        lightCtx.arc(x+15, y+15, i, 0, 2*Math.PI);
+        lightCtx.stroke();
+        lightCtx.closePath();
+    }
+    lightCtx.globalAlpha=1;
+    lightCtx.fillStyle="rgb(114, 72, 27)";
+    lightCtx.fillRect(x+10, y+10, 10, 20);
+    lightCtx.fillStyle="rgb(204, 23, 23)";
+    lightCtx.fillRect(x+10, y, 10, 10);
+    lightCtx.fillStyle="rgb(229, 252, 56)";
+    lightCtx.fillRect(x+12, y+4, 6, 6);
+    lightCtx.fillStyle="rgb(204, 23, 23)";
+    for(var i=-5; i<15; i++){
+        for(var j=-5; j<15; j++){
+            if(Math.floor(Math.random()*5)+1==5) lightCtx.fillRect(x+10+i, y+j, 1, 1);
+        }
+    }
+}
 function events(n, action, nextAction){
     if(!paused){
         if(action=="night"){
@@ -1167,6 +1186,7 @@ function pause(){
     clearInterval(enemyMoveInt);
     clearInterval(shootInt);
     clearInterval(animInt);
+    clearInterval(pickUpInt);
 }
 function keypress(e){
     if(e.key==" ") space=true;
@@ -1215,6 +1235,23 @@ function start()
 }, 1000);*/
 window.addEventListener("keypress", keypress);
 window.addEventListener("keydown", keyDown);
+pickUpInt=setInterval(function() {
+    if(pickUp.length>document.getElementById("pickUps").childElementCount){
+        for(var i=document.getElementById("pickUps").childElementCount; i<pickUp.length; i++){
+            let elem=document.createElement("DIV");
+            document.getElementById("pickUps").appendChild(elem);
+            document.getElementById("pickUps").lastChild.style.opacity=1;
+            document.getElementById("pickUps").lastChild.innerHTML="+1 <img src='resources/"+pickUp[i]+".png' alt='' width='30' height='30' />";
+        }
+    }
+    pickUp.forEach((item, index)=>{
+        document.getElementById("pickUps").children[index].style.opacity-=1/240;
+        if(document.getElementById("pickUps").children[index].style.opacity<=0){
+            document.getElementById("pickUps").removeChild(document.getElementById("pickUps").children[index]);
+            pickUp.splice(index, 1);
+        }
+    });
+}, 1000/60);
 move=setInterval(function() {
     if(keys.w && polGracza[1]-15>=0) polGracza[1]-=10;
     if(keys.a && polGracza[0]-15>=0) polGracza[0]-=10;
@@ -1227,21 +1264,23 @@ surowceInt=setInterval(function() {
     if(biome[0]=="laka")
     {
         var liczbaL=Math.floor(Math.random()*2)+1;
-        var x=Math.floor(Math.random()*(proj.width-10));
-        var y=Math.floor(Math.random()*(proj.height-10));
+        var x=Math.floor(Math.random()*(proj.width-20));
+        var y=Math.floor(Math.random()*(proj.height-20));
         surowceX.push(x);
         surowceY.push(y);
         if(liczbaL==1)
         {
             surowceTyp.push("drewno");
-            resourcesCtx.fillStyle="rgb(126, 78, 27)";
+            //resourcesCtx.fillStyle="rgb(126, 78, 27)";
         }
         if(liczbaL==2)
         {
             surowceTyp.push("kamyk");
-            resourcesCtx.fillStyle="rgb(116, 98, 99)";
+            //resourcesCtx.fillStyle="rgb(116, 98, 99)";
         }
-        resourcesCtx.fillRect(x, y, 10, 10);
+        //resourcesCtx.fillRect(x, y, 10, 10);
+        img.setAttribute("src", "resources/"+surowceTyp[surowceTyp.length-1]+".png");
+        resourcesCtx.drawImage(img, x, y);
     }
 }, 3000);
 sprint=setInterval(function() {
@@ -1644,10 +1683,11 @@ function sprSurowce()
     for(var i=0; i<=surowceX.length-1; i++)
     {
         if(surowceX[i]==undefined) {}
-        else if(((gracz[0]-10<=surowceX[i]) && (gracz[0]+30>=surowceX[i])) && ((gracz[1]-10<=surowceY[i]) && (gracz[1]+30>=surowceY[i])))
+        else if(((gracz[0]-20<=surowceX[i]) && (gracz[0]+30>=surowceX[i])) && ((gracz[1]-20<=surowceY[i]) && (gracz[1]+30>=surowceY[i])))
         {
             document.getElementById(surowceTyp[i]).textContent=(document.getElementById(surowceTyp[i]).textContent*1)+1;
-            resourcesCtx.clearRect(surowceX[i], surowceY[i], 10, 10);
+            resourcesCtx.clearRect(surowceX[i], surowceY[i], 20, 20);
+            pickUp.push(surowceTyp[i]);
             delete surowceX[i];
             delete surowceY[i];
             delete surowceTyp[i];
@@ -1693,23 +1733,7 @@ function sprPoziom()
                     mapa[mapaMy[0]][mapaMy[1]]=biome[0]+biome[1];
                     torches.forEach((item, index)=>{
                         if(item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]){
-                            lightCtx.fillStyle=`rgba(255, 255, 255, ${Math.floor(Math.random()*0.4)+0.3})`;
-                            for(var i=0; i<200; i++){
-                                let angle=Math.floor(Math.random()*(2*Math.PI))+1;
-                                lightCtx.fillRect(item.x+15-(Math.floor(Math.random()*200)+1)*Math.cos(angle), item.y+15-(Math.floor(Math.random()*200)+1)*Math.sin(angle), 7, 7);
-                            }
-                            lightCtx.fillStyle="rgb(114, 72, 27)";
-                            lightCtx.fillRect(item.x+10, item.y+10, 10, 20);
-                            lightCtx.fillStyle="rgb(204, 23, 23)";
-                            lightCtx.fillRect(item.x+10, item.y, 10, 10);
-                            lightCtx.fillStyle="rgb(229, 252, 56)";
-                            lightCtx.fillRect(item.x+12, item.y+4, 6, 6);
-                            lightCtx.fillStyle="rgb(204, 23, 23)";
-                            for(var i=-5; i<15; i++){
-                                for(var j=-5; j<15; j++){
-                                    if(Math.floor(Math.random()*5)+1==5) lightCtx.fillRect(item.x+10+i, item.y+j, 1, 1);
-                                }
-                            }
+                            torch(item.x, item.y);
                         }
                     });
                 }
@@ -1738,23 +1762,7 @@ function sprPoziom()
                     mapa[mapaMy[0]][mapaMy[1]]=biome[0]+biome[1];
                     torches.forEach((item, index)=>{
                         if(item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]){
-                            lightCtx.fillStyle=`rgba(255, 255, 255, ${Math.floor(Math.random()*0.4)+0.3})`;
-                            for(var i=0; i<200; i++){
-                                let angle=Math.floor(Math.random()*(2*Math.PI))+1;
-                                lightCtx.fillRect(item.x+15-(Math.floor(Math.random()*200)+1)*Math.cos(angle), item.y+15-(Math.floor(Math.random()*200)+1)*Math.sin(angle), 7, 7);
-                            }
-                            lightCtx.fillStyle="rgb(114, 72, 27)";
-                            lightCtx.fillRect(item.x+10, item.y+10, 10, 20);
-                            lightCtx.fillStyle="rgb(204, 23, 23)";
-                            lightCtx.fillRect(item.x+10, item.y, 10, 10);
-                            lightCtx.fillStyle="rgb(229, 252, 56)";
-                            lightCtx.fillRect(item.x+12, item.y+4, 6, 6);
-                            lightCtx.fillStyle="rgb(204, 23, 23)";
-                            for(var i=-5; i<15; i++){
-                                for(var j=-5; j<15; j++){
-                                    if(Math.floor(Math.random()*5)+1==5) lightCtx.fillRect(item.x+10+i, item.y+j, 1, 1);
-                                }
-                            }
+                            torch(item.x, item.y);
                         }
                     });
                 }
@@ -1779,23 +1787,7 @@ function sprPoziom()
             lightCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
             torches.forEach((item, index)=>{
                 if(item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]){
-                    lightCtx.fillStyle=`rgba(255, 255, 255, ${Math.floor(Math.random()*0.4)+0.3})`;
-                    for(var i=0; i<200; i++){
-                        let angle=Math.floor(Math.random()*(2*Math.PI))+1;
-                        lightCtx.fillRect(item.x+15-(Math.floor(Math.random()*200)+1)*Math.cos(angle), item.y+15-(Math.floor(Math.random()*200)+1)*Math.sin(angle), 7, 7);
-                    }
-                    lightCtx.fillStyle="rgb(114, 72, 27)";
-                    lightCtx.fillRect(item.x+10, item.y+10, 10, 20);
-                    lightCtx.fillStyle="rgb(204, 23, 23)";
-                    lightCtx.fillRect(item.x+10, item.y, 10, 10);
-                    lightCtx.fillStyle="rgb(229, 252, 56)";
-                    lightCtx.fillRect(item.x+12, item.y+4, 6, 6);
-                    lightCtx.fillStyle="rgb(204, 23, 23)";
-                    for(var i=-5; i<15; i++){
-                        for(var j=-5; j<15; j++){
-                            if(Math.floor(Math.random()*5)+1==5) lightCtx.fillRect(item.x+10+i, item.y+j, 1, 1);
-                        }
-                    }
+                    torch(item.x, item.y);
                 }
             });
         }
