@@ -10,6 +10,7 @@ body{
     background-image: url(other/bg34.png);
     background-repeat: repeat;
     user-select: none;
+    font-family: 'quaver';
 }
 div{
     text-align: center;
@@ -39,7 +40,7 @@ div{
     height: 85px;
     margin-top: 5px;
 	color: white;
-    font-family: fantasy;
+    font-family: 'quaver';
     font-size: 22px;
     float: left;
 }
@@ -80,7 +81,7 @@ div{
 .ammo{
     width: 15px;
     color: white;
-    font-family: fantasy;
+    font-family: 'quaver';
     float: left;
 }
 .type{
@@ -118,7 +119,7 @@ div{
     width: 70px;
     height: 70px;
     color: white;
-    font-family: fantasy;
+    font-family: 'quaver';
     cursor: pointer;
     background-color: orange;
     text-shadow: 5px 5px 15px black;
@@ -129,7 +130,7 @@ div{
     width: 80px;
     height: 80px;
     color: white;
-    font-family: fantasy;
+    font-family: 'quaver';
     cursor: pointer;
     background-color: #a26a04;
     text-shadow: 5px 5px 15px black;
@@ -417,7 +418,7 @@ div{
     text-align: left;
     z-index: 400;
 }
-#sprint, #load{
+#sprint, #load, #hp{
     background-color: gray;
 }
 #sprint::-webkit-progress-value{
@@ -431,6 +432,12 @@ div{
 }
 #load::-moz-progress-bar{
     background-color: darkblue;
+}
+#hp::-webkit-progress-value{
+    background-color: green;
+}
+#hp::-moz-progress-bar{
+    background-color: green;
 }
 @keyframes load{
     0%{
@@ -466,7 +473,7 @@ footer{
 <div id="menu" style="position: absolute; width: 100%; height: 100%; background-image: linear-gradient(#37e0ff, #0e810e); z-index: 200;">
     <div id="loading">Loading...</div>
     <div id="menuPage">
-        <button id="play" onclick="document.getElementById('menuPage').style.animationName='menuPage2'; setTimeout(function() {document.getElementById('menu').style.visibility='hidden'; start();}, 1500);">Graj</button>
+        <button id="play" onclick="document.getElementById('menuPage').style.animationName='menuPage2'; setTimeout(function() {document.getElementById('menu').style.visibility='hidden'; theme.setAttribute('src', 'sounds/Jungle1.wav'); theme.play(); start();}, 1500);">Graj</button>
     </div>
     <footer>A Game Made By: Programmer Maksymilian Nowak &amp; Originator Bruno Pastorczak &copy;</footer>
 </div>
@@ -545,10 +552,10 @@ footer{
 </div>
 <div id="paski">
     <div style="color: white;">Zdrowie</div>
-    <meter value="100" max="100" id="hp"></meter>
+    <progress value="100" max="100" id="hp"></progress>
     <div style="color: white;">Sprint</div>
     <progress value="100" max="100" id="sprint"></progress>
-    <div style="color: white;">Napięcie łuku/Siła rzutu</div>
+    <div style="color: white;">Napiecie luku/Sila rzutu</div>
     <progress value="0" max="100" id="load"></progress>
 </div>
 <div id="przyciski" style="height: 180px;">
@@ -830,13 +837,16 @@ var img=new Image;
 var imgs={goblin: new Image, goblinProca: new Image, goblinFreeze: new Image, goblinProcaFreeze: new Image};
 var weps=new Audio();
 var barAudio=new Audio();
+var theme=new Audio("sounds/journey.wav");
+var pickUpSound=new Audio("sounds/pickUp.mp3");
+theme.setAttribute("loop", "");
 window.onload=function(){
     imgs.goblin.setAttribute("src", "enemies/goblin.png");
     imgs.goblinProca.setAttribute("src", "enemies/goblinProca.png");
     imgs.goblinFreeze.setAttribute("src", "enemies/goblinFreeze.png");
     imgs.goblinProcaFreeze.setAttribute("src", "enemies/goblinProcaFreeze.png");
     document.getElementById("loading").innerHTML="<button>PLAY</button>";
-    document.getElementById("loading").firstChild.setAttribute("onclick", `document.getElementById('menuPage').style.animationName='menuPage1'; document.getElementById('loading').style.visibility='hidden'; barAudio.addEventListener("canplaythrough", _=>barAudio.play()); weps.addEventListener("canplaythrough", _=>weps.play()); barAudio.setAttribute("src", "sounds/select2.wav"); openFullscreen(); setTimeout(function() {document.getElementById('menuPage').style.top='25%';}, 1500);`);
+    document.getElementById("loading").firstChild.setAttribute("onclick", `document.getElementById('menuPage').style.animationName='menuPage1'; document.getElementById('loading').style.visibility='hidden'; barAudio.addEventListener("canplaythrough", _=>barAudio.play()); weps.addEventListener("canplaythrough", _=>weps.play()); barAudio.addEventListener("canplaythrough", _=>barAudio.play()); pickUpSound.addEventListener("canplaythrough", _=>pickUpSound.play()); theme.addEventListener("canplaythrough", _=>theme.play()); theme.play(); barAudio.setAttribute("src", "sounds/select2.wav"); openFullscreen(); setTimeout(function() {document.getElementById('menuPage').style.top='25%';}, 1500);`);
     document.getElementById("loading").firstChild.style.width="50%";
     document.getElementById("loading").firstChild.style.height="66.6%";
     document.getElementById("loading").style.animationName="None";
@@ -1688,6 +1698,7 @@ function sprSurowce()
             document.getElementById(surowceTyp[i]).textContent=(document.getElementById(surowceTyp[i]).textContent*1)+1;
             resourcesCtx.clearRect(surowceX[i], surowceY[i], 20, 20);
             pickUp.push(surowceTyp[i]);
+            pickUpSound.play();
             delete surowceX[i];
             delete surowceY[i];
             delete surowceTyp[i];
