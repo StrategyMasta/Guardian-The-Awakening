@@ -478,14 +478,15 @@ footer{
     <footer>A Game Made By: Programmer Maksymilian Nowak &amp; Originator Bruno Pastorczak &copy;</footer>
 </div>
 <div id="pickUps"></div>
-<canvas id="light" style="position: absolute; left: 0; top: 0; z-index: 6;"></canvas>
+<canvas id="light" style="position: absolute; left: 0; top: 0; z-index: 7;"></canvas>
 <div id="gameHolder" style="background-image: url(maps/laka1.png); position: relative;">
  <canvas id="resources" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
  <canvas id="hero" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
  <canvas id="enemies" style="position: absolute; left: 0; top: 0; z-index: 2;"></canvas>
- <canvas id="text" style="position: absolute; left: 0; top: 0; z-index: 3;"></canvas>
- <canvas id="projectiles" style="position: absolute; left: 0; top: 0; z-index: 4;"></canvas>
- <canvas id="animations1" style="position: absolute; left: 0; top: 0; z-index: 5;"></canvas>
+ <canvas id="sources" style="position: absolute; left: 0; top: 0; z-index: 3;"></canvas>
+ <canvas id="text" style="position: absolute; left: 0; top: 0; z-index: 4;"></canvas>
+ <canvas id="projectiles" style="position: absolute; left: 0; top: 0; z-index: 5;"></canvas>
+ <canvas id="animations1" style="position: absolute; left: 0; top: 0; z-index: 6;"></canvas>
 </div>
 <div style="position: absolute; top: 0; left: 50%; transform: translate(-50%, 0); color: white; font-size: 30px; z-index: 100;">Score: <span id="score">0</span></div>
 <div id="moce">
@@ -520,18 +521,18 @@ footer{
     </div>
     <div style="clear: both;"></div>
     <div style="width: 540px; height: 12px;"></div>
-    <div class="wrap" style="visibility: hidden;">
-        <div class="ammo">0</div>
-        <div class="craft">S<br />T<br />W<br />Ó<br />R<br />Z</div>
-        <div class="moc"></div>
-        <div class="info">I<br />N<br />F<br />O</div>
+    <div class="wrap">
+        <div class="ammo">50</div>
+        <div class="craft" onclick="if(surowce[0].innerHTML*1>=1 && surowce[1].innerHTML*1>=1) {ammo[4].innerHTML=(wepAmmo.pickaxe+=10); surowce[0].innerHTML=surowce[0].innerHTML*1-1; surowce[1].innerHTML=surowce[1].innerHTML*1-1; barAudio.play();}" onmouseover="moc[4].innerHTML=craft.pickaxe; moc[4].style.background='white'; moc[4].style.color='black';" onmouseout="moc[4].innerHTML=''; moc[4].style.backgroundImage='url(weps/pickaxe.png)'; moc[4].style.backgroundSize='cover'; moc[4].style.color='white';">S<br />T<br />W<br />Ó<br />R<br />Z</div>
+        <div class="moc" style="background-image: url(weps/pickaxe.png); background-size: cover;" onclick="if(this.innerHTML=='' && !lockChangeWep && this.style.filter!='brightness(0.5)')    {if(zaznaczony=='pickaxe') {zaznaczony=''; this.style.filter='brightness(1)';} else if(zaznaczony!=''){zaznaczony=''; for(var i=0; i<=7; i++){if(moc[i].style.filter=='brightness(1.5)') {moc[i].style.filter='brightness(1)';}} this.style.filter='brightness(1.5)'; zaznaczony='pickaxe';} else {zaznaczony='pickaxe'; this.style.filter='brightness(1.5)';}}"></div>
+        <div class="info" onmouseover="moc[4].innerHTML=info.pickaxe; moc[4].style.background='white'; moc[4].style.color='black'; moc[4].style.fontSize='9px';" onmouseout="moc[4].innerHTML=''; moc[4].style.backgroundImage='url(weps/pickaxe.png)'; moc[4].style.backgroundSize='cover'; moc[4].style.color='white'; moc[4].style.fontSize='38px';">I<br />N<br />F<br />O</div>
         <div style="clear: both;"></div>
     </div>
-    <div class="wrap" style="visibility: hidden;">
-        <div class="ammo">0</div>
-        <div class="craft">S<br />T<br />W<br />Ó<br />R<br />Z</div>
-        <div class="moc"></div>
-        <div class="info">I<br />N<br />F<br />O</div>
+    <div class="wrap">
+        <div class="ammo">50</div>
+        <div class="craft" onclick="if(surowce[0].innerHTML*1>=1 && surowce[1].innerHTML*1>=1) {ammo[5].innerHTML=(wepAmmo.axe+=10); surowce[0].innerHTML=surowce[0].innerHTML*1-1; surowce[1].innerHTML=surowce[1].innerHTML*1-1; barAudio.play();}" onmouseover="moc[5].innerHTML=craft.axe; moc[5].style.background='white'; moc[5].style.color='black';" onmouseout="moc[5].innerHTML=''; moc[5].style.backgroundImage='url(weps/axe.png)'; moc[5].style.backgroundSize='cover'; moc[5].style.color='white';">S<br />T<br />W<br />Ó<br />R<br />Z</div>
+        <div class="moc" style="background-image: url(weps/axe.png); background-size: cover;" onclick="if(this.innerHTML=='' && !lockChangeWep && this.style.filter!='brightness(0.5)')    {if(zaznaczony=='axe') {zaznaczony=''; this.style.filter='brightness(1)';} else if(zaznaczony!=''){zaznaczony=''; for(var i=0; i<=7; i++){if(moc[i].style.filter=='brightness(1.5)') {moc[i].style.filter='brightness(1)';}} this.style.filter='brightness(1.5)'; zaznaczony='axe';} else {zaznaczony='axe'; this.style.filter='brightness(1.5)';}}"></div>
+        <div class="info" onmouseover="moc[5].innerHTML=info.axe; moc[5].style.background='white'; moc[5].style.color='black'; moc[5].style.fontSize='9px';" onmouseout="moc[5].innerHTML=''; moc[5].style.backgroundImage='url(weps/axe.png)'; moc[5].style.backgroundSize='cover'; moc[5].style.color='white'; moc[5].style.fontSize='38px';">I<br />N<br />F<br />O</div>
         <div style="clear: both;"></div>
     </div>
     <div class="wrap" style="visibility: hidden;">
@@ -554,7 +555,7 @@ footer{
     <div style="color: white;">Zdrowie</div>
     <progress value="100" max="100" id="hp"></progress>
     <div style="color: white;">Sprint</div>
-    <progress value="100" max="100" id="sprint"></progress>
+    <progress value="200" max="200" id="sprint"></progress>
     <div style="color: white;">Napiecie luku/Sila rzutu</div>
     <progress value="0" max="100" id="load"></progress>
 </div>
@@ -643,8 +644,8 @@ footer{
             <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"><img src="weps/bowFreeze.png" alt="weps1" id="bowFreeze1" draggable="true" ondragstart="drag(event)" /></div>
             <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"><img src="weps/bowPoison.png" alt="weps1" id="bowPoison1" draggable="true" ondragstart="drag(event)" /></div>
             <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"><img src="weps/torch.png" alt="w" id="torch" draggable="true" ondragstart="drag(event)" /></div>
-            <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-            <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"><img src="weps/pickaxe.png" alt="w" id="pickaxe" draggable="true" ondragstart="drag(event)" /></div>
+            <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"><img src="weps/axe.png" alt="w" id="axe" draggable="true" ondragstart="drag(event)" /></div>
             <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
             <div class="weps weps1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
             <div style="clear: both;"></div>
@@ -796,6 +797,8 @@ const text=document.getElementById("text");
 const textCtx=text.getContext("2d");
 const light=document.getElementById("light");
 const lightCtx=light.getContext("2d");
+const sourceCanv=document.getElementById("sources");
+const sourceCtx=sourceCanv.getContext("2d");
 if(window.innerWidth>1800) {
     proj.width=1800;
     enemies.width=1800;
@@ -803,6 +806,7 @@ if(window.innerWidth>1800) {
     resources.width=1800;
     anim1.width=1800;
     text.width=1800;
+    sourceCanv.width=1800;
     document.getElementById("gameHolder").style.marginLeft=((window.innerWidth-1800)/2)+"px";
     document.getElementById("light").style.marginLeft=((window.innerWidth-1800)/2)+"px";
 } else {
@@ -812,6 +816,7 @@ if(window.innerWidth>1800) {
     resources.width=window.innerWidth;
     anim1.width=window.innerWidth;
     text.width=window.innerWidth;
+    sourceCanv.width=window.innerWidth;
     document.getElementById("gameHolder").style.backgroundSize="cover";
 } if(window.innerHeight>1193) {
     proj.height=1013;
@@ -819,6 +824,7 @@ if(window.innerWidth>1800) {
     heroCanv.height=1013;
     anim1.height=1013;
     text.height=1013;
+    sourceCanv.height=1013;
 }
 else {
     proj.height=(window.innerHeight-180);
@@ -827,6 +833,7 @@ else {
     resources.height=(window.innerHeight-180);
     anim1.height=(window.innerHeight-180);
     text.height=(window.innerHeight-180);
+    sourceCanv.height=(window.innerHeight-180);
     document.getElementById("gameHolder").style.backgroundSize="cover";
 }
 document.getElementById("gameHolder").style.width=proj.width+"px";
@@ -851,6 +858,14 @@ window.onload=function(){
     document.getElementById("loading").firstChild.style.height="66.6%";
     document.getElementById("loading").style.animationName="None";
     document.getElementById("loading").firstChild.style.cursor="pointer";
+    for(var i=0; i<Math.floor(Math.random()*2)+3; i++){newSource(mapaMy);}
+    source.filter((item, index)=>item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]).forEach((item2, index2)=>{
+        let prop=new Image;
+        prop.src="resources/"+item2.type+".png";
+        prop.onload=function(){
+            sourceCtx.drawImage(prop, item2.x, item2.y);
+        }
+    });
 }
 var gracz=[proj.width/2, proj.height/2];
 var zaznaczony="";
@@ -891,6 +906,10 @@ var pickUpInt;
 var torches=[];
 var night=false;
 var pickUp=[];
+var source=[];
+var biomeSource={
+    laka: ["tree", "rock"]
+};
 const moc=document.getElementsByClassName("moc");
 var hero="elf";
 var changeType=[];
@@ -957,14 +976,18 @@ var craft={
     bowFreeze: "1<img src='resources/drewno.png' alt='' width='12' height='12' title='drewno' />1<div style='display: inline-block; padding: 6px; background-color: rgb(53, 180, 255);'></div>",
     bowPoison: "1<img src='resources/drewno.png' alt='' width='12' height='12' title='drewno' />1<div style='display: inline-block; padding: 6px; background-color: rgb(130, 26, 123);'></div>",
     fireball: "2<div style='display: inline-block; padding: 6px;  background-color: rgb(242, 107, 8);'></div>",
-    torch: "1<img src='resources/drewno.png' alt='' width='12' height='12' title='drewno' />1<div style='display: inline-block; padding: 6px; background-color: rgb(242, 107, 8);'></div>"
+    torch: "1<img src='resources/drewno.png' alt='' width='12' height='12' title='drewno' />1<div style='display: inline-block; padding: 6px; background-color: rgb(242, 107, 8);'></div>",
+    pickaxe: "1<img src='resources/drewno.png' alt='' width='12' height='12' title='drewno' />1<img src='resources/kamyk.png' alt='' width='12' height='12' title='kamyki' />",
+    axe: "1<img src='resources/drewno.png' alt='' width='12' height='12' title='drewno' />1<img src='resources/kamyk.png' alt='' width='12' height='12' title='kamyki' />"
 };
 var info={
     bow: "STRZALA<br /><br /><br />Zwyczajna strzala<br />Dla: Elf",
     bowFreeze: "LODOWA STRZALA<br /><br /><br />Zamrazajaca strzala<br />Dla: Elf",
     bowPoison: "ZATRUTA STRZALA<br /><br /><br />Zatruta strzala<br />Dla: Elf",
     fireball: "KULA OGNIA<br /><br /><br />Wybucha<br />Dla: Mag Ognia",
-    torch: "POCHODNIA<br /><br /><br />Pozwala widziec wrogow w nocy<br />Dla: Wszyscy"
+    torch: "POCHODNIA<br /><br /><br />Pozwala widziec wrogow w nocy<br />Dla: Wszyscy",
+    pickaxe: "KILOF<br /><br /><br />Sluzy do kopania roznych kamieni<br />Dla: Wszyscy",
+    axe: "SIEKIERA<br /><br /><br />Sluzy do scinania drzew<br />Dla: Wszyscy"
 };
 var heroes=["elf", "fireMage"];
 var recipe={
@@ -972,21 +995,27 @@ var recipe={
     bowFreeze: [0, 1, 2, 1],
     bowPoison: [0, 1, 3, 1],
     fireball: [4, 2],
-    torch: [0, 1, 4, 1]
+    torch: [0, 1, 4, 1],
+    pickaxe: [0, 1, 1, 1],
+    axe: [0, 1, 1, 1]
 };
 var wepAmmo={
     bow: 10,
     bowFreeze: 10,
     bowPoison: 10,
     fireball: 10,
-    torch: 10
+    torch: 10,
+    pickaxe: 50,
+    axe: 50
 };
 var items={
     bow: {info: ""+info.bow, craft: ""+craft.bow, name: "bow"},
     bowFreeze: {info: info.bowFreeze, craft: craft.bowFreeze, name: "bowFreeze"},
     bowPoison: {info: info.bowPoison, craft: craft.bowPoison, name: "bowPoison"},
     fireball: {info: info.fireball, craft: craft.fireball, name: "fireball"},
-    torch: {info: info.torch, craft: craft.torch, name: "torch"}
+    torch: {info: info.torch, craft: craft.torch, name: "torch"},
+    pickaxe: {info: info.pickaxe, craft: craft.pickaxe, name: "pickaxe"},
+    axe: {info: info.axe, craft: craft.axe, name: "axe"}
 };
 img.setAttribute("src", "heroes/elf.png");
 heroCtx.drawImage(img, gracz[0], gracz[1]);
@@ -1000,7 +1029,7 @@ document.getElementById("light").addEventListener("click", function(r) {
     if(zaznaczony!="" && wepAmmo[zaznaczony]>0){
         for(var i=0; i<8; i++) {if(moc[i].style.backgroundImage.includes("/"+zaznaczony+".") && document.getElementsByClassName("wrap")[i].style.visibility!="hidden"){ind=i; break;}}
         moc[ind].style.filter="brightness(0.5)";
-        clearInterval(dsily);
+        cancelAnimationFrame(dsily);
         document.getElementById("load").value="0";
         lockChangeWep=false;
         ammo[ind].innerHTML=ammo[ind].innerHTML*1-1;
@@ -1012,45 +1041,44 @@ document.getElementById("light").addEventListener("click", function(r) {
             spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e){weps.setAttribute("src", "sounds/arrow.wav"); weps.play();}, onMove: function(x, y){projCtx.fillStyle="#646464"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: Math.trunc(15*(sila/30))});
             odliczanie(1, ind, zaznaczony);
         } else if(zaznaczony=="bowFreeze"){
-            spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e,x,y){e.frozen=true; e.frozenTime=0; weps.setAttribute("src", "sounds/iceball.wav"); weps.play(); Przeciwnicy.forEach((item2, index2) => {if(Math.sqrt(Math.abs(x-item2.polozenieX+18)**2+Math.abs(y-item2.polozenieY+18)**2)<65) {item2.frozen=true; item2.frozenTime=0;}});animations.push([0, "ice", x, y, 6, new Image("effects/ice/0.png")]);}, onMove: function(x, y){projCtx.fillStyle="#35b4ff"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: Math.trunc(15*(sila/30))});
+            spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e,x,y){e.frozen=true; e.frozenTime=0; weps.setAttribute("src", "sounds/iceball.wav"); weps.play(); Przeciwnicy.forEach((item2, index2) => {if(Math.sqrt(Math.abs(x-item2.polozenieX+18)**2+Math.abs(y-item2.polozenieY+18)**2)<65) {item2.frozen=true; item2.frozenTime=0;}});animations.push([0, "ice", x, y, 6, new Image("effects/ice/0.png"), 128]);}, onMove: function(x, y){projCtx.fillStyle="#35b4ff"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: Math.trunc(15*(sila/30))});
             odliczanie(1, ind, zaznaczony);
         } else if(zaznaczony=="bowPoison"){
             spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e,x,y){e.poisoned=true; e.poisonedTime=0; weps.setAttribute("src", "sounds/poison.ogg"); weps.play();}, onMove: function(x, y){projCtx.fillStyle="#821a7b"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: Math.trunc(15*(sila/30))});
             odliczanie(1, ind, zaznaczony);
         } else if(zaznaczony=="fireball"){
-            spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+7, posY: gracz[1]+7, target: true, effects: {onHit: function(e,x,y,dmg){weps.setAttribute("src", "sounds/fireball.wav"); weps.play(); Przeciwnicy.forEach((item2, index2) => {if(Math.sqrt(Math.abs(x-item2.polozenieX+23)**2+Math.abs(y-item2.polozenieY+23)**2)<45 && e!=item2) {item2.hp-=dmg}});animations.push([0, "explosion", x+32, y+32, 9, new Image("effects/explosion/0.png")]);}, onMove: function(x, y){}}, spell: attack.fireball, dmg: Math.trunc(21*(sila/30))});
+            spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+7, posY: gracz[1]+7, target: true, effects: {onHit: function(e,x,y,dmg){weps.setAttribute("src", "sounds/fireball.wav"); weps.play(); Przeciwnicy.forEach((item2, index2) => {if(Math.sqrt(Math.abs(x-item2.polozenieX+23)**2+Math.abs(y-item2.polozenieY+23)**2)<45 && e!=item2) {item2.hp-=dmg}});animations.push([0, "explosion", x, y, 9, new Image("effects/explosion/0.png"), 64]);}, onMove: function(x, y){}}, spell: attack.fireball, dmg: Math.trunc(21*(sila/30))});
             odliczanie(4, ind, zaznaczony);
         } else if(zaznaczony=="torch"){
             torches.push({x: gracz[0], y: gracz[1], stage: [mapaMy[0], mapaMy[1]]});
-            /*lightCtx.fillStyle=`rgba(255, 255, 255, ${Math.floor(Math.random()*0.4)+0.3})`;
-            for(var i=0; i<200; i++){
-                let angle=Math.floor(Math.random()*(2*Math.PI))+1;
-                lightCtx.fillRect(gracz[0]+15-(Math.floor(Math.random()*200)+1)*Math.cos(angle), gracz[1]+15-(Math.floor(Math.random()*200)+1)*Math.sin(angle), 7, 7);
-            }*/
             torch(gracz[0], gracz[1]);
             odliczanie(2, ind, zaznaczony);
+        } else if(zaznaczony=="pickaxe" || zaznaczony=="axe"){
+            swing(zaznaczony);
+            odliczanie(1, ind, zaznaczony);
         } if(zaznaczony!=""){
             sila=1;
             zaznaczony="";
         }
     }
 });
+function silaFunc(){
+    if(sila!=100)
+    {
+        sila++;
+        document.getElementById("load").textContent=sila;
+        document.getElementById("load").value=sila;
+    }
+    dsily=requestAnimationFrame(silaFunc);
+}
 document.getElementById("light").addEventListener("mousedown", function(e) {
     //if((zaznaczony=="bow" && ammo[0].innerHTML*1>0 && moc[0].textContent=="") || (zaznaczony=="bowFreeze" && ammo[1].innerHTML*1>0 && moc[0].textContent=="") || (zaznaczony=="bowPoison" && ammo[2].innerHTML*1>0 && moc[0].textContent=="") || (zaznaczony=="rocks" && ammo[3].innerHTML*1>0 && moc[1].textContent=="")){
-    if(zaznaczony!="" && wepAmmo[zaznaczony]>0 && zaznaczony!="torch"){
+    if(zaznaczony!="" && wepAmmo[zaznaczony]>0 && zaznaczony!="torch" && zaznaczony!="pickaxe"){
         if(e.button==0)
         {
             if(zaznaczony.slice(0, 3)=="bow") {weps.setAttribute("src", "sounds/bowStrBack"+(Math.floor(Math.random()*4)+1)+".wav"); weps.play();}
             lockChangeWep=true;
-            clearInterval(dsily);
-            dsily=setInterval(function() {
-                if(sila!=100)
-                {
-                    sila++;
-                    document.getElementById("load").textContent=sila;
-                    document.getElementById("load").value=sila;
-                }
-            }, 20);
+            silaFunc();
         }
     }
 });
@@ -1062,6 +1090,7 @@ window.addEventListener("resize", function() {
         resources.width=1800;
         anim1.width=1800;
         text.width=1800;
+        sourceCanv.width=1800;
         document.getElementById("gameHolder").style.marginLeft=((window.innerWidth-1800)/2)+"px";
     } else {
         proj.width=window.innerWidth;
@@ -1070,6 +1099,7 @@ window.addEventListener("resize", function() {
         resources.width=window.innerWidth;
         anim1.width=window.innerWidth;
         text.width=window.innerWidth;
+        sourceCanv.width=window.innerWidth;
         document.getElementById("gameHolder").style.backgroundSize="cover";
     } if(window.innerHeight>1193) {
         proj.height=1013;
@@ -1077,6 +1107,7 @@ window.addEventListener("resize", function() {
         heroCanv.height=1013;
         anim1.height=1013;
         text.height=1013;
+        sourceCanv.height=1013;
     }
     else {
         proj.height=(window.innerHeight-180);
@@ -1085,6 +1116,7 @@ window.addEventListener("resize", function() {
         resources.height=(window.innerHeight-180);
         anim1.height=(window.innerHeight-180);
         text.height=(window.innerHeight-180);
+        sourceCanv.height=(window.innerHeight-180);
         document.getElementById("gameHolder").style.backgroundSize="cover";
     }
     document.getElementById("gameHolder").style.width=proj.width+"px";
@@ -1112,6 +1144,13 @@ window.addEventListener("resize", function() {
         if(!item.poisoned) enemiesCtx.fillStyle="#008400";
         else enemiesCtx.fillStyle="#821a7b";
         enemiesCtx.fillRect(item.polozenieX, item.polozenieY-11, Math.trunc(item.hp/3), 10);
+    });
+    source.filter((item, index)=>item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]).forEach((item2, index2)=>{
+        let prop=new Image;
+        prop.src="resources/"+item2.type+".png";
+        prop.onload=function(){
+            sourceCtx.drawImage(prop, item2.x, item2.y);
+        }
     });
 });
 function torch(x, y){
@@ -1157,6 +1196,104 @@ function events(n, action, nextAction){
     setTimeout(`events(${n}, "${action}", "${nextAction}")`, 1000);
 }
 events(35, 'night', 'day');
+function newSource(stage){
+    let place=mapa[stage[0]][stage[1]];
+    source.push({
+        x: Math.floor(Math.random()*(innerWidth-128)),
+        y: Math.floor(Math.random()*(innerHeight-128-180)),
+        type: biomeSource[place.slice(0, place.length-1)][Math.floor(Math.random()*biomeSource[place.slice(0, place.length-1)].length)]+"0",
+        stage: [stage[0], stage[1]]
+    });
+}
+var lastSource={tree: "tree3", rock: "rock3"};
+var toolSource={axe: "tree", pickaxe: "rock"};
+var hitbox={tree: [64, 128], rock: [64, 64]};
+var imgAnimSize={tree: 128, rock: 64};
+var sourceDrop={tree: "drewno", rock: "kamyk"};
+function swing(tool){
+    let swingAudio=new Audio("sounds/swing"+(Math.floor(Math.random()*3)+1)+".wav");
+    swingAudio.play();
+    animations.push([0, "swing", gracz[0]+16, gracz[1]+16, 8, new Image("effects/swing/0.png"), 64]);
+    source.filter((item, index)=>item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]).forEach((item2, index2)=>{
+        /*if(tool=="pickaxe" && item2.type.slice(0, item2.type.length-1)=="rock"){
+            if(Math.sqrt(Math.abs((item2.x+32)-(gracz[0]+16))**2+Math.abs((item2.y+32)-(gracz[1]+16))**2)<40+32){
+                item2.type="rock"+(1+1*item2.type[item2.type.length-1]);
+                animations.push([0, "rock", item2.x+32, item2.y+32, 3, new Image("effects/rock/0.png"), 64]);
+                let hit=new Audio("sounds/rockHit.wav");
+                hit.play();
+                sourceCtx.clearRect(-1, -1, sourceCanv.width+2, sourceCanv.height+2);
+                source.filter((item3, index3)=>item3.stage[0]==mapaMy[0] && item3.stage[1]==mapaMy[1]).forEach((item4, index4)=>{
+                    if(item4.type!="rock3"){
+                        let prop=new Image;
+                        prop.src="resources/"+item4.type+".png";
+                        prop.onload=function(){
+                            sourceCtx.drawImage(prop, item4.x, item4.y);
+                        }
+                    }
+                });
+                if(item2.type=="rock3"){
+                    let destroy=new Audio("sounds/rockDestroy.wav");
+                    destroy.play();
+                    for(var i=0; i<3; i++){
+                        let randX=Math.floor(Math.random()*44);
+                        let randY=Math.floor(Math.random()*44);
+                        surowceX.push(item2.x+randX);
+                        surowceY.push(item2.y+randY);
+                        surowceTyp.push("kamyk");
+                        img.setAttribute("src", "resources/"+surowceTyp[surowceTyp.length-1]+".png");
+                        resourcesCtx.drawImage(img, item2.x+randX, item2.y+randY);
+                    }
+                    source.splice(source.indexOf(item2), 1);
+                }
+            }
+        }*/
+        //-------------------------------------------------------------------------------------
+        if(toolSource[tool]!=undefined && item2.type.slice(0, item2.type.length-1)==toolSource[tool]){
+            if(Math.sqrt(Math.abs((item2.x+hitbox[toolSource[tool]][0]/2)-(gracz[0]+16))**2+Math.abs((item2.y+hitbox[toolSource[tool]][1]/2)-(gracz[1]+16))**2)<40+32){
+                item2.type=toolSource[tool]+(1+1*item2.type[item2.type.length-1]);
+                animations.push([0, toolSource[tool], item2.x+hitbox[toolSource[tool]][0]/2, item2.y+hitbox[toolSource[tool]][1]/2, 3, new Image("effects/"+toolSource[tool]+"/0.png"), imgAnimSize[toolSource[tool]]]);
+                let hit=new Audio("sounds/"+toolSource[tool]+"Hit.wav");
+                hit.play();
+                sourceCtx.clearRect(-1, -1, sourceCanv.width+2, sourceCanv.height+2);
+                source.filter((item3, index3)=>item3.stage[0]==mapaMy[0] && item3.stage[1]==mapaMy[1]).forEach((item4, index4)=>{
+                    if(item4.type!=lastSource[toolSource[tool]]){
+                        let prop=new Image;
+                        prop.src="resources/"+item4.type+".png";
+                        prop.onload=function(){
+                            sourceCtx.drawImage(prop, item4.x, item4.y);
+                        }
+                    }
+                });
+                if(item2.type==lastSource[toolSource[tool]]){
+                    let destroy=new Audio("sounds/"+toolSource[tool]+"Destroy.wav");
+                    destroy.play();
+                    if(toolSource[tool]=="tree") animations.push([0, "treeFall", item2.x, item2.y+64, 6, new Image("effects/treeFall/0.png"), 128]);
+                    for(var i=0; i<3; i++){
+                        let randX=Math.floor(Math.random()*(hitbox[toolSource[tool]][0]-20));
+                        let randY=Math.floor(Math.random()*(hitbox[toolSource[tool]][1]-20));
+                        surowceX.push(item2.x+randX);
+                        surowceY.push(item2.y+randY);
+                        surowceTyp.push(sourceDrop[toolSource[tool]]);
+                        img.setAttribute("src", "resources/"+surowceTyp[surowceTyp.length-1]+".png");
+                        resourcesCtx.drawImage(img, item2.x+randX, item2.y+randY);
+                    }
+                    source.splice(source.indexOf(item2), 1);
+                }
+            }
+        }
+    });
+    Przeciwnicy.forEach((item, index)=>{
+        if(Math.sqrt(Math.abs((item.polozenieX+16)-(gracz[0]+16))**2+Math.abs((item.polozenieY+16)-(gracz[1]+16))**2)<40+16 && item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]){
+            if(tool=="sword") item.hp-=70;
+            else item.hp-=45;
+            textCtx.fillStyle="white";
+            textCtx.font="30px Arial";
+            if(tool=="sword") textCtx.fillText("70", item.polozenieX+16, item.polozenieY-14);
+            else textCtx.fillText("45", item.polozenieX, item.polozenieY-14);
+            setTimeout("textCtx.clearRect("+(item.polozenieX-1)+", "+(item.polozenieY-45)+", 62, 32)", 1000);
+        }
+    });
+}
 function changeHero(index){
     for(var ind=0; ind<8; ind++){
         if(document.getElementsByClassName("weps"+(index+1))[ind+1].childElementCount==1){
@@ -1222,6 +1359,47 @@ function keyDown(e){
     if(e.key=="s" || e.key=="S") keys.s=true;
     if(e.key=="d" || e.key=="D") keys.d=true;
 }
+function sprintFunc(){
+    if((energia!=200) && (recharge==200))
+    {
+        energia++;
+        document.getElementById("sprint").value=energia;
+    }
+    else if(recharge!=200) recharge++;
+    if(space && energia!=0)
+    {
+        energia--;
+        document.getElementById("sprint").value=energia;
+        recharge=0;
+        if(!wsprint)
+        {
+            clearInterval(move);
+            move=setInterval(function() {
+                if(keys.w && polGracza[1]-15>=0) polGracza[1]-=10;
+                if(keys.a && polGracza[0]-15>=0) polGracza[0]-=10;
+                if(keys.s && polGracza[1]+15<=proj.height) polGracza[1]+=10;
+                if(keys.d && polGracza[0]+15<=proj.width) polGracza[0]+=10;
+                ruch(polGracza[0], polGracza[1]);
+                sprSurowce();
+            }, 50);
+        }
+        wsprint=true;
+    }
+    else if(wsprint)
+    {
+        clearInterval(move);
+        move=setInterval(function() {
+            if(keys.w && polGracza[1]-15>=0) polGracza[1]-=10;
+            if(keys.a && polGracza[0]-15>=0) polGracza[0]-=10;
+            if(keys.s && polGracza[1]+15<=proj.height) polGracza[1]+=10;
+            if(keys.d && polGracza[0]+15<=proj.width) polGracza[0]+=10;
+            ruch(polGracza[0], polGracza[1]);
+            sprSurowce();
+        }, 90);
+        wsprint=false;
+    }
+    sprint=requestAnimationFrame(sprintFunc);
+}
 window.addEventListener("keyup", keyUp);
 //start();
 function start()
@@ -1270,7 +1448,7 @@ move=setInterval(function() {
     ruch(polGracza[0], polGracza[1]);
     sprSurowce();
 }, 90);
-surowceInt=setInterval(function() {
+/*surowceInt=setInterval(function() {
     if(biome[0]=="laka")
     {
         var liczbaL=Math.floor(Math.random()*2)+1;
@@ -1292,47 +1470,8 @@ surowceInt=setInterval(function() {
         img.setAttribute("src", "resources/"+surowceTyp[surowceTyp.length-1]+".png");
         resourcesCtx.drawImage(img, x, y);
     }
-}, 3000);
-sprint=setInterval(function() {
-    if((energia!=100) && (recharge==100))
-    {
-        energia++;
-        document.getElementById("sprint").value=energia;
-    }
-    else if(recharge!=100) recharge++;
-    if(space && energia!=0)
-    {
-        energia--;
-        document.getElementById("sprint").value=energia;
-        recharge=0;
-        if(!wsprint)
-        {
-            clearInterval(move);
-            move=setInterval(function() {
-                if(keys.w && polGracza[1]-15>=0) polGracza[1]-=10;
-                if(keys.a && polGracza[0]-15>=0) polGracza[0]-=10;
-                if(keys.s && polGracza[1]+15<=proj.height) polGracza[1]+=10;
-                if(keys.d && polGracza[0]+15<=proj.width) polGracza[0]+=10;
-                ruch(polGracza[0], polGracza[1]);
-                sprSurowce();
-            }, 50);
-        }
-        wsprint=true;
-    }
-    else if(wsprint)
-    {
-        clearInterval(move);
-        move=setInterval(function() {
-            if(keys.w && polGracza[1]-15>=0) polGracza[1]-=10;
-            if(keys.a && polGracza[0]-15>=0) polGracza[0]-=10;
-            if(keys.s && polGracza[1]+15<=proj.height) polGracza[1]+=10;
-            if(keys.d && polGracza[0]+15<=proj.width) polGracza[0]+=10;
-            ruch(polGracza[0], polGracza[1]);
-            sprSurowce();
-        }, 90);
-        wsprint=false;
-    }
-}, 50);
+}, 3000);*/
+sprintFunc();
 enemyInt=setInterval(function() {
     if(biome[0]=="laka")
     {
@@ -1349,7 +1488,7 @@ enemyMoveInt=setInterval(function() {
             item.dl=Math.abs((gracz[0]-item.polozenieX+15)+15);
             item.wy=Math.abs((gracz[1]-item.polozenieY+15)+15);
             if(!item.torch) item.torch=66>Math.sqrt(item.dl**2+item.wy**2);
-            enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-12, 32, 12);
+            enemiesCtx.clearRect(item.polozenieX, item.polozenieY-12, 32, 12);
             if(item.poisoned) {
                 item.poisonedTime++;
                 if(item.poisonedTime%2==0) item.hp-=2;
@@ -1360,7 +1499,7 @@ enemyMoveInt=setInterval(function() {
             }
             if(item.frozen) {
                 item.frozenTime++;
-                enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-1, 32, 32);
+                enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-1, 34, 34);
                 //if(item.type=="goblin") img.setAttribute("src", "enemies/goblinFreeze.png");
                 //else if(item.type=="goblinProca") img.setAttribute("src", "enemies/goblinProcaFreeze.png");
                 if(!night || item.torch) enemiesCtx.drawImage(imgs[item.type+"Freeze"], item.polozenieX, item.polozenieY);
@@ -1391,14 +1530,14 @@ enemyMoveInt=setInterval(function() {
                 else
                 {
                     item.odlicz++;
-                    enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-1, 32, 32);
+                    enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-1, 34, 34);
                     //if(item.type=="goblinProca") img.setAttribute("src", "enemies/goblinProca.png");
                     //ctx.drawImage(img, item.polozenieX, item.polozenieY);
                     if(item.type=="goblinProca" && (!night || item.torch)) enemiesCtx.drawImage(imgs.goblinProca, item.polozenieX, item.polozenieY);
                 }
             }
             else {
-                enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-1, 32, 32);
+                enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-1, 34, 34);
                 item.angle2=Math.atan2(gracz[1]-item.polozenieY, gracz[0]-item.polozenieX);
                 item.polozenieY+=Math.sin(item.angle2)*10;
                 item.polozenieX+=Math.cos(item.angle2)*10;
@@ -1408,20 +1547,21 @@ enemyMoveInt=setInterval(function() {
                 //ctx.drawImage(img, item.polozenieX, item.polozenieY);
             }
             enemiesCtx.fillStyle="red";
-            if(!night || item.torch) enemiesCtx.fillRect(item.polozenieX, item.polozenieY-11, 30, 10);
+            if(!night || item.torch) enemiesCtx.fillRect(item.polozenieX+1, item.polozenieY-11, 30, 10);
             if(!item.poisoned) enemiesCtx.fillStyle="#008400";
             else enemiesCtx.fillStyle="#821a7b";
-            if(item.hp>0){if(!night || item.torch) enemiesCtx.fillRect(item.polozenieX, item.polozenieY-11, Math.trunc(item.hp/3), 10);}
+            if(item.hp>0){if(!night || item.torch) enemiesCtx.fillRect(item.polozenieX+1, item.polozenieY-11, Math.trunc(item.hp/3), 10);}
             else {
-                enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-1, 32, 32);
-                enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-12, 32, 12);
+                enemiesCtx.clearRect(item.polozenieX-1, item.polozenieY-1, 34, 34);
+                enemiesCtx.clearRect(item.polozenieX, item.polozenieY-12, 32, 12);
                 document.getElementById("score").innerHTML=(document.getElementById("score").innerHTML*1)+50;
                 Przeciwnicy.splice(index, 1);
             }
         }
     });
 }, 125);
-shootInt=setInterval(function() {
+//shootInt=setInterval(function() {
+(function shootFunc(){
     spells.forEach((item, index)=>{
         /*projCtx.fillStyle="#ffffff";
         projCtx.fillRect(item.procaPolx, item.procaPoly, 14, 14);
@@ -1503,7 +1643,7 @@ shootInt=setInterval(function() {
             projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-5, 0, 2*Math.PI);
             projCtx.fill();
             projCtx.fillStyle=item.spell.color2;
-            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-6, 0, 2*Math.PI);
+            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-7, 0, 2*Math.PI);
             projCtx.fill();
             projCtx.closePath();
             projCtx.fillStyle=item.spell.color1;
@@ -1542,15 +1682,17 @@ shootInt=setInterval(function() {
             spells.splice(index, 1);
         }}
     });
-}, 15);
+    requestAnimationFrame(shootFunc);
+})();
+//}, 15);
 animInt=setInterval(function() {
     animations.forEach((item, index)=>{
-        anim1Ctx.clearRect(item[2]-70, item[3]-70, 140, 140);
+        anim1Ctx.clearRect(item[2]-item[6]/2-1, item[3]-item[6]/2-1, item[6]+2, item[6]+2);
         item[5].setAttribute("src", "effects/"+item[1]+"/"+item[0]+".png");
-        anim1Ctx.drawImage(item[5], item[2]-64, item[3]-64);
+        anim1Ctx.drawImage(item[5], item[2]-item[6]/2, item[3]-item[6]/2);
         item[0]=item[0]+1;
-        if(item[4]!=item[0]) animations[animations.length-1][5].setAttribute("src", "effects/"+item[1]+"/"+item[0]+".png");
-        if(item[4]==item[0]) {setTimeout(function() {anim1Ctx.clearRect(item[2]-70, item[3]-70, 140, 140)}, 2000/60); animations.splice(index, 1);}
+        if(item[4]!=item[0]) animations[index][5].setAttribute("src", "effects/"+item[1]+"/"+item[0]+".png");
+        if(item[4]==item[0]) {setTimeout(function() {anim1Ctx.clearRect(item[2]-item[6]/2-1, item[3]-item[6]/2-1, item[6]+2, item[6]+2)}, 2000/60); animations.splice(index, 1);}
     });
 }, 2000/60);
 }
@@ -1627,17 +1769,19 @@ function drop(e) {
                 for(var j=1; j<9; j++) {if(ind.nextElementSibling.style.clear=="both"){ind=8-j; break;} else {ind=ind.nextElementSibling;}}
                 if(document.getElementsByClassName("weps"+selHero)[ind+1].childElementCount==1){
                     let wep="";
+                    let isMelee=1;
                     /*if(b[i]==a.parentElement && b[i].childElementCount==1){for(var x=0; x<b[i].firstChild.id.length; x++) {if(b[i].firstChild.id[x]*1>-1){break;} else {wep+=b[i].firstChild.id[x]}}}
                     else{for(var x=0; x<e.dataTransfer.getData("text").length; x++) {if(e.dataTransfer.getData("text")[x]*1>-1){break;} else {wep+=e.dataTransfer.getData("text")[x]}}}*/
                     for(var x=0; x<b[i].firstChild.id.length; x++) {if(b[i].firstChild.id[x]*1>-1){break;} else {wep+=b[i].firstChild.id[x]}}
                     if(zaznaczony==wep) zaznaczony="";
+                    if(wep=="pickaxe" || wep=="axe") isMelee=10;
                     if(moc[ind].style.filter=="brightness(1.5)") moc[ind].style.filter="brightness(1)";
                     //Object.values(test)[Object.keys(test).indexOf("b")];
                     moc[ind].style.backgroundImage="url(weps/"+wep+".png)";
                     moc[ind].style.backgroundSize="cover";
                     ammo[ind].innerHTML=wepAmmo[wep];
                     moc[ind].setAttribute("onclick", "if(moc["+ind+"].innerHTML=='' && !lockChangeWep){if(zaznaczony=='"+wep+"'){zaznaczony='';moc["+ind+"].style.filter='brightness(1)';}else if(zaznaczony!=''){zaznaczony='';for(var i=0; i<=7; i++){if(moc[i].style.filter=='brightness(1.5)'){moc[i].style.filter='brightness(1)';}}moc["+ind+"].style.filter='brightness(1.5)';zaznaczony='"+wep+"';}else{zaznaczony='"+wep+"';moc["+ind+"].style.filter='brightness(1.5)';}}");
-                    document.getElementsByClassName("craft")[ind].setAttribute("onclick", 'let pozwolenie=true; for(var i=0; ['+recipe[wep]+'].length/2>i; i++){if(surowce[['+recipe[wep]+'][i*2]].innerHTML*1<['+recipe[wep]+'][i*2+1]) pozwolenie=false;}if(pozwolenie) {ammo['+ind+'].innerHTML=(wepAmmo["'+wep+'"]+=1);barAudio.play();for(var i=0; ['+recipe[wep]+'].length/2>i; i++){surowce[['+recipe[wep]+'][i*2]].innerHTML=surowce[['+recipe[wep]+'][i*2]].innerHTML*1-['+recipe[wep]+'][i*2+1];}}');
+                    document.getElementsByClassName("craft")[ind].setAttribute("onclick", 'let pozwolenie=true; for(var i=0; ['+recipe[wep]+'].length/2>i; i++){if(surowce[['+recipe[wep]+'][i*2]].innerHTML*1<['+recipe[wep]+'][i*2+1]) pozwolenie=false;}if(pozwolenie) {ammo['+ind+'].innerHTML=(wepAmmo["'+wep+'"]+='+isMelee+');barAudio.play();for(var i=0; ['+recipe[wep]+'].length/2>i; i++){surowce[['+recipe[wep]+'][i*2]].innerHTML=surowce[['+recipe[wep]+'][i*2]].innerHTML*1-['+recipe[wep]+'][i*2+1];}}');
                     document.getElementsByClassName("craft")[ind].setAttribute("onmouseover", 'moc['+ind+'].innerHTML="'+craft[wep]+'";moc['+ind+'].style.background="white";moc['+ind+'].style.color="black";');
                     document.getElementsByClassName("craft")[ind].setAttribute("onmouseout", 'moc['+ind+'].innerHTML="";moc['+ind+'].style.backgroundImage="url(weps/'+wep+'.png)";moc['+ind+'].style.backgroundSize="cover";moc['+ind+'].style.color="white";');
                     document.getElementsByClassName("info")[ind].setAttribute("onmouseover", 'moc['+ind+'].innerHTML="'+info[wep]+'";moc['+ind+'].style.background="white";moc['+ind+'].style.color="black";moc['+ind+'].style.fontSize="9px";');
@@ -1650,16 +1794,16 @@ function drop(e) {
 }
 function ruch(x, y)
 {
-    let dl=Math.abs((gracz[0]-x)+15);
-    let wy=Math.abs((gracz[1]-y)+15);
+    let dl=Math.abs((gracz[0]-x)+16);
+    let wy=Math.abs((gracz[1]-y)+16);
     if(dl>=10 || wy>=10)
     {
-        heroCtx.clearRect(gracz[0]-1, gracz[1]-1, 32, 32);
-        let angle=Math.atan2(y-15-gracz[1], x-15-gracz[0]);
+        heroCtx.clearRect(gracz[0]-1, gracz[1]-1, 34, 34);
+        let angle=Math.atan2(y-16-gracz[1], x-16-gracz[0]);
         gracz[1]+=Math.sin(angle)*10;
         gracz[0]+=Math.cos(angle)*10;
-        polGracza[0]=gracz[0]+15;
-        polGracza[1]=gracz[1]+15;
+        polGracza[0]=gracz[0]+16;
+        polGracza[1]=gracz[1]+16;
     }
     img.setAttribute("src", "heroes/"+hero+".png");
     heroCtx.drawImage(img, gracz[0], gracz[1]);
@@ -1693,7 +1837,7 @@ function sprSurowce()
     for(var i=0; i<=surowceX.length-1; i++)
     {
         if(surowceX[i]==undefined) {}
-        else if(((gracz[0]-20<=surowceX[i]) && (gracz[0]+30>=surowceX[i])) && ((gracz[1]-20<=surowceY[i]) && (gracz[1]+30>=surowceY[i])))
+        else if(((gracz[0]-20<=surowceX[i]) && (gracz[0]+32>=surowceX[i])) && ((gracz[1]-20<=surowceY[i]) && (gracz[1]+32>=surowceY[i])))
         {
             document.getElementById(surowceTyp[i]).textContent=(document.getElementById(surowceTyp[i]).textContent*1)+1;
             resourcesCtx.clearRect(surowceX[i], surowceY[i], 20, 20);
@@ -1711,10 +1855,10 @@ function sprPoziom()
     let prawa=false;
     let gora=false;
     let dol=false;
-    if(gracz[0]+15<=20 && mapaMy[0]!=0) lewa=true;
-    else if(gracz[0]+15>=proj.width-20 && mapaMy[0]!=24) prawa=true;
-    else if(gracz[1]+15<=20 && mapaMy[1]!=0) gora=true;
-    else if(gracz[1]+15>=proj.height-20 && mapaMy[1]!=24) dol=true;
+    if(gracz[0]+16<=20 && mapaMy[0]!=0) lewa=true;
+    else if(gracz[0]+16>=proj.width-20 && mapaMy[0]!=24) prawa=true;
+    else if(gracz[1]+16<=20 && mapaMy[1]!=0) gora=true;
+    else if(gracz[1]+16>=proj.height-20 && mapaMy[1]!=24) dol=true;
     if(lewa || prawa || gora || dol)
     {
         surowceTyp=[];
@@ -1737,6 +1881,7 @@ function sprPoziom()
                     textCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
                     resourcesCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
                     lightCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+                    sourceCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
                     if(lewa) {gracz[0]=proj.width-40; mapaMy[0]-=1;}
                     else if(prawa) {gracz[0]=10; mapaMy[0]+=1;}
                     else if(gora) {gracz[1]=proj.height-40; mapaMy[1]-=1;}
@@ -1766,6 +1911,7 @@ function sprPoziom()
                     textCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
                     resourcesCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
                     lightCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+                    sourceCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
                     if(lewa) {gracz[0]=proj.width-40; mapaMy[0]-=1;}
                     else if(prawa) {gracz[0]=10; mapaMy[0]+=1;}
                     else if(gora) {gracz[1]=proj.height-40; mapaMy[1]-=1;}
@@ -1779,6 +1925,7 @@ function sprPoziom()
                 }
                 biome[1]++;
             }
+            for(var i=0; i<Math.floor(Math.random()*2)+3; i++){newSource(mapaMy);}
         }
         else
         {
@@ -1796,12 +1943,20 @@ function sprPoziom()
             textCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
             resourcesCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
             lightCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
+            sourceCtx.clearRect(-10, -10, proj.width+20, proj.height+20);
             torches.forEach((item, index)=>{
                 if(item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]){
                     torch(item.x, item.y);
                 }
             });
         }
+        source.filter((item, index)=>item.stage[0]==mapaMy[0] && item.stage[1]==mapaMy[1]).forEach((item, index)=>{
+            let prop=new Image;
+            prop.src="resources/"+item.type+".png";
+            prop.onload=function(){
+                setTimeout(function(){sourceCtx.drawImage(prop, item.x, item.y)}, 20);
+            }
+        });
         for(var j=0; j<=4; j++)
         {
             for(var i=0; i<=4; i++)
