@@ -394,15 +394,46 @@ div{
 }
 #play{
     position: absolute;
-    top: 60%;
+    top: 53%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 50%;
-    height: 20%;
+    height: 15%;
     background-color: #253e90;
     color: white;
     font-family: fantasy;
     font-size: 3em;
+    cursor: pointer;
+}
+#howToPlay{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 15%;
+    background-color: orange;
+    color: white;
+    font-family: fantasy;
+    font-size: 3em;
+    cursor: pointer;
+}
+#polishFlag{
+    position: absolute;
+    top: 86%;
+    left: 38.5%;
+    transform: translate(-50%, -50%);
+    width: 22%;
+    height: 10%;
+    cursor: pointer;
+}
+#englishFlag{
+    position: absolute;
+    top: 86%;
+    left: 61.5%;
+    transform: translate(-50%, -50%);
+    width: 22%;
+    height: 10%;
     cursor: pointer;
 }
 #pickUps{
@@ -472,8 +503,16 @@ footer{
 <body oncontextmenu="return false;">
 <div id="menu" style="position: absolute; width: 100%; height: 100%; background-image: linear-gradient(#37e0ff, #0e810e); z-index: 200;">
     <div id="loading">Loading...</div>
+    <div id="howToPlay2" style="position: absolute; width: 100%; height: 100%; visibility: hidden; z-index: 300;">
+        <img src="other/guide.png" alt="guide" style="width: 100%; height: 100%;" />
+        <div style="position: absolute; top: 0; right: 0; width: 7%; height: 7%; background: red; color: white; font-size: 1em;" onclick="popup('#howToPlay2', 0);"><br />X</div>
+    </div>
     <div id="menuPage">
+	<img src="other/menuLogo.png" alt="" style="width: 100%; height: 100%;" />
         <button id="play" onclick="document.getElementById('menuPage').style.animationName='menuPage2'; setTimeout(function() {document.getElementById('menu').style.visibility='hidden'; theme.setAttribute('src', 'sounds/Jungle1.wav'); theme.play(); start();}, 1500);">Graj</button>
+	<button id="howToPlay" onclick="popup('#howToPlay2', 0);">Jak grać</button>
+	<img id="polishFlag" src="other/polishFlag.jpg" alt="" />
+	<img id="englishFlag" src="other/englishFlag.png" alt="" />
     </div>
     <footer>A Game Made By: Programmer Maksymilian Nowak &amp; Originator Bruno Pastorczak &copy;</footer>
 </div>
@@ -771,7 +810,7 @@ footer{
         <button class="sekcja" onclick="changeSekcja(2);">Display</button>
         <div id="opcContent" style="margin-top: 5px; font-family: fantasy; position: relative;">
             <div class="optionPage" style="position: absolute; top: 0; left: 0;">
-            <div>Reset broni: <img src="other/yes.png" alt="" id="checkReset" style="width: auto; height: 35px; margin-bottom: -12px; background-size: cover;"  onmouseover="this.setAttribute('src', 'other/yesHover.png');" onmouseout="this.setAttribute('src', 'other/yes.png');" onmousedown="this.setAttribute('src', 'other/yesPress.png');" onclick="changeOption('#checkReset', 0); options.checkReset=!options.checkReset;" /></div></div>
+            <div>Reset broni: <img src="other/no.png" alt="" id="checkReset" style="width: auto; height: 35px; margin-bottom: -12px; background-size: cover;"  onmouseover="this.setAttribute('src', 'other/noHover.png');" onmouseout="this.setAttribute('src', 'other/no.png');" onmousedown="this.setAttribute('src', 'other/noPress.png');" onclick="changeOption('#checkReset', 0); options.checkReset=!options.checkReset;" /></div></div>
         <div class="optionPage" style="position: absolute; top: 0; left: 0; visibility: hidden;">
         </div>
         <div class="optionPage" style="position: absolute; top: 0; left: 0; visibility: hidden;">
@@ -897,7 +936,6 @@ var selHero="1";
 var Przeciwnicy=[];
 var spells=[];
 var sprint;
-var surowceInt;
 var shootInt;
 var enemyMoveInt;
 var enemyInt;
@@ -921,7 +959,7 @@ var attack={
     fireball: {color1: "rgb(255, 127, 39)", color2: "rgb(255, 242, 0)", bsize: 16, size: 30, type: "ball", dmg: 70}
 };
 var options={
-    checkReset: true,
+    checkReset: false,
     UIScale: 0.8
 };
 var animations=[];
@@ -1041,7 +1079,7 @@ document.getElementById("light").addEventListener("click", function(r) {
             spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e){weps.setAttribute("src", "sounds/arrow.wav"); weps.play();}, onMove: function(x, y){projCtx.fillStyle="#646464"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: Math.trunc(15*(sila/30))});
             odliczanie(1, ind, zaznaczony);
         } else if(zaznaczony=="bowFreeze"){
-            spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e,x,y){e.frozen=true; e.frozenTime=0; weps.setAttribute("src", "sounds/iceball.wav"); weps.play(); Przeciwnicy.forEach((item2, index2) => {if(Math.sqrt(Math.abs(x-item2.polozenieX+18)**2+Math.abs(y-item2.polozenieY+18)**2)<65) {item2.frozen=true; item2.frozenTime=0;}});animations.push([0, "ice", x, y, 6, new Image("effects/ice/0.png"), 128]);}, onMove: function(x, y){projCtx.fillStyle="#35b4ff"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: Math.trunc(15*(sila/30))});
+            spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e,x,y){e.frozen=true; e.frozenTime=0; let impact=new Audio("sounds/iceball.wav"); impact.play(); Przeciwnicy.forEach((item2, index2) => {if(Math.sqrt(Math.abs(x-item2.polozenieX+18)**2+Math.abs(y-item2.polozenieY+18)**2)<65) {item2.frozen=true; item2.frozenTime=0;}});animations.push([0, "ice", x, y, 6, new Image("effects/ice/0.png"), 128]);}, onMove: function(x, y){projCtx.fillStyle="#35b4ff"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: Math.trunc(15*(sila/30))});
             odliczanie(1, ind, zaznaczony);
         } else if(zaznaczony=="bowPoison"){
             spells.push({x: r.clientX, y: r.clientY, posX: gracz[0]+12, posY: gracz[1]+12, target: true, effects: {onHit: function(e,x,y){e.poisoned=true; e.poisonedTime=0; weps.setAttribute("src", "sounds/poison.ogg"); weps.play();}, onMove: function(x, y){projCtx.fillStyle="#821a7b"; projCtx.fillRect(x, y, 7, 7);}}, spell: attack.arrow, dmg: Math.trunc(15*(sila/30))});
@@ -1073,7 +1111,7 @@ function silaFunc(){
 }
 document.getElementById("light").addEventListener("mousedown", function(e) {
     //if((zaznaczony=="bow" && ammo[0].innerHTML*1>0 && moc[0].textContent=="") || (zaznaczony=="bowFreeze" && ammo[1].innerHTML*1>0 && moc[0].textContent=="") || (zaznaczony=="bowPoison" && ammo[2].innerHTML*1>0 && moc[0].textContent=="") || (zaznaczony=="rocks" && ammo[3].innerHTML*1>0 && moc[1].textContent=="")){
-    if(zaznaczony!="" && wepAmmo[zaznaczony]>0 && zaznaczony!="torch" && zaznaczony!="pickaxe"){
+    if(zaznaczony!="" && wepAmmo[zaznaczony]>0 && zaznaczony!="torch" && zaznaczony!="pickaxe" && zaznaczony!="axe"){
         if(e.button==0)
         {
             if(zaznaczony.slice(0, 3)=="bow") {weps.setAttribute("src", "sounds/bowStrBack"+(Math.floor(Math.random()*4)+1)+".wav"); weps.play();}
@@ -1267,6 +1305,19 @@ function swing(tool){
                 if(item2.type==lastSource[toolSource[tool]]){
                     let destroy=new Audio("sounds/"+toolSource[tool]+"Destroy.wav");
                     destroy.play();
+                    setTimeout(function(){
+                        newSource(mapaMy);
+                        sourceCtx.clearRect(-1, -1, sourceCanv.width+2, sourceCanv.height+2);
+                        source.filter((item3, index3)=>item3.stage[0]==mapaMy[0] && item3.stage[1]==mapaMy[1]).forEach((item4, index4)=>{
+                            if(item4.type!=lastSource[toolSource[tool]]){
+                                let prop=new Image;
+                                prop.src="resources/"+item4.type+".png";
+                                prop.onload=function(){
+                                    sourceCtx.drawImage(prop, item4.x, item4.y);
+                                }
+                            }
+                        });
+                    }, 30000);
                     if(toolSource[tool]=="tree") animations.push([0, "treeFall", item2.x, item2.y+64, 6, new Image("effects/treeFall/0.png"), 128]);
                     for(var i=0; i<3; i++){
                         let randX=Math.floor(Math.random()*(hitbox[toolSource[tool]][0]-20));
@@ -1326,12 +1377,11 @@ function pause(){
     paused=true;
     window.removeEventListener("keypress", keypress);
     window.removeEventListener("keydown", keyDown);
-    clearInterval(sprint);
+    cancelAnimationFrame(sprint);
     clearInterval(move);
-    clearInterval(surowceInt);
     clearInterval(enemyInt);
     clearInterval(enemyMoveInt);
-    clearInterval(shootInt);
+    cancelAnimationFrame(shootInt);
     clearInterval(animInt);
     clearInterval(pickUpInt);
 }
@@ -1399,6 +1449,129 @@ function sprintFunc(){
         wsprint=false;
     }
     sprint=requestAnimationFrame(sprintFunc);
+}
+function shootFunc(){
+    spells.forEach((item, index)=>{
+        /*projCtx.fillStyle="#ffffff";
+        projCtx.fillRect(item.procaPolx, item.procaPoly, 14, 14);
+        setTimeout("projCtx.clearRect("+(item.procaPolx-1)+", "+(item.procaPoly-1)+", 16, 16)", 50);
+        item.procaPoly+=item.vY;
+        item.procaPolx+=item.vX;
+        projCtx.fillStyle="rgb(116, 98, 99)";
+        projCtx.fillRect(item.procaPolx, item.procaPoly, 14, 14);
+        if((((item.procaPolx>=proj.width) || (item.procaPoly<=0)) || ((item.procaPolx<=0) || (item.procaPoly>=proj.height))) || (((gracz[0]-14<=item.procaPolx) && (gracz[0]+30>=item.procaPolx)) && ((gracz[1]-14<=item.procaPoly) && (gracz[1]+30>=item.procaPoly))))
+        {
+            setTimeout("projCtx.clearRect("+(item.procaPolx-1)+", "+(item.procaPoly-1)+", 16, 16)", 50);
+            projCtx.fillStyle="#ffffff";
+            projCtx.fillRect(item.procaPolx, item.procaPoly, 14, 14);
+            spells.splice(index, 1);
+        }*/
+        let angle=Math.atan2(item.y-item.posY, item.x-item.posX);
+        if(item.spell.type=="rect"){
+            projCtx.fillStyle="#ffffff";
+            projCtx.fillRect(item.posX-1, item.posY-1, item.spell.size+2, item.spell.size+2);
+            setTimeout("projCtx.clearRect("+(item.posX-2)+", "+(item.posY-2)+", "+(item.spell.size+4)+", "+(item.spell.size+4)+")", 50);
+        } else if(item.spell.type=="line"){
+            /*projCtx.fillStyle="#ffffff";
+            projCtx.beginPath();
+            projCtx.lineWidth=item.spell.size;
+            projCtx.moveTo(item.posX+item.spell.size/2+Math.cos(angle)*27, item.posY+item.spell.size/2+Math.sin(angle)*27);
+            projCtx.lineTo(item.posX+item.spell.size/2+Math.cos(angle)*37, item.posY+item.spell.size/2+Math.sin(angle)*37);
+            projCtx.stroke();
+            projCtx.lineWidth=1;
+            projCtx.endPath();
+            setTimeout("ctx.clearRect("+(item.posX-2)+", "+(item.posY-2)+", "+(item.spell.size+4)+", "+(item.spell.size+4)+")", 50);*/
+            for(var i=0; i<=30; i++)
+            {
+                projCtx.fillStyle="#ffffff";
+                projCtx.fillRect(item.posX-Math.cos(angle)*i, item.posY-Math.sin(angle)*i, 7, 7);
+            }
+            for(var i=0; i<=30; i++)
+            {
+                projCtx.clearRect(item.posX+(-5*Math.cos(angle)*10)-Math.cos(angle)*i-1, item.posY+(-5*Math.sin(angle)*10)-Math.sin(angle)*i-1, 9, 9);
+            }
+        } else if(item.spell.type=="ball") projCtx.clearRect(item.posX-((30-item.spell.bsize)/2)-1, item.posY-((30-item.spell.bsize)/2)-1, 32, 32);
+        item.posY+=Math.sin(angle)*10;
+        item.posX+=Math.cos(angle)*10;
+        item.y+=Math.sin(angle)*10;
+        item.x+=Math.cos(angle)*10;
+        if(item.spell.type=="rect"){
+            projCtx.fillStyle=item.spell.color;
+            projCtx.fillRect(item.posX, item.posY, item.spell.size, item.spell.size);
+        }
+        else if(item.spell.type=="line"){
+            /*projCtx.fillStyle=item.spell.color;
+            projCtx.beginPath();
+            projCtx.lineWidth=item.spell.size;
+            projCtx.moveTo(item.posX+item.spell.size/2, item.posY+item.spell.size/2);
+            projCtx.lineTo(item.posX+item.spell.size/2+Math.cos(angle)*37, item.posY+item.spell.size/2+Math.sin(angle)*37);
+            projCtx.stroke();
+            projCtx.lineWidth=1;
+            projCtx.endPath();*/
+            for(var i=0; i<=30; i++)
+            {
+                projCtx.fillStyle=item.spell.color;
+                projCtx.fillRect(item.posX-Math.cos(angle)*i, item.posY-Math.sin(angle)*i, 7, 7);
+            }
+        }
+        else if(item.spell.type=="ball"){
+            projCtx.beginPath();
+            projCtx.fillStyle=item.spell.color1;
+            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2, 0, 2*Math.PI);
+            projCtx.fill();
+            projCtx.fillStyle=item.spell.color2;
+            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-2, 0, 2*Math.PI);
+            projCtx.fill();
+            projCtx.fillStyle="white";
+            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-3, 0, 2*Math.PI);
+            projCtx.fill();
+            projCtx.fillStyle=item.spell.color1;
+            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-4, 0, 2*Math.PI);
+            projCtx.fill();
+            projCtx.fillStyle="white";
+            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-5, 0, 2*Math.PI);
+            projCtx.fill();
+            projCtx.fillStyle=item.spell.color2;
+            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-7, 0, 2*Math.PI);
+            projCtx.fill();
+            projCtx.closePath();
+            projCtx.fillStyle=item.spell.color1;
+            /*for(var i=0; i<=8; i++){
+                for(var j=0; j<=8; j++){
+                    if(Math.floor(Math.random()*5)+1<5) projCtx.fillRect(item.posX+item.spell.size/2-Math.cos(angle)*i, item.posY+item.spell.size/2-Math.sin(angle)*j, 1, 1);
+                }
+            }*/
+            for(var i=0; i<=10; i++){
+                for(var j=0; j<=10; j++){
+                    if(Math.floor(Math.random()*5)+1<5) projCtx.fillRect(item.posX+item.spell.bsize/2-Math.cos(angle)*10-5+i, item.posY+item.spell.bsize/2-Math.sin(angle)*10-5+j, 1, 1);
+                }
+            }
+        }
+        item.effects.onMove(item.posX, item.posY);
+        if(((((item.posX>=proj.width) || (item.posY<=0)) || ((item.posX<=0) || (item.posY>=proj.height))) || (((gracz[0]-item.spell.size<=item.posX) && (gracz[0]+30>=item.posX)) && ((gracz[1]-item.spell.size<=item.posY) && (gracz[1]+30>=item.posY)))) && !item.target)
+        {
+            if(item.spell.type=="rect"){
+                setTimeout("projCtx.clearRect("+(item.posX-1)+", "+(item.posY-1)+", "+(item.spell.size+2)+", "+(item.spell.size+2)+")", 50);
+                projCtx.fillStyle="#ffffff";
+                projCtx.fillRect(item.posX, item.posY, item.spell.size, item.spell.size);
+            } else if(item.spell.type=="line"){
+                for(var i=0; i<=60; i++) projCtx.clearRect(item.posX-Math.cos(angle)*i-1, item.posY-Math.sin(angle)*i-1, 9, 9);
+            } else if(item.spell.type=="ball") projCtx.clearRect(item.posX-(30-item.spell.size)/2-1, item.posY-(30-item.spell.size)/2-1, 32, 32);
+            spells.splice(index, 1);
+        }
+        if(item.target){
+        if((item.posX<=0) || (item.posY<=0) || (item.posY-7>=proj.height) || (item.posX-7>=proj.width) || czyDostal(item.posX, item.posY, item.dmg, item.spell.size, item.effects.onHit)){
+            if(item.spell.type=="rect"){
+                setTimeout("projCtx.clearRect("+(item.posX-1)+", "+(item.posY-1)+", "+(item.spell.size+2)+", "+(item.spell.size+2)+")", 50);
+                projCtx.fillStyle="#ffffff";
+                projCtx.fillRect(item.posX, item.posY, item.spell.size, item.spell.size);
+            } else if(item.spell.type=="line"){
+                for(var i=0; i<=60; i++) projCtx.clearRect(item.posX-Math.cos(angle)*i-1, item.posY-Math.sin(angle)*i-1, 9, 9);
+            } else if(item.spell.type=="ball") projCtx.clearRect(item.posX-(30-item.spell.bsize)/2-1, item.posY-(30-item.spell.bsize)/2-1, 32, 32);
+            spells.splice(index, 1);
+        }}
+    });
+    shootInt=requestAnimationFrame(shootFunc);
 }
 window.addEventListener("keyup", keyUp);
 //start();
@@ -1561,129 +1734,7 @@ enemyMoveInt=setInterval(function() {
     });
 }, 125);
 //shootInt=setInterval(function() {
-(function shootFunc(){
-    spells.forEach((item, index)=>{
-        /*projCtx.fillStyle="#ffffff";
-        projCtx.fillRect(item.procaPolx, item.procaPoly, 14, 14);
-        setTimeout("projCtx.clearRect("+(item.procaPolx-1)+", "+(item.procaPoly-1)+", 16, 16)", 50);
-        item.procaPoly+=item.vY;
-        item.procaPolx+=item.vX;
-        projCtx.fillStyle="rgb(116, 98, 99)";
-        projCtx.fillRect(item.procaPolx, item.procaPoly, 14, 14);
-        if((((item.procaPolx>=proj.width) || (item.procaPoly<=0)) || ((item.procaPolx<=0) || (item.procaPoly>=proj.height))) || (((gracz[0]-14<=item.procaPolx) && (gracz[0]+30>=item.procaPolx)) && ((gracz[1]-14<=item.procaPoly) && (gracz[1]+30>=item.procaPoly))))
-        {
-            setTimeout("projCtx.clearRect("+(item.procaPolx-1)+", "+(item.procaPoly-1)+", 16, 16)", 50);
-            projCtx.fillStyle="#ffffff";
-            projCtx.fillRect(item.procaPolx, item.procaPoly, 14, 14);
-            spells.splice(index, 1);
-        }*/
-        let angle=Math.atan2(item.y-item.posY, item.x-item.posX);
-        if(item.spell.type=="rect"){
-            projCtx.fillStyle="#ffffff";
-            projCtx.fillRect(item.posX-1, item.posY-1, item.spell.size+2, item.spell.size+2);
-            setTimeout("projCtx.clearRect("+(item.posX-2)+", "+(item.posY-2)+", "+(item.spell.size+4)+", "+(item.spell.size+4)+")", 50);
-        } else if(item.spell.type=="line"){
-            /*projCtx.fillStyle="#ffffff";
-            projCtx.beginPath();
-            projCtx.lineWidth=item.spell.size;
-            projCtx.moveTo(item.posX+item.spell.size/2+Math.cos(angle)*27, item.posY+item.spell.size/2+Math.sin(angle)*27);
-            projCtx.lineTo(item.posX+item.spell.size/2+Math.cos(angle)*37, item.posY+item.spell.size/2+Math.sin(angle)*37);
-            projCtx.stroke();
-            projCtx.lineWidth=1;
-            projCtx.endPath();
-            setTimeout("ctx.clearRect("+(item.posX-2)+", "+(item.posY-2)+", "+(item.spell.size+4)+", "+(item.spell.size+4)+")", 50);*/
-            for(var i=0; i<=30; i++)
-            {
-                projCtx.fillStyle="#ffffff";
-                projCtx.fillRect(item.posX-Math.cos(angle)*i, item.posY-Math.sin(angle)*i, 7, 7);
-            }
-            for(var i=0; i<=30; i++)
-            {
-                projCtx.clearRect(item.posX+(-5*Math.cos(angle)*10)-Math.cos(angle)*i-1, item.posY+(-5*Math.sin(angle)*10)-Math.sin(angle)*i-1, 9, 9);
-            }
-        } else if(item.spell.type=="ball") projCtx.clearRect(item.posX-((30-item.spell.bsize)/2)-1, item.posY-((30-item.spell.bsize)/2)-1, 32, 32);
-        item.posY+=Math.sin(angle)*10;
-        item.posX+=Math.cos(angle)*10;
-        item.y+=Math.sin(angle)*10;
-        item.x+=Math.cos(angle)*10;
-        if(item.spell.type=="rect"){
-            projCtx.fillStyle=item.spell.color;
-            projCtx.fillRect(item.posX, item.posY, item.spell.size, item.spell.size);
-        }
-        else if(item.spell.type=="line"){
-            /*projCtx.fillStyle=item.spell.color;
-            projCtx.beginPath();
-            projCtx.lineWidth=item.spell.size;
-            projCtx.moveTo(item.posX+item.spell.size/2, item.posY+item.spell.size/2);
-            projCtx.lineTo(item.posX+item.spell.size/2+Math.cos(angle)*37, item.posY+item.spell.size/2+Math.sin(angle)*37);
-            projCtx.stroke();
-            projCtx.lineWidth=1;
-            projCtx.endPath();*/
-            for(var i=0; i<=30; i++)
-            {
-                projCtx.fillStyle=item.spell.color;
-                projCtx.fillRect(item.posX-Math.cos(angle)*i, item.posY-Math.sin(angle)*i, 7, 7);
-            }
-        }
-        else if(item.spell.type=="ball"){
-            projCtx.beginPath();
-            projCtx.fillStyle=item.spell.color1;
-            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2, 0, 2*Math.PI);
-            projCtx.fill();
-            projCtx.fillStyle=item.spell.color2;
-            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-2, 0, 2*Math.PI);
-            projCtx.fill();
-            projCtx.fillStyle="white";
-            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-3, 0, 2*Math.PI);
-            projCtx.fill();
-            projCtx.fillStyle=item.spell.color1;
-            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-4, 0, 2*Math.PI);
-            projCtx.fill();
-            projCtx.fillStyle="white";
-            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-5, 0, 2*Math.PI);
-            projCtx.fill();
-            projCtx.fillStyle=item.spell.color2;
-            projCtx.arc(item.posX+item.spell.bsize/2, item.posY+item.spell.bsize/2, item.spell.bsize/2-7, 0, 2*Math.PI);
-            projCtx.fill();
-            projCtx.closePath();
-            projCtx.fillStyle=item.spell.color1;
-            /*for(var i=0; i<=8; i++){
-                for(var j=0; j<=8; j++){
-                    if(Math.floor(Math.random()*5)+1<5) projCtx.fillRect(item.posX+item.spell.size/2-Math.cos(angle)*i, item.posY+item.spell.size/2-Math.sin(angle)*j, 1, 1);
-                }
-            }*/
-            for(var i=0; i<=10; i++){
-                for(var j=0; j<=10; j++){
-                    if(Math.floor(Math.random()*5)+1<5) projCtx.fillRect(item.posX+item.spell.bsize/2-Math.cos(angle)*10-5+i, item.posY+item.spell.bsize/2-Math.sin(angle)*10-5+j, 1, 1);
-                }
-            }
-        }
-        item.effects.onMove(item.posX, item.posY);
-        if(((((item.posX>=proj.width) || (item.posY<=0)) || ((item.posX<=0) || (item.posY>=proj.height))) || (((gracz[0]-item.spell.size<=item.posX) && (gracz[0]+30>=item.posX)) && ((gracz[1]-item.spell.size<=item.posY) && (gracz[1]+30>=item.posY)))) && !item.target)
-        {
-            if(item.spell.type=="rect"){
-                setTimeout("projCtx.clearRect("+(item.posX-1)+", "+(item.posY-1)+", "+(item.spell.size+2)+", "+(item.spell.size+2)+")", 50);
-                projCtx.fillStyle="#ffffff";
-                projCtx.fillRect(item.posX, item.posY, item.spell.size, item.spell.size);
-            } else if(item.spell.type=="line"){
-                for(var i=0; i<=60; i++) projCtx.clearRect(item.posX-Math.cos(angle)*i-1, item.posY-Math.sin(angle)*i-1, 9, 9);
-            } else if(item.spell.type=="ball") projCtx.clearRect(item.posX-(30-item.spell.size)/2-1, item.posY-(30-item.spell.size)/2-1, 32, 32);
-            spells.splice(index, 1);
-        }
-        if(item.target){
-        if((item.posX<=0) || (item.posY<=0) || (item.posY-7>=proj.height) || (item.posX-7>=proj.width) || czyDostal(item.posX, item.posY, item.dmg, item.spell.size, item.effects.onHit)){
-            if(item.spell.type=="rect"){
-                setTimeout("projCtx.clearRect("+(item.posX-1)+", "+(item.posY-1)+", "+(item.spell.size+2)+", "+(item.spell.size+2)+")", 50);
-                projCtx.fillStyle="#ffffff";
-                projCtx.fillRect(item.posX, item.posY, item.spell.size, item.spell.size);
-            } else if(item.spell.type=="line"){
-                for(var i=0; i<=60; i++) projCtx.clearRect(item.posX-Math.cos(angle)*i-1, item.posY-Math.sin(angle)*i-1, 9, 9);
-            } else if(item.spell.type=="ball") projCtx.clearRect(item.posX-(30-item.spell.bsize)/2-1, item.posY-(30-item.spell.bsize)/2-1, 32, 32);
-            spells.splice(index, 1);
-        }}
-    });
-    requestAnimationFrame(shootFunc);
-})();
+shootFunc();
 //}, 15);
 animInt=setInterval(function() {
     animations.forEach((item, index)=>{
